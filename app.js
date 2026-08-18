@@ -18,6 +18,25 @@ state.latencies = state.latencies || [];
 
 const save = () => localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 
+// Theme system
+const THEME_KEY = "english-overdrive-theme";
+const themeToggle = document.getElementById("themeToggle");
+const themeMeta = document.getElementById("themeColorMeta");
+const themeAnnouncement = document.getElementById("themeAnnouncement");
+function applyTheme(theme, persist = true) {
+  const normalized = theme === "light" ? "light" : "dark";
+  document.documentElement.dataset.theme = normalized;
+  themeMeta?.setAttribute("content", normalized === "dark" ? "#090d13" : "#f3f6f8");
+  themeToggle?.setAttribute("aria-label", normalized === "dark" ? "Ativar tema claro" : "Ativar tema escuro");
+  themeToggle?.setAttribute("title", normalized === "dark" ? "Tema claro" : "Tema escuro");
+  if (persist) localStorage.setItem(THEME_KEY, normalized);
+  if (themeAnnouncement) themeAnnouncement.textContent = `Tema ${normalized === "dark" ? "escuro" : "claro"} ativado.`;
+}
+applyTheme(document.documentElement.dataset.theme || "dark", false);
+themeToggle?.addEventListener("click", () => applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark"));
+const systemTheme = window.matchMedia?.("(prefers-color-scheme: dark)");
+systemTheme?.addEventListener?.("change", event => { if (!localStorage.getItem(THEME_KEY)) applyTheme(event.matches ? "dark" : "light", false); });
+
 const routine = [
   ["15 min", "Error Attack", "Revisar padrões de erro ativos"],
   ["20 min", "Listening", "Compreensão em velocidade real"],
@@ -108,9 +127,10 @@ function renderDashboard() {
 function showView(viewId) {
   document.querySelectorAll(".view").forEach(v => v.classList.remove("active-view"));
   document.getElementById(viewId).classList.add("active-view");
-  document.querySelectorAll(".nav-item").forEach(b => b.classList.toggle("active", b.dataset.view === viewId));
+  document.querySelectorAll(".nav-item").forEach(b => { const active = b.dataset.view === viewId; b.classList.toggle("active", active); b.setAttribute("aria-current", active ? "page" : "false"); });
   const labels = { dashboard: "Dashboard", diagnostic: "Diagnóstico", toeic: "TOEIC Engine", errors: "Error Engine", work: "Shanghai Work" };
   document.getElementById("pageTitle").textContent = labels[viewId];
+  window.scrollTo({ top: 0, behavior: "smooth" });
   if (viewId === "errors") renderErrors();
 }
 
@@ -257,3 +277,71 @@ document.getElementById("stopLatency").addEventListener("click", () => {
 renderDashboard();
 renderToeic();
 renderErrors();
+
+// PWA install + offline support
+let deferredInstallPrompt = null;
+const installAppButton = document.getElementById("installApp");
+const installSheet = document.getElementById("installSheet");
+const installInstructions = document.getElementById("installInstructions");
+const closeInstallSheet = document.getElementById("closeInstallSheet");
+const installSheetAction = document.getElementById("installSheetAction");
+const offlineBadge = document.getElementById("offlineBadge");
+
+const isStandalone = () => window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+const isIOS = () => /iphone|ipad|ipod/i.test(navigator.userAgent);
+
+function openInstallHelp(message) {
+  installInstructions.textContent = message;
+  installSheet.classList.remove("hidden");
+}
+
+function closeInstallHelp() {
+  installSheet.classList.add("hidden");
+}
+
+window.addEventListener("beforeinstallprompt", event => {
+  event.preventDefault();
+  deferredInstallPrompt = event;
+  if (!isStandalone()) installAppButton.classList.remove("hidden");
+});
+
+installAppButton.addEventListener("click", async () => {
+  if (deferredInstallPrompt) {
+    deferredInstallPrompt.prompt();
+    await deferredInstallPrompt.userChoice;
+    deferredInstallPrompt = null;
+    installAppButton.classList.add("hidden");
+    return;
+  }
+
+  if (isIOS()) {
+    openInstallHelp("No Safari, toque em Compartilhar e depois em ‘Adicionar à Tela de Início’. O English Overdrive abrirá como um app.");
+  } else {
+    openInstallHelp("Abra o menu do navegador e escolha ‘Instalar aplicativo’ ou ‘Adicionar à tela inicial’.");
+  }
+});
+
+closeInstallSheet.addEventListener("click", closeInstallHelp);
+installSheetAction.addEventListener("click", closeInstallHelp);
+installSheet.addEventListener("click", event => { if (event.target === installSheet) closeInstallHelp(); });
+
+window.addEventListener("appinstalled", () => {
+  deferredInstallPrompt = null;
+  installAppButton.classList.add("hidden");
+});
+
+function updateConnectionState() {
+  offlineBadge.classList.toggle("hidden", navigator.onLine);
+}
+window.addEventListener("online", updateConnectionState);
+window.addEventListener("offline", updateConnectionState);
+updateConnectionState();
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/sw.js").catch(error => console.error("Service worker registration failed:", error));
+  });
+}
+
+// On iOS there is no beforeinstallprompt; keep an explicit install path available.
+if (isIOS() && !isStandalone()) installAppButton.classList.remove("hidden");

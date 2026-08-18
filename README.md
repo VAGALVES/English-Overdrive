@@ -1,44 +1,25 @@
-# English Overdrive
+# English Overdrive — PWA v0.1.3
 
-MVP de um sistema pessoal de treinamento intensivo para TOEIC + inglês profissional.
+Professional mobile-first foundation for adaptive TOEIC + work-English training.
 
-## Objetivo
+## Added in v0.1.3
+- Full responsive behavior: desktop, tablet and phone.
+- Fixed bottom navigation on mobile/PWA.
+- Android/iPhone safe-area support.
+- Light/dark theme toggle with persistence.
+- Automatic OS theme on first use.
+- Dynamic PWA/browser theme color.
+- Professional semantic CSS design system.
+- Accessibility improvements: focus, reduced motion, aria-current and theme announcement.
+- `DESIGN_SYSTEM.md`.
+- `SYSTEM_DESIGN.md` with architecture, data model, security, offline strategy and roadmap.
+- Flat repository: icons stay beside all other files.
 
-- TOEIC 900+ (stretch 950+)
-- Reduzir response latency
-- Mapear padrões de erro
-- Preparar para reuniões, entrevistas e trabalho internacional em Xangai
+## Existing MVP
+Dashboard, quick diagnostic prototype, TOEIC prototype, Error Engine, Shanghai Work latency exercise, local persistence, PWA install/offline shell and Netlify configuration.
 
-## Módulos v0.1
+## Deploy
+Upload **every file to the GitHub repository root**. Netlify publishes the repository root with no build command.
 
-- Dashboard "English Combat Readiness"
-- Diagnóstico rápido
-- TOEIC Engine com feedback
-- Error Engine persistente
-- Shanghai Work com medição manual de response latency
-- Persistência local via `localStorage`
-
-## Rodar localmente
-
-Por ser uma aplicação estática, basta abrir `index.html` no navegador ou servir a pasta com qualquer servidor HTTP.
-
-Exemplo:
-
-```bash
-python -m http.server 8080
-```
-
-Depois acesse `http://localhost:8080`.
-
-## Deploy no Netlify
-
-A pasta já inclui `netlify.toml`. O deploy pode ser feito diretamente da raiz do projeto ou, posteriormente, conectando o repositório GitHub ao Netlify.
-
-## Próximas versões
-
-- v0.2: diagnóstico completo por skill e skill radar
-- v0.3: question bank maior + sessões cronometradas por Part
-- v0.4: Spaced Repetition e Error Attack adaptativo
-- v0.5: áudio + speech recognition + shadowing
-- v0.6: entrevistas e reuniões com IA
-- v0.7: autenticação e sincronização em nuvem
+## Status
+The PWA shell, responsive visual foundation and system architecture are professionalized. The learning product itself is still an MVP; the next milestone is **v0.2 Diagnostic Engine + English Digital Twin v1**.
