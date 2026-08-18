@@ -1,25 +1,22 @@
-# English Overdrive — PWA v0.1.3
+# English Overdrive v0.2.0
 
-Professional mobile-first foundation for adaptive TOEIC + work-English training.
+PWA mobile-first para preparação intensiva de TOEIC e inglês profissional com foco em prontidão para trabalhar internacionalmente.
 
-## Added in v0.1.3
-- Full responsive behavior: desktop, tablet and phone.
-- Fixed bottom navigation on mobile/PWA.
-- Android/iPhone safe-area support.
-- Light/dark theme toggle with persistence.
-- Automatic OS theme on first use.
-- Dynamic PWA/browser theme color.
-- Professional semantic CSS design system.
-- Accessibility improvements: focus, reduced motion, aria-current and theme announcement.
-- `DESIGN_SYSTEM.md`.
-- `SYSTEM_DESIGN.md` with architecture, data model, security, offline strategy and roadmap.
-- Flat repository: icons stay beside all other files.
-
-## Existing MVP
-Dashboard, quick diagnostic prototype, TOEIC prototype, Error Engine, Shanghai Work latency exercise, local persistence, PWA install/offline shell and Netlify configuration.
+## Nesta versão
+- Dashboard expandido com XP, missão diária, Training Pulse e insights.
+- Diagnostic Engine com 20 questões em 5 domínios.
+- TOEIC Engine com treino das Parts 1–7 e estatísticas por parte.
+- Listening Lab usando síntese de voz disponível no navegador.
+- Active Vocabulary com 30 expressões profissionais e estado ativo/em treino.
+- Error Engine com padrões dominantes e histórico de erros.
+- Shanghai Work com 12 cenários profissionais e níveis 1–10.
+- Response Latency com histórico e média.
+- Tema claro/escuro persistente.
+- PWA instalável e cache offline básico.
+- Estrutura totalmente plana: todos os arquivos ficam na raiz para facilitar upload pelo celular no GitHub.
 
 ## Deploy
-Upload **every file to the GitHub repository root**. Netlify publishes the repository root with no build command.
+A estrutura está pronta para GitHub + Netlify. Publique a raiz do repositório, sem comando de build.
 
-## Status
-The PWA shell, responsive visual foundation and system architecture are professionalized. The learning product itself is still an MVP; the next milestone is **v0.2 Diagnostic Engine + English Digital Twin v1**.
+## Commit sugerido
+`feat: expand training content and adaptive learning modules`

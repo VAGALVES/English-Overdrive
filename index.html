@@ -31,11 +31,12 @@
         <div class="brand-copy"><strong>English Overdrive</strong><span>Shanghai Ready</span></div>
       </div>
       <nav id="nav">
-        <button class="nav-item active" data-view="dashboard" aria-label="Dashboard"><span class="nav-icon" aria-hidden="true">⌂</span><span class="nav-label">Dashboard</span></button>
-        <button class="nav-item" data-view="diagnostic" aria-label="Diagnóstico"><span class="nav-icon" aria-hidden="true">◎</span><span class="nav-label">Diagnóstico</span></button>
-        <button class="nav-item" data-view="toeic" aria-label="TOEIC Engine"><span class="nav-icon" aria-hidden="true">◫</span><span class="nav-label">TOEIC</span></button>
-        <button class="nav-item" data-view="errors" aria-label="Error Engine"><span class="nav-icon" aria-hidden="true">△</span><span class="nav-label">Erros</span></button>
-        <button class="nav-item" data-view="work" aria-label="Shanghai Work"><span class="nav-icon" aria-hidden="true">◇</span><span class="nav-label">Work</span></button>
+        <button class="nav-item active" data-view="dashboard" aria-label="Dashboard"><span class="nav-icon">⌂</span><span class="nav-label">Dashboard</span></button>
+        <button class="nav-item" data-view="diagnostic" aria-label="Diagnóstico"><span class="nav-icon">◎</span><span class="nav-label">Diagnóstico</span></button>
+        <button class="nav-item" data-view="toeic" aria-label="TOEIC Engine"><span class="nav-icon">◫</span><span class="nav-label">TOEIC</span></button>
+        <button class="nav-item" data-view="vocabulary" aria-label="Vocabulário"><span class="nav-icon">A+</span><span class="nav-label">Vocabulário</span></button>
+        <button class="nav-item" data-view="errors" aria-label="Error Engine"><span class="nav-icon">△</span><span class="nav-label">Erros</span></button>
+        <button class="nav-item" data-view="work" aria-label="Shanghai Work"><span class="nav-icon">◇</span><span class="nav-label">Work</span></button>
       </nav>
       <div class="sidebar-footer">
         <div class="sidebar-goal-head"><span>Objetivo</span><span class="status-dot">ACTIVE</span></div>
@@ -47,7 +48,8 @@
       <header class="topbar">
         <div class="page-heading"><p class="eyebrow">ENGLISH COMBAT READINESS</p><h1 id="pageTitle">Dashboard</h1></div>
         <div class="top-actions">
-          <button class="icon-button" id="themeToggle" type="button" aria-label="Alternar tema" title="Alternar tema"><span class="theme-icon theme-icon-sun" aria-hidden="true">☀</span><span class="theme-icon theme-icon-moon" aria-hidden="true">☾</span></button>
+          <div class="xp-chip"><span>XP</span><strong id="xpValue">0</strong></div>
+          <button class="icon-button" id="themeToggle" type="button" aria-label="Alternar tema" title="Alternar tema"><span class="theme-icon theme-icon-sun">☀</span><span class="theme-icon theme-icon-moon">☾</span></button>
           <button class="install-button hidden" id="installApp" type="button">Instalar app</button>
           <div class="streak-card"><span>Sequência</span><strong id="streak">1 dia</strong></div>
         </div>
@@ -56,55 +58,108 @@
       <section id="dashboard" class="view active-view" aria-labelledby="pageTitle">
         <div class="hero-grid">
           <article class="card readiness-card card-accent">
-            <div><div class="card-kicker"><span class="status-pulse"></span>Índice principal</div><span class="muted">Shanghai Ready</span><strong class="giant" id="readyScore">42%</strong><p>Seu índice consolidado de prontidão profissional em inglês.</p></div>
+            <div><div class="card-kicker"><span class="status-pulse"></span>Índice principal</div><span class="muted">Shanghai Ready</span><strong class="giant" id="readyScore">42%</strong><p>Prontidão profissional combinando prova, velocidade, produção e repertório.</p></div>
             <div class="ring" id="readinessRing" aria-label="Shanghai Ready"><span>42</span></div>
           </article>
           <article class="card target-card">
             <div class="card-head compact"><div><span class="muted">TOEIC estimado</span><strong class="giant" id="toeicEstimate">650</strong></div><span class="score-chip">/ 990</span></div>
-            <p>Alvo principal: 900+. O treino adaptativo priorizará as maiores perdas de pontos.</p>
+            <p>Alvo principal: 900+. O motor passa a priorizar partes com menor precisão.</p>
             <div class="progress" aria-label="Progresso TOEIC"><div id="toeicProgress"></div></div>
             <div class="progress-legend"><span>Atual</span><span>900 target</span><span>990 max</span></div>
           </article>
         </div>
+
         <div class="metric-grid">
-          <article class="metric card"><div class="metric-top"><span>Listening</span><span class="trend">↑ foco</span></div><strong id="mListening">58%</strong><div class="progress"><div style="width:58%"></div></div></article>
-          <article class="metric card"><div class="metric-top"><span>Reading</span><span class="trend neutral">estável</span></div><strong id="mReading">66%</strong><div class="progress"><div style="width:66%"></div></div></article>
-          <article class="metric card"><div class="metric-top"><span>Speaking</span><span class="trend warning">gargalo</span></div><strong id="mSpeaking">40%</strong><div class="progress"><div style="width:40%"></div></div></article>
-          <article class="metric card"><div class="metric-top"><span>Business English</span><span class="trend">↑ foco</span></div><strong id="mBusiness">38%</strong><div class="progress"><div style="width:38%"></div></div></article>
+          <article class="metric card"><div class="metric-top"><span>Listening</span><span class="trend">↑ foco</span></div><strong id="mListening">58%</strong><div class="progress"><div id="barListening"></div></div></article>
+          <article class="metric card"><div class="metric-top"><span>Reading</span><span class="trend neutral">estável</span></div><strong id="mReading">66%</strong><div class="progress"><div id="barReading"></div></div></article>
+          <article class="metric card"><div class="metric-top"><span>Speaking</span><span class="trend warning">gargalo</span></div><strong id="mSpeaking">40%</strong><div class="progress"><div id="barSpeaking"></div></div></article>
+          <article class="metric card"><div class="metric-top"><span>Business English</span><span class="trend">↑ foco</span></div><strong id="mBusiness">38%</strong><div class="progress"><div id="barBusiness"></div></div></article>
         </div>
-        <div class="content-grid">
-          <article class="card"><div class="card-head"><div><span class="muted">Hoje</span><h2>Treino recomendado</h2></div><span class="pill">90 MIN</span></div><div id="routine" class="routine"></div></article>
-          <article class="card focus-card"><div class="card-head"><div><span class="muted">Principal gargalo</span><h2 id="weaknessTitle">Speaking espontâneo</h2></div><span class="focus-index">01</span></div><p id="weaknessText">Você ainda demora para produzir respostas completas sem traduzir mentalmente.</p><button class="primary" data-go="work">Atacar gargalo <span aria-hidden="true">→</span></button></article>
+
+        <div class="dashboard-band">
+          <article class="card mission-card">
+            <div class="card-head"><div><span class="muted">Plano adaptativo</span><h2>Missão de hoje</h2></div><span class="pill" id="missionProgress">0/5</span></div>
+            <div id="routine" class="routine"></div>
+          </article>
+          <article class="card focus-card"><div class="card-head"><div><span class="muted">Principal gargalo</span><h2 id="weaknessTitle">Speaking espontâneo</h2></div><span class="focus-index">01</span></div><p id="weaknessText">Você ainda demora para produzir respostas completas sem traduzir mentalmente.</p><button class="primary" data-go="work">Atacar gargalo <span>→</span></button></article>
+        </div>
+
+        <div class="dashboard-band">
+          <article class="card">
+            <div class="card-head"><div><span class="muted">Últimos 7 dias</span><h2>Training Pulse</h2></div><span class="pill" id="weeklyMinutes">0 MIN</span></div>
+            <div class="week-chart" id="weekChart" aria-label="Atividade dos últimos sete dias"></div>
+          </article>
+          <article class="card">
+            <div class="card-head"><div><span class="muted">TOEIC</span><h2>Mapa das 7 partes</h2></div><button class="text-button" data-go="toeic">Treinar →</button></div>
+            <div id="partMiniGrid" class="part-mini-grid"></div>
+          </article>
+        </div>
+
+        <div class="dashboard-band">
+          <article class="card">
+            <div class="card-head"><div><span class="muted">English Digital Twin</span><h2>Insights atuais</h2></div><span class="pill">BETA</span></div>
+            <div id="insights" class="insight-list"></div>
+          </article>
+          <article class="card">
+            <div class="card-head"><div><span class="muted">Vocabulário ativo</span><h2>Repertório profissional</h2></div><span class="pill" id="activeVocabCount">0 ATIVAS</span></div>
+            <p>Não basta reconhecer uma palavra. O objetivo é conseguir produzi-la sob pressão.</p>
+            <div class="vocab-preview" id="vocabPreview"></div>
+            <button class="secondary" data-go="vocabulary">Abrir Active Vocabulary</button>
+          </article>
         </div>
       </section>
 
       <section id="diagnostic" class="view">
-        <article class="card diagnostic-intro feature-card"><div class="feature-number">01</div><span class="pill">DIAGNOSTIC ENGINE</span><h2>Mapeamento inicial</h2><p>Transforme “meu inglês é intermediário” em dados objetivos: precisão, velocidade, compreensão, produção e padrão de erro.</p><button class="primary" id="startDiagnostic">Iniciar diagnóstico rápido <span aria-hidden="true">→</span></button></article>
-        <article class="card hidden quiz-card" id="diagnosticQuiz"><div class="question-top"><span id="diagCount">1/5</span><span class="pill">Diagnóstico</span></div><h2 id="diagQuestion"></h2><div id="diagOptions" class="options"></div></article>
+        <article class="card diagnostic-intro feature-card"><div class="feature-number">01</div><span class="pill">DIAGNOSTIC ENGINE</span><h2>Mapeamento inicial</h2><p>20 questões para mapear gramática, vocabulário, leitura, TOEIC e inglês profissional. Depois o app transforma o resultado em prioridades de treino.</p><div class="feature-stats"><span>20 questões</span><span>5 domínios</span><span>~10 min</span></div><button class="primary" id="startDiagnostic">Iniciar diagnóstico <span>→</span></button></article>
+        <article class="card hidden quiz-card" id="diagnosticQuiz"><div class="question-top"><span id="diagCount">1/20</span><span class="pill" id="diagDomain">Diagnóstico</span></div><div class="question-progress"><div id="diagProgress"></div></div><h2 id="diagQuestion"></h2><div id="diagOptions" class="options"></div></article>
         <article class="card hidden" id="diagnosticResult"></article>
       </section>
 
       <section id="toeic" class="view">
-        <div class="section-head"><div><span class="muted">Treino adaptativo</span><h2>TOEIC Engine</h2></div><span class="pill">LISTENING + READING</span></div>
-        <article class="card quiz-card"><div class="question-top"><span id="toeicCounter">Questão 1</span><span class="pill" id="toeicPart">Part 5</span></div><h2 id="toeicQuestion"></h2><div id="toeicOptions" class="options"></div><div id="toeicFeedback" class="feedback hidden" role="status"></div><button id="nextToeic" class="primary hidden">Próxima questão <span aria-hidden="true">→</span></button></article>
+        <div class="section-head"><div><span class="muted">Treino adaptativo</span><h2>TOEIC Engine</h2></div><span class="pill">PARTS 1–7</span></div>
+        <div class="toeic-overview" id="toeicPartCards"></div>
+        <article class="card listening-lab">
+          <div><span class="muted">Listening Lab</span><h2>Ouça sem ler primeiro</h2><p id="listeningTranscript" class="listening-mask">The quarterly review has been moved to Thursday afternoon.</p></div>
+          <div class="button-row"><button class="primary" id="playListening">▶ Ouvir</button><button class="secondary" id="revealListening">Mostrar frase</button><button class="secondary" id="newListening">Nova frase</button></div>
+        </article>
+        <article class="card quiz-card toeic-quiz"><div class="question-top"><span id="toeicCounter">Questão 1</span><span class="pill" id="toeicPart">Part 5</span></div><h2 id="toeicQuestion"></h2><p class="question-context hidden" id="toeicContext"></p><div id="toeicOptions" class="options"></div><div id="toeicFeedback" class="feedback hidden" role="status"></div><button id="nextToeic" class="primary hidden">Próxima questão <span>→</span></button></article>
+      </section>
+
+      <section id="vocabulary" class="view">
+        <div class="section-head"><div><span class="muted">Produção, não reconhecimento</span><h2>Active Vocabulary</h2></div><span class="pill" id="vocabMastery">0% ACTIVE</span></div>
+        <div class="vocab-stats" id="vocabStats"></div>
+        <div class="filter-row" id="vocabFilters"></div>
+        <article class="card flashcard" id="flashcard">
+          <div class="flashcard-top"><span class="pill" id="flashCategory">Meetings</span><span class="muted" id="flashIndex">1/30</span></div>
+          <span class="muted">Expressão</span><h2 id="flashTerm">follow up</h2>
+          <p class="flash-definition" id="flashDefinition">acompanhar / dar continuidade</p>
+          <div class="example-box"><span>Example</span><strong id="flashExample">I'll follow up with the supplier this afternoon.</strong></div>
+          <div class="production-prompt"><span>Produza sem traduzir</span><p id="flashPrompt">Diga em inglês: “Vou acompanhar isso amanhã.”</p></div>
+          <div class="button-row"><button class="secondary" id="speakVocab">🔊 Ouvir</button><button class="secondary" id="prevVocab">← Anterior</button><button class="primary" id="markActive">Marcar como ativa</button><button class="secondary" id="nextVocab">Próxima →</button></div>
+        </article>
+        <div class="vocab-list" id="vocabList"></div>
       </section>
 
       <section id="errors" class="view">
-        <div class="section-head"><div><span class="muted">Seu padrão, não apenas seus erros</span><h2>Error Engine</h2></div></div>
-        <article class="card"><div class="error-summary"><div><span>Erros registrados</span><strong id="errorCount">0</strong></div><div><span>Categoria dominante</span><strong id="dominantError">—</strong></div></div></article>
+        <div class="section-head"><div><span class="muted">Seu padrão, não apenas seus erros</span><h2>Error Engine</h2></div><span class="pill">ADAPTIVE MEMORY</span></div>
+        <article class="card"><div class="error-summary"><div><span>Erros registrados</span><strong id="errorCount">0</strong></div><div><span>Categoria dominante</span><strong id="dominantError">—</strong></div><div><span>Precisão TOEIC</span><strong id="toeicAccuracy">—</strong></div></div></article>
+        <div id="errorPatterns" class="pattern-grid"></div>
         <div id="errorList" class="stack"></div>
       </section>
 
       <section id="work" class="view">
         <div class="section-head"><div><span class="muted">Inglês profissional</span><h2>Shanghai Work</h2></div><span class="pill">REAL-WORLD MODE</span></div>
-        <div class="scenario-grid"><button class="scenario card" data-scenario="meeting"><span>01</span><strong>Meeting</strong><small>Responda sem preparar a frase.</small></button><button class="scenario card" data-scenario="interview"><span>02</span><strong>Interview</strong><small>Treino de entrevistas internacionais.</small></button><button class="scenario card" data-scenario="decision"><span>03</span><strong>Decision Room</strong><small>Explique e defenda uma decisão.</small></button></div>
-        <article class="card hidden scenario-panel" id="scenarioPanel"><span class="pill" id="scenarioType"></span><h2 id="scenarioPrompt"></h2><p class="muted">Clique em iniciar e responda em voz alta. Cronometre o tempo até começar a falar.</p><div class="latency-display"><span>Response latency</span><strong id="latency">—</strong></div><div class="button-row"><button class="primary" id="startLatency">Iniciar</button><button class="secondary" id="stopLatency" disabled>Comecei a falar</button></div></article>
+        <div class="work-levels"><span class="pill">LEVEL 01 · CLEAR</span><span class="pill">LEVEL 05 · INTERRUPTIONS</span><span class="pill">LEVEL 10 · PRESSURE</span></div>
+        <div class="scenario-grid" id="scenarioGrid"></div>
+        <article class="card hidden scenario-panel" id="scenarioPanel"><div class="card-head"><span class="pill" id="scenarioType"></span><span class="muted" id="scenarioLevel"></span></div><h2 id="scenarioPrompt"></h2><div class="scenario-brief" id="scenarioBrief"></div><p class="muted">Clique em iniciar e responda em voz alta. Pare o cronômetro quando sua primeira palavra sair.</p><div class="latency-display"><span>Response latency</span><strong id="latency">—</strong></div><div class="button-row"><button class="primary" id="startLatency">Iniciar</button><button class="secondary" id="stopLatency" disabled>Comecei a falar</button><button class="secondary" id="newScenario">Outro cenário</button></div></article>
+        <article class="card work-history"><div class="card-head"><div><span class="muted">Performance</span><h2>Response Latency</h2></div><span class="pill" id="avgLatency">—</span></div><div id="latencyHistory" class="latency-history"></div></article>
       </section>
     </main>
   </div>
 
   <div class="install-sheet hidden" id="installSheet" role="dialog" aria-modal="true" aria-labelledby="installTitle"><div class="install-sheet-card"><button class="sheet-close" id="closeInstallSheet" aria-label="Fechar">×</button><span class="pill">PWA</span><h2 id="installTitle">Instalar English Overdrive</h2><p id="installInstructions">Abra o menu do navegador e escolha “Adicionar à tela inicial” ou “Instalar aplicativo”.</p><button class="primary" id="installSheetAction">Entendi</button></div></div>
   <div class="offline-badge hidden" id="offlineBadge">Modo offline</div>
+  <div class="toast hidden" id="toast" role="status"></div>
   <div class="sr-only" id="themeAnnouncement" aria-live="polite"></div>
   <script src="app.js"></script>
 </body>
