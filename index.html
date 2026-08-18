@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="English Overdrive — treinamento adaptativo para TOEIC e inglês profissional." />
+  <title>English Overdrive</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">EO</div>
+        <div>
+          <strong>English Overdrive</strong>
+          <span>Shanghai Ready</span>
+        </div>
+      </div>
+
+      <nav id="nav">
+        <button class="nav-item active" data-view="dashboard">Dashboard</button>
+        <button class="nav-item" data-view="diagnostic">Diagnóstico</button>
+        <button class="nav-item" data-view="toeic">TOEIC Engine</button>
+        <button class="nav-item" data-view="errors">Error Engine</button>
+        <button class="nav-item" data-view="work">Shanghai Work</button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <span>Meta</span>
+        <strong>TOEIC 900+</strong>
+        <small>Stretch: 950+</small>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">ENGLISH COMBAT READINESS</p>
+          <h1 id="pageTitle">Dashboard</h1>
+        </div>
+        <div class="streak-card">
+          <span>Sequência</span>
+          <strong id="streak">1 dia</strong>
+        </div>
+      </header>
+
+      <section id="dashboard" class="view active-view">
+        <div class="hero-grid">
+          <article class="card readiness-card">
+            <div>
+              <span class="muted">Shanghai Ready</span>
+              <strong class="giant" id="readyScore">42%</strong>
+              <p>Seu índice geral de prontidão profissional em inglês.</p>
+            </div>
+            <div class="ring" id="readinessRing"><span>42</span></div>
+          </article>
+
+          <article class="card target-card">
+            <span class="muted">TOEIC estimado</span>
+            <strong class="giant" id="toeicEstimate">650</strong>
+            <p>Alvo principal: 900+. O app ajustará sua rotina para reduzir suas maiores perdas de pontos.</p>
+            <div class="progress"><div id="toeicProgress"></div></div>
+          </article>
+        </div>
+
+        <div class="metric-grid">
+          <article class="metric card"><span>Listening</span><strong id="mListening">58%</strong><div class="progress"><div style="width:58%"></div></div></article>
+          <article class="metric card"><span>Reading</span><strong id="mReading">66%</strong><div class="progress"><div style="width:66%"></div></div></article>
+          <article class="metric card"><span>Speaking</span><strong id="mSpeaking">40%</strong><div class="progress"><div style="width:40%"></div></div></article>
+          <article class="metric card"><span>Business English</span><strong id="mBusiness">38%</strong><div class="progress"><div style="width:38%"></div></div></article>
+        </div>
+
+        <div class="content-grid">
+          <article class="card">
+            <div class="card-head">
+              <div><span class="muted">Hoje</span><h2>Treino recomendado</h2></div>
+              <span class="pill">90 min</span>
+            </div>
+            <div id="routine" class="routine"></div>
+          </article>
+
+          <article class="card">
+            <div class="card-head">
+              <div><span class="muted">Principal gargalo</span><h2 id="weaknessTitle">Speaking espontâneo</h2></div>
+            </div>
+            <p id="weaknessText">Você ainda demora para produzir respostas completas sem traduzir mentalmente.</p>
+            <button class="primary" data-go="work">Atacar gargalo</button>
+          </article>
+        </div>
+      </section>
+
+      <section id="diagnostic" class="view">
+        <article class="card diagnostic-intro">
+          <span class="pill">ETAPA 1</span>
+          <h2>Mapeamento inicial</h2>
+          <p>O diagnóstico transforma “meu inglês é intermediário” em dados objetivos: precisão, velocidade, compreensão, produção e padrão de erro.</p>
+          <button class="primary" id="startDiagnostic">Iniciar diagnóstico rápido</button>
+        </article>
+        <article class="card hidden" id="diagnosticQuiz">
+          <div class="question-top"><span id="diagCount">1/5</span><span class="pill">Diagnóstico</span></div>
+          <h2 id="diagQuestion"></h2>
+          <div id="diagOptions" class="options"></div>
+        </article>
+        <article class="card hidden" id="diagnosticResult"></article>
+      </section>
+
+      <section id="toeic" class="view">
+        <div class="section-head">
+          <div><span class="muted">Treino adaptativo</span><h2>TOEIC Engine</h2></div>
+          <span class="pill">L&R</span>
+        </div>
+        <article class="card">
+          <div class="question-top"><span id="toeicCounter">Questão 1</span><span class="pill" id="toeicPart">Part 5</span></div>
+          <h2 id="toeicQuestion"></h2>
+          <div id="toeicOptions" class="options"></div>
+          <div id="toeicFeedback" class="feedback hidden"></div>
+          <button id="nextToeic" class="primary hidden">Próxima questão</button>
+        </article>
+      </section>
+
+      <section id="errors" class="view">
+        <div class="section-head"><div><span class="muted">Seu padrão, não apenas seus erros</span><h2>Error Engine</h2></div></div>
+        <article class="card">
+          <div class="error-summary">
+            <div><span>Erros registrados</span><strong id="errorCount">0</strong></div>
+            <div><span>Categoria dominante</span><strong id="dominantError">—</strong></div>
+          </div>
+        </article>
+        <div id="errorList" class="stack"></div>
+      </section>
+
+      <section id="work" class="view">
+        <div class="section-head"><div><span class="muted">Inglês profissional</span><h2>Shanghai Work</h2></div></div>
+        <div class="scenario-grid">
+          <button class="scenario card" data-scenario="meeting"><span>01</span><strong>Meeting</strong><small>Responda sem preparar a frase.</small></button>
+          <button class="scenario card" data-scenario="interview"><span>02</span><strong>Interview</strong><small>Treino de entrevistas internacionais.</small></button>
+          <button class="scenario card" data-scenario="decision"><span>03</span><strong>Decision Room</strong><small>Explique e defenda uma decisão.</small></button>
+        </div>
+        <article class="card hidden" id="scenarioPanel">
+          <span class="pill" id="scenarioType"></span>
+          <h2 id="scenarioPrompt"></h2>
+          <p class="muted">Clique em iniciar e responda em voz alta. Cronometre o tempo até começar a falar.</p>
+          <div class="latency-display"><span>Response latency</span><strong id="latency">—</strong></div>
+          <div class="button-row">
+            <button class="primary" id="startLatency">Iniciar</button>
+            <button class="secondary" id="stopLatency" disabled>Comecei a falar</button>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
