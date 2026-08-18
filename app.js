@@ -4467,7 +4467,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "From my perspective, we should delay the launch. The main reason is that the quality risk is still too high. For example, two critical defects are still open. So, overall, one extra week is the safer decision.",
-    "prompt": "Give an opinion about a project decision using all four steps."
+    "prompt": "Give an opinion about a project decision using all four steps.",
+    "purposePt": "Dar uma opinião clara sem se alongar ou perder o foco.",
+    "stepsPt": [
+      "Na minha perspectiva,...",
+      "A principal razão é...",
+      "Por exemplo,...",
+      "Então, no geral,..."
+    ],
+    "examplePt": "Na minha perspectiva, deveríamos adiar o lançamento. A principal razão é que o risco de qualidade ainda está alto demais. Por exemplo, dois defeitos críticos ainda estão em aberto. Então, no geral, uma semana extra é a decisão mais segura.",
+    "promptPt": "Dê uma opinião sobre uma decisão de projeto usando as quatro etapas."
   },
   {
     "id": "fw-002",
@@ -4495,7 +4504,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "There are three things to consider. First, customer impact. Second, implementation cost. And finally, the time required to scale.",
-    "prompt": "Explain a business problem in exactly three points."
+    "prompt": "Explain a business problem in exactly three points.",
+    "purposePt": "Fazer uma resposta parecer organizada e fácil de acompanhar.",
+    "stepsPt": [
+      "Há três coisas a considerar.",
+      "Primeiro,...",
+      "Segundo,...",
+      "E, por fim,..."
+    ],
+    "examplePt": "Há três coisas a considerar. Primeiro, o impacto no cliente. Segundo, o custo de implementação. E, por fim, o tempo necessário para escalar.",
+    "promptPt": "Explique um problema de negócios em exatamente três pontos."
   },
   {
     "id": "fw-003",
@@ -4523,7 +4541,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "I believe strong teams need clear ownership. Because ambiguity slows decisions. A good example is a project where we assigned one owner per deliverable. That is why I always clarify responsibility early.",
-    "prompt": "Answer an interview question using one claim, one reason and one example."
+    "prompt": "Answer an interview question using one claim, one reason and one example.",
+    "purposePt": "Transformar uma resposta curta em uma resposta convincente.",
+    "stepsPt": [
+      "Eu acredito que...",
+      "Porque...",
+      "Um bom exemplo é...",
+      "É por isso que..."
+    ],
+    "examplePt": "Eu acredito que equipes fortes precisam de responsabilidades claras. Porque a ambiguidade desacelera as decisões. Um bom exemplo é um projeto em que atribuímos um responsável por cada entrega. É por isso que sempre esclareço as responsabilidades cedo.",
+    "promptPt": "Responda a uma pergunta de entrevista usando uma afirmação, uma razão e um exemplo."
   },
   {
     "id": "fw-004",
@@ -4551,7 +4578,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "The short answer is yes, we can hit the date. The reason is that the critical path is now stable. The key evidence is that all external dependencies are confirmed. What I need from you is approval for the overtime budget.",
-    "prompt": "Give an executive update with the conclusion in the first sentence."
+    "prompt": "Give an executive update with the conclusion in the first sentence.",
+    "purposePt": "Começar pela resposta antes de entrar nos detalhes.",
+    "stepsPt": [
+      "A resposta curta é...",
+      "A razão é...",
+      "A principal evidência é...",
+      "O que eu preciso de você é..."
+    ],
+    "examplePt": "A resposta curta é sim, conseguimos cumprir a data. A razão é que o caminho crítico agora está estável. A principal evidência é que todas as dependências externas estão confirmadas. O que eu preciso de você é a aprovação do orçamento de horas extras.",
+    "promptPt": "Dê uma atualização executiva com a conclusão já na primeira frase."
   },
   {
     "id": "fw-005",
@@ -4575,7 +4611,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "What we are seeing is a 12% drop in repeat purchases. What this means is that retention, not acquisition, is becoming the bigger risk. So the next step should be to investigate the post-purchase experience.",
-    "prompt": "Take one metric and explain what it means and what should happen next."
+    "prompt": "Take one metric and explain what it means and what should happen next.",
+    "purposePt": "Sair da informação, chegar ao significado e terminar em ação.",
+    "stepsPt": [
+      "O que estamos vendo é...",
+      "O que isso significa é...",
+      "Então, o próximo passo deveria ser...",
+      "Saberemos que funcionou se..."
+    ],
+    "examplePt": "O que estamos vendo é uma queda de 12% nas compras recorrentes. O que isso significa é que retenção, e não aquisição, está se tornando o maior risco. Então, o próximo passo deveria ser investigar a experiência pós-compra.",
+    "promptPt": "Pegue uma métrica e explique o que ela significa e o que deveria acontecer em seguida."
   },
   {
     "id": "fw-006",
@@ -4599,7 +4644,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "Just to give some context, the supplier changed the production schedule yesterday. The key point is that our original delivery date is no longer realistic. What I suggest is that we replan the launch now.",
-    "prompt": "Explain a change in a project and propose one action."
+    "prompt": "Explain a change in a project and propose one action.",
+    "purposePt": "Dar contexto suficiente sem perder o ponto principal.",
+    "stepsPt": [
+      "Só para dar um pouco de contexto,...",
+      "O ponto principal é...",
+      "O que eu sugiro é...",
+      "Se concordarmos, podemos..."
+    ],
+    "examplePt": "Só para dar um pouco de contexto, o fornecedor mudou o cronograma de produção ontem. O ponto principal é que nossa data original de entrega deixou de ser realista. O que eu sugiro é replanejar o lançamento agora.",
+    "promptPt": "Explique uma mudança em um projeto e proponha uma ação."
   },
   {
     "id": "fw-007",
@@ -4623,7 +4677,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "Previously, we were waiting for legal approval. At this point, the contract is signed and onboarding has started. The next step is to complete the technical integration.",
-    "prompt": "Give a 30-second project update."
+    "prompt": "Give a 30-second project update.",
+    "purposePt": "Explicar progresso como uma linha do tempo simples.",
+    "stepsPt": [
+      "Anteriormente,...",
+      "Neste momento,...",
+      "O próximo passo é...",
+      "Depois disso,..."
+    ],
+    "examplePt": "Anteriormente, estávamos aguardando a aprovação jurídica. Neste momento, o contrato está assinado e o onboarding começou. O próximo passo é concluir a integração técnica.",
+    "promptPt": "Dê uma atualização de projeto de 30 segundos."
   },
   {
     "id": "fw-008",
@@ -4651,7 +4714,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "The problem is late order confirmation. The main driver appears to be manual approval. The most practical solution is to automate low-risk orders. That should allow us to cut response time significantly.",
-    "prompt": "Describe a recurring operational problem and one practical solution."
+    "prompt": "Describe a recurring operational problem and one practical solution.",
+    "purposePt": "Explicar um problema de forma lógica e evitar pular direto para a solução.",
+    "stepsPt": [
+      "O problema é...",
+      "O principal fator parece ser...",
+      "A solução mais prática é...",
+      "Isso deve nos permitir..."
+    ],
+    "examplePt": "O problema é a confirmação tardia dos pedidos. O principal fator parece ser a aprovação manual. A solução mais prática é automatizar pedidos de baixo risco. Isso deve nos permitir reduzir significativamente o tempo de resposta.",
+    "promptPt": "Descreva um problema operacional recorrente e uma solução prática."
   },
   {
     "id": "fw-009",
@@ -4679,7 +4751,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "We have an issue with a delayed shipment. The immediate impact is a two-day production risk. To contain it, we are moving part of the volume by air. What we need now is confirmation from the logistics provider.",
-    "prompt": "Escalate one operational issue in four sentences."
+    "prompt": "Escalate one operational issue in four sentences.",
+    "purposePt": "Escalar um problema sem soar dramático.",
+    "stepsPt": [
+      "Temos um problema com...",
+      "O impacto imediato é...",
+      "Para contê-lo, estamos...",
+      "O que precisamos agora é..."
+    ],
+    "examplePt": "Temos um problema com uma remessa atrasada. O impacto imediato é um risco de dois dias para a produção. Para contê-lo, estamos movendo parte do volume por transporte aéreo. O que precisamos agora é a confirmação do operador logístico.",
+    "promptPt": "Escale um problema operacional em quatro frases."
   },
   {
     "id": "fw-010",
@@ -4703,7 +4784,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "The data shows that conversion is stable but traffic is down. The way I interpret that is that the problem is reach, not product performance. Based on that, I would focus on acquisition first.",
-    "prompt": "Use one fact, one interpretation and one response."
+    "prompt": "Use one fact, one interpretation and one response.",
+    "purposePt": "Separar evidência de interpretação.",
+    "stepsPt": [
+      "Os dados mostram...",
+      "A forma como interpreto isso é...",
+      "Com base nisso, eu...",
+      "O próximo teste deveria ser..."
+    ],
+    "examplePt": "Os dados mostram que a conversão está estável, mas o tráfego caiu. A forma como interpreto isso é que o problema é alcance, não desempenho do produto. Com base nisso, eu focaria primeiro em aquisição.",
+    "promptPt": "Use um fato, uma interpretação e uma resposta."
   },
   {
     "id": "fw-011",
@@ -4731,7 +4821,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "Option A gives us speed. By contrast, option B gives us more control. The deciding factor for me is reversibility. So I would recommend option A for the pilot.",
-    "prompt": "Compare two choices and make a clear recommendation."
+    "prompt": "Compare two choices and make a clear recommendation.",
+    "purposePt": "Comparar duas opções e terminar com uma recomendação.",
+    "stepsPt": [
+      "A opção A nos dá...",
+      "Em contraste, a opção B nos dá...",
+      "O fator decisivo para mim é...",
+      "Então, eu recomendaria..."
+    ],
+    "examplePt": "A opção A nos dá velocidade. Em contraste, a opção B nos dá mais controle. O fator decisivo para mim é a reversibilidade. Então, eu recomendaria a opção A para o piloto.",
+    "promptPt": "Compare duas escolhas e faça uma recomendação clara."
   },
   {
     "id": "fw-012",
@@ -4759,7 +4858,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "Our goal is to shorten lead time. The main obstacle is supplier capacity. One way around that is to split volume across two approved suppliers. If we agree, we can test that next month.",
-    "prompt": "Frame a business challenge around goal, obstacle and option."
+    "prompt": "Frame a business challenge around goal, obstacle and option.",
+    "purposePt": "Manter a discussão ancorada no objetivo.",
+    "stepsPt": [
+      "Nosso objetivo é...",
+      "O principal obstáculo é...",
+      "Uma forma de contornar isso é...",
+      "Se concordarmos, podemos..."
+    ],
+    "examplePt": "Nosso objetivo é reduzir o lead time. O principal obstáculo é a capacidade do fornecedor. Uma forma de contornar isso é dividir o volume entre dois fornecedores homologados. Se concordarmos, podemos testar isso no próximo mês.",
+    "promptPt": "Estruture um desafio de negócios em torno de objetivo, obstáculo e opção."
   },
   {
     "id": "fw-013",
@@ -4787,7 +4895,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "The situation was a late product launch. My responsibility was to coordinate the recovery plan. What I did was redesign the approval flow and clarify owners. As a result, we recovered five days and launched on the revised date.",
-    "prompt": "Tell one professional achievement using STAR."
+    "prompt": "Tell one professional achievement using STAR.",
+    "purposePt": "Contar uma história curta e baseada em evidências em entrevistas.",
+    "stepsPt": [
+      "A situação era...",
+      "Minha responsabilidade era...",
+      "O que eu fiz foi...",
+      "Como resultado,..."
+    ],
+    "examplePt": "A situação era um lançamento de produto atrasado. Minha responsabilidade era coordenar o plano de recuperação. O que eu fiz foi redesenhar o fluxo de aprovação e esclarecer os responsáveis. Como resultado, recuperamos cinco dias e lançamos na data revisada.",
+    "promptPt": "Conte uma conquista profissional usando STAR."
   },
   {
     "id": "fw-014",
@@ -4811,7 +4928,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "The challenge was inconsistent reporting across teams. I decided to standardize the definitions and automate the dashboard. The result was a much faster weekly review.",
-    "prompt": "Describe one challenge, your action and the measurable result."
+    "prompt": "Describe one challenge, your action and the measurable result.",
+    "purposePt": "Contar uma história de conquista ainda mais curta.",
+    "stepsPt": [
+      "O desafio era...",
+      "Eu decidi...",
+      "O resultado foi...",
+      "O impacto foi..."
+    ],
+    "examplePt": "O desafio era a inconsistência dos relatórios entre as equipes. Eu decidi padronizar as definições e automatizar o dashboard. O resultado foi uma revisão semanal muito mais rápida.",
+    "promptPt": "Descreva um desafio, sua ação e o resultado mensurável."
   },
   {
     "id": "fw-015",
@@ -4839,7 +4965,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "In yesterday's meeting, when you changed the scope without checking dependencies, the impact was confusion across the team. Next time, I would like us to align the change before committing externally.",
-    "prompt": "Give constructive feedback using situation, behavior, impact and next step."
+    "prompt": "Give constructive feedback using situation, behavior, impact and next step.",
+    "purposePt": "Dar feedback específico sem atacar a pessoa.",
+    "stepsPt": [
+      "Na reunião de ontem,...",
+      "Quando você...",
+      "O impacto foi...",
+      "Da próxima vez, eu gostaria que..."
+    ],
+    "examplePt": "Na reunião de ontem, quando você mudou o escopo sem verificar as dependências, o impacto foi confusão em toda a equipe. Da próxima vez, eu gostaria que alinhássemos a mudança antes de assumir um compromisso externo.",
+    "promptPt": "Dê feedback construtivo usando situação, comportamento, impacto e próximo passo."
   },
   {
     "id": "fw-016",
@@ -4867,7 +5002,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "I see your point. At the same time, we need to protect service quality. My concern is that the proposed cut is too aggressive. What I would suggest instead is a phased reduction.",
-    "prompt": "Disagree with a proposal while preserving the relationship."
+    "prompt": "Disagree with a proposal while preserving the relationship.",
+    "purposePt": "Discordar sem criar atrito desnecessário.",
+    "stepsPt": [
+      "Entendo seu ponto.",
+      "Ao mesmo tempo,...",
+      "Minha preocupação é...",
+      "O que eu sugeriria em vez disso é..."
+    ],
+    "examplePt": "Entendo seu ponto. Ao mesmo tempo, precisamos proteger a qualidade do serviço. Minha preocupação é que o corte proposto seja agressivo demais. O que eu sugeriria em vez disso é uma redução em fases.",
+    "promptPt": "Discorde de uma proposta preservando o relacionamento."
   },
   {
     "id": "fw-017",
@@ -4891,7 +5035,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "When you say faster, do you mean launch sooner or shorten production time? So, if I understand correctly, the priority is the launch date. In that case, I would reduce scope rather than compress testing.",
-    "prompt": "Clarify an ambiguous request before giving your answer."
+    "prompt": "Clarify an ambiguous request before giving your answer.",
+    "purposePt": "Reduzir mal-entendidos antes de responder.",
+    "stepsPt": [
+      "Quando você diz X, quer dizer...?",
+      "Então, se entendi corretamente,...",
+      "Nesse caso, eu...",
+      "Isso funcionaria para você?"
+    ],
+    "examplePt": "Quando você diz mais rápido, quer dizer lançar antes ou reduzir o tempo de produção? Então, se entendi corretamente, a prioridade é a data de lançamento. Nesse caso, eu reduziria o escopo em vez de comprimir os testes.",
+    "promptPt": "Esclareça um pedido ambíguo antes de dar sua resposta."
   },
   {
     "id": "fw-018",
@@ -4919,7 +5072,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "My current view is that churn is driven by onboarding friction. The strongest evidence is the drop-off in the first two weeks. The implication is that acquisition spend alone will not solve the problem. Therefore, I would prioritize onboarding changes.",
-    "prompt": "Defend one analytical conclusion with evidence and implication."
+    "prompt": "Defend one analytical conclusion with evidence and implication.",
+    "purposePt": "Tornar afirmações analíticas mais rigorosas.",
+    "stepsPt": [
+      "Minha visão atual é...",
+      "A evidência mais forte é...",
+      "A implicação é...",
+      "Portanto, eu..."
+    ],
+    "examplePt": "Minha visão atual é que o churn é impulsionado por atrito no onboarding. A evidência mais forte é a queda nas duas primeiras semanas. A implicação é que apenas aumentar o investimento em aquisição não resolverá o problema. Portanto, eu priorizaria mudanças no onboarding.",
+    "promptPt": "Defenda uma conclusão analítica com evidência e implicação."
   },
   {
     "id": "fw-019",
@@ -4947,7 +5109,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "What I observe is that demand fell after the price increase. One interpretation is increased price sensitivity. I would not conclude yet that price is the only cause. But it does suggest we should test elasticity by segment.",
-    "prompt": "Interpret a pattern while explicitly keeping uncertainty."
+    "prompt": "Interpret a pattern while explicitly keeping uncertainty.",
+    "purposePt": "Mostrar a diferença entre o que aconteceu e o que você infere.",
+    "stepsPt": [
+      "O que observo é...",
+      "Uma interpretação é...",
+      "Eu ainda não concluiria que...",
+      "Mas isso sugere que..."
+    ],
+    "examplePt": "O que observo é que a demanda caiu depois do aumento de preço. Uma interpretação é uma maior sensibilidade ao preço. Eu ainda não concluiria que o preço é a única causa. Mas isso sugere que deveríamos testar a elasticidade por segmento.",
+    "promptPt": "Interprete um padrão deixando a incerteza explicitamente aberta."
   },
   {
     "id": "fw-020",
@@ -4975,7 +5146,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "The number that stands out is the 18% increase in returns. What it tells us is that product expectation and reality may be diverging. The action I would take is to review product content and sizing. We would know it worked if returns fall without hurting conversion.",
-    "prompt": "Turn one KPI into an insight, action and success measure."
+    "prompt": "Turn one KPI into an insight, action and success measure.",
+    "purposePt": "Traduzir métricas em uma resposta de negócios.",
+    "stepsPt": [
+      "O número que mais chama atenção é...",
+      "O que isso nos diz é...",
+      "A ação que eu tomaria é...",
+      "Saberíamos que funcionou se..."
+    ],
+    "examplePt": "O número que mais chama atenção é o aumento de 18% nas devoluções. O que isso nos diz é que a expectativa sobre o produto e a realidade podem estar divergindo. A ação que eu tomaria é revisar o conteúdo do produto e a grade de tamanhos. Saberíamos que funcionou se as devoluções caíssem sem prejudicar a conversão.",
+    "promptPt": "Transforme um KPI em insight, ação e medida de sucesso."
   },
   {
     "id": "fw-021",
@@ -5003,7 +5183,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "The broader trend is shorter product cycles. The main driver behind it is faster digital feedback. For us, that means planning must become more flexible. So we should reduce the size of each commitment.",
-    "prompt": "Explain one market trend and its implication for the company."
+    "prompt": "Explain one market trend and its implication for the company.",
+    "purposePt": "Explicar uma tendência e por que ela importa.",
+    "stepsPt": [
+      "A tendência mais ampla é...",
+      "O principal fator por trás disso é...",
+      "Para nós, isso significa...",
+      "Então, deveríamos..."
+    ],
+    "examplePt": "A tendência mais ampla é de ciclos de produto mais curtos. O principal fator por trás disso é o feedback digital mais rápido. Para nós, isso significa que o planejamento precisa se tornar mais flexível. Então, deveríamos reduzir o tamanho de cada compromisso.",
+    "promptPt": "Explique uma tendência de mercado e sua implicação para a empresa."
   },
   {
     "id": "fw-022",
@@ -5031,7 +5220,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "The assumption behind this is that customers will pay for faster delivery. What supports that assumption is our premium-shipping usage. What could invalidate it is different behavior in lower-value orders. So my conclusion is to test before scaling.",
-    "prompt": "Take one business assumption and test it verbally."
+    "prompt": "Take one business assumption and test it verbally.",
+    "purposePt": "Expor a premissa por trás de uma decisão.",
+    "stepsPt": [
+      "A premissa por trás disso é...",
+      "O que sustenta essa premissa é...",
+      "O que poderia invalidá-la é...",
+      "Então, minha conclusão é..."
+    ],
+    "examplePt": "A premissa por trás disso é que os clientes pagarão por uma entrega mais rápida. O que sustenta essa premissa é o uso do frete premium. O que poderia invalidá-la é um comportamento diferente em pedidos de menor valor. Então, minha conclusão é testar antes de escalar.",
+    "promptPt": "Pegue uma premissa de negócio e teste-a verbalmente."
   },
   {
     "id": "fw-023",
@@ -5059,7 +5257,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "My current hypothesis is that the delay comes from approval queues. The fastest way to test it is to measure waiting time by stage. If we see most time concentrated before approval, that would support it. If not, I would revise the hypothesis toward execution capacity.",
-    "prompt": "State a hypothesis and explain how you would falsify it."
+    "prompt": "State a hypothesis and explain how you would falsify it.",
+    "purposePt": "Raciocinar sem fingir saber a resposta cedo demais.",
+    "stepsPt": [
+      "Minha hipótese atual é...",
+      "A forma mais rápida de testá-la é...",
+      "Se observarmos X, isso a sustentaria.",
+      "Se não, eu revisaria a hipótese para..."
+    ],
+    "examplePt": "Minha hipótese atual é que o atraso vem das filas de aprovação. A forma mais rápida de testá-la é medir o tempo de espera por etapa. Se observarmos a maior parte do tempo concentrada antes da aprovação, isso a sustentaria. Se não, eu revisaria a hipótese para capacidade de execução.",
+    "promptPt": "Declare uma hipótese e explique como você tentaria refutá-la."
   },
   {
     "id": "fw-024",
@@ -5087,7 +5294,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "We have three realistic options: build, buy or partner. I would evaluate them on speed, control and cost. The key trade-off is speed versus ownership. On balance, I would choose a partner for phase one.",
-    "prompt": "Compare options using explicit decision criteria."
+    "prompt": "Compare options using explicit decision criteria.",
+    "purposePt": "Fazer uma recomendação rastreável a critérios explícitos.",
+    "stepsPt": [
+      "Temos três opções realistas...",
+      "Eu as avaliaria por...",
+      "O principal trade-off é...",
+      "No balanço geral, eu escolheria..."
+    ],
+    "examplePt": "Temos três opções realistas: construir, comprar ou fazer parceria. Eu as avaliaria por velocidade, controle e custo. O principal trade-off é velocidade versus propriedade. No balanço geral, eu escolheria um parceiro para a primeira fase.",
+    "promptPt": "Compare opções usando critérios explícitos de decisão."
   },
   {
     "id": "fw-025",
@@ -5115,7 +5331,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "The main risk is supplier failure during peak season. I would rate the likelihood as medium. If it happens, the impact would be severe. To reduce exposure, we can qualify a backup supplier now.",
-    "prompt": "Describe one business risk with probability, impact and mitigation."
+    "prompt": "Describe one business risk with probability, impact and mitigation.",
+    "purposePt": "Discutir risco com precisão em vez de vagamente.",
+    "stepsPt": [
+      "O principal risco é...",
+      "Eu classificaria a probabilidade como...",
+      "Se acontecer, o impacto seria...",
+      "Para reduzir a exposição, podemos..."
+    ],
+    "examplePt": "O principal risco é uma falha do fornecedor durante a alta temporada. Eu classificaria a probabilidade como média. Se acontecer, o impacto seria grave. Para reduzir a exposição, podemos homologar agora um fornecedor alternativo.",
+    "promptPt": "Descreva um risco de negócio com probabilidade, impacto e mitigação."
   },
   {
     "id": "fw-026",
@@ -5143,7 +5368,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "The trade-off is speed versus customization. If we prioritize speed, we are choosing a standardized solution. That means accepting less flexibility. Given our objective, I would make that trade.",
-    "prompt": "Explain the sacrifice behind one recommendation."
+    "prompt": "Explain the sacrifice behind one recommendation.",
+    "purposePt": "Deixar explícito o custo de uma decisão.",
+    "stepsPt": [
+      "O trade-off é...",
+      "Se priorizarmos X, estamos escolhendo...",
+      "Isso significa aceitar...",
+      "Dado nosso objetivo, eu..."
+    ],
+    "examplePt": "O trade-off é velocidade versus customização. Se priorizarmos velocidade, estamos escolhendo uma solução padronizada. Isso significa aceitar menos flexibilidade. Dado nosso objetivo, eu faria essa troca.",
+    "promptPt": "Explique o sacrifício por trás de uma recomendação."
   },
   {
     "id": "fw-027",
@@ -5171,7 +5405,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "We currently have strong demand in the region. However, our fulfillment capacity is already near its limit. So the question is how to grow without damaging service. My recommendation is to add capacity before increasing acquisition spend.",
-    "prompt": "Frame an executive problem using situation, complication, question and answer."
+    "prompt": "Frame an executive problem using situation, complication, question and answer.",
+    "purposePt": "Criar tensão e conduzir naturalmente a uma recomendação.",
+    "stepsPt": [
+      "Atualmente temos...",
+      "No entanto,...",
+      "Então, a pergunta é...",
+      "Minha recomendação é..."
+    ],
+    "examplePt": "Atualmente temos forte demanda na região. No entanto, nossa capacidade de atendimento já está próxima do limite. Então, a pergunta é como crescer sem prejudicar o serviço. Minha recomendação é adicionar capacidade antes de aumentar o investimento em aquisição.",
+    "promptPt": "Estruture um problema executivo usando situação, complicação, pergunta e resposta."
   },
   {
     "id": "fw-028",
@@ -5199,7 +5442,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "My recommendation is to enter with a pilot. There are three reasons. First, uncertainty is still high. Second, the investment is reversible. Third, we can learn quickly. Taken together, a pilot gives us the best risk-adjusted path.",
-    "prompt": "Give the answer first and support it with three reasons."
+    "prompt": "Give the answer first and support it with three reasons.",
+    "purposePt": "Começar pela conclusão e sustentá-la com razões agrupadas.",
+    "stepsPt": [
+      "Minha recomendação é...",
+      "Há três razões.",
+      "Primeiro... Segundo... Terceiro...",
+      "Considerando tudo,..."
+    ],
+    "examplePt": "Minha recomendação é entrar com um piloto. Há três razões. Primeiro, a incerteza ainda é alta. Segundo, o investimento é reversível. Terceiro, podemos aprender rapidamente. Considerando tudo, um piloto nos dá o melhor caminho ajustado ao risco.",
+    "promptPt": "Dê a resposta primeiro e sustente-a com três razões."
   },
   {
     "id": "fw-029",
@@ -5227,7 +5479,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "We are currently on track for the revised launch. Since the last update, testing is complete. The main risk is final supplier certification. The decision we need is approval to release the contingency budget if certification slips.",
-    "prompt": "Give a 45-second executive project update."
+    "prompt": "Give a 45-second executive project update.",
+    "purposePt": "Reportar status, risco e decisão necessária em menos de um minuto.",
+    "stepsPt": [
+      "Atualmente estamos...",
+      "Desde a última atualização,...",
+      "O principal risco é...",
+      "A decisão de que precisamos é..."
+    ],
+    "examplePt": "Atualmente estamos dentro do cronograma para o lançamento revisado. Desde a última atualização, os testes foram concluídos. O principal risco é a certificação final do fornecedor. A decisão de que precisamos é a aprovação para liberar o orçamento de contingência caso a certificação atrase.",
+    "promptPt": "Dê uma atualização executiva de projeto de 45 segundos."
   },
   {
     "id": "fw-030",
@@ -5255,7 +5516,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "Here is what happened: the primary supplier missed the confirmed ship date. Here is the impact: production stops in four days. Here is what we have already done: secured partial backup volume. What I need from you is approval for expedited freight.",
-    "prompt": "Escalate a serious issue without sounding helpless."
+    "prompt": "Escalate a serious issue without sounding helpless.",
+    "purposePt": "Escalar com fatos, responsabilidade e um pedido preciso.",
+    "stepsPt": [
+      "Aqui está o que aconteceu...",
+      "Aqui está o impacto...",
+      "Aqui está o que já fizemos...",
+      "O que eu preciso de você é..."
+    ],
+    "examplePt": "Aqui está o que aconteceu: o fornecedor principal perdeu a data de embarque confirmada. Aqui está o impacto: a produção para em quatro dias. Aqui está o que já fizemos: garantimos parte do volume alternativo. O que eu preciso de você é a aprovação do frete expresso.",
+    "promptPt": "Escale um problema sério sem soar sem controle da situação."
   },
   {
     "id": "fw-031",
@@ -5283,7 +5553,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "My concern with that approach is execution risk. The reason I say that is that two dependencies are still untested. An alternative would be a phased rollout. Would that address your main objective?",
-    "prompt": "Challenge a proposal and offer an alternative."
+    "prompt": "Challenge a proposal and offer an alternative.",
+    "purposePt": "Contestar uma proposta com substância, não com emoção.",
+    "stepsPt": [
+      "Minha preocupação com essa abordagem é...",
+      "A razão de eu dizer isso é...",
+      "Uma alternativa seria...",
+      "Isso atenderia ao seu principal objetivo?"
+    ],
+    "examplePt": "Minha preocupação com essa abordagem é o risco de execução. A razão de eu dizer isso é que duas dependências ainda não foram testadas. Uma alternativa seria um rollout em fases. Isso atenderia ao seu principal objetivo?",
+    "promptPt": "Questione uma proposta e ofereça uma alternativa."
   },
   {
     "id": "fw-032",
@@ -5311,7 +5590,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "If we can extend the payment term to 60 days, then we would need a firm annual volume commitment. That would allow both sides to plan capacity more confidently. Would that work for you?",
-    "prompt": "Make one conditional concession in a negotiation."
+    "prompt": "Make one conditional concession in a negotiation.",
+    "purposePt": "Evitar fazer concessões sem receber valor em troca.",
+    "stepsPt": [
+      "Se pudermos...",
+      "Então precisaríamos...",
+      "Isso permitiria que ambos os lados...",
+      "Isso funcionaria para você?"
+    ],
+    "examplePt": "Se pudermos estender o prazo de pagamento para 60 dias, então precisaríamos de um compromisso firme de volume anual. Isso permitiria que ambos os lados planejassem capacidade com mais confiança. Isso funcionaria para você?",
+    "promptPt": "Faça uma concessão condicional em uma negociação."
   },
   {
     "id": "fw-033",
@@ -5339,7 +5627,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "What matters most to us is delivery reliability. The constraint we have is limited safety stock. One option that could satisfy both is a fixed weekly allocation. How does that fit with your priorities?",
-    "prompt": "Negotiate around interests rather than fixed positions."
+    "prompt": "Negotiate around interests rather than fixed positions.",
+    "purposePt": "Sair de posições fixas e ir para necessidades subjacentes.",
+    "stepsPt": [
+      "O que mais importa para nós é...",
+      "A restrição que temos é...",
+      "Uma opção que poderia atender a ambos é...",
+      "Como isso se encaixa nas suas prioridades?"
+    ],
+    "examplePt": "O que mais importa para nós é a confiabilidade da entrega. A restrição que temos é um estoque de segurança limitado. Uma opção que poderia atender a ambos é uma alocação semanal fixa. Como isso se encaixa nas suas prioridades?",
+    "promptPt": "Negocie em torno de interesses, e não de posições fixas."
   },
   {
     "id": "fw-034",
@@ -5367,7 +5664,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "Just to give some context, headquarters needs one global reporting standard. What I am trying to achieve is comparability, not extra bureaucracy. How does that sound from your side? If needed, we can adjust the process to fit the local workflow.",
-    "prompt": "Explain a global request while inviting local perspective."
+    "prompt": "Explain a global request while inviting local perspective.",
+    "purposePt": "Tornar a comunicação mais segura entre culturas e idiomas diferentes.",
+    "stepsPt": [
+      "Só para dar um pouco de contexto,...",
+      "O que estou tentando alcançar é...",
+      "Como isso soa do seu lado?",
+      "Se necessário, podemos ajustar..."
+    ],
+    "examplePt": "Só para dar um pouco de contexto, a matriz precisa de um padrão global de relatórios. O que estou tentando alcançar é comparabilidade, não mais burocracia. Como isso soa do seu lado? Se necessário, podemos ajustar o processo ao fluxo de trabalho local.",
+    "promptPt": "Explique uma solicitação global convidando a perspectiva local."
   },
   {
     "id": "fw-035",
@@ -5395,7 +5701,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "The global principle is consistent customer experience. Locally, the reality is that payment behavior is different. So the adaptation I would make is to support local payment methods, as long as we preserve the same service standard.",
-    "prompt": "Adapt one global standard to a local context."
+    "prompt": "Adapt one global standard to a local context.",
+    "purposePt": "Equilibrar consistência global com relevância local.",
+    "stepsPt": [
+      "O princípio global é...",
+      "Localmente, a realidade é...",
+      "Então, a adaptação que eu faria é...",
+      "Desde que preservemos..."
+    ],
+    "examplePt": "O princípio global é uma experiência consistente para o cliente. Localmente, a realidade é que o comportamento de pagamento é diferente. Então, a adaptação que eu faria é aceitar métodos de pagamento locais, desde que preservemos o mesmo padrão de serviço.",
+    "promptPt": "Adapte um padrão global a um contexto local."
   },
   {
     "id": "fw-036",
@@ -5423,7 +5738,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "I noticed that final approval usually happens after the meeting. Is there a local reason for that? What would be the best way to align on decisions before we communicate externally? So we are agreed that we will pre-align with the key approvers.",
-    "prompt": "Explore a process difference with curiosity instead of judgment."
+    "prompt": "Explore a process difference with curiosity instead of judgment.",
+    "purposePt": "Abordar uma diferença sem fazer suposições.",
+    "stepsPt": [
+      "Percebi que...",
+      "Existe alguma razão local para isso?",
+      "Qual seria a melhor forma de nos alinharmos sobre...?",
+      "Então, estamos de acordo que..."
+    ],
+    "examplePt": "Percebi que a aprovação final geralmente acontece depois da reunião. Existe alguma razão local para isso? Qual seria a melhor forma de nos alinharmos sobre as decisões antes de comunicá-las externamente? Então, estamos de acordo que faremos um pré-alinhamento com os principais aprovadores.",
+    "promptPt": "Explore uma diferença de processo com curiosidade em vez de julgamento."
   },
   {
     "id": "fw-037",
@@ -5451,7 +5775,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "The signal I would focus on is the three-month retention decline. I would treat one week of traffic volatility as noise for now because it is not persistent. The deeper implication is weakening product stickiness. The next test should be cohort-level retention.",
-    "prompt": "Separate signal from noise in a set of business results."
+    "prompt": "Separate signal from noise in a set of business results.",
+    "purposePt": "Separar um padrão real de uma variação de curto prazo.",
+    "stepsPt": [
+      "O sinal em que eu focaria é...",
+      "Eu trataria X como ruído por enquanto porque...",
+      "A implicação mais profunda é...",
+      "O próximo teste deveria ser..."
+    ],
+    "examplePt": "O sinal em que eu focaria é a queda de retenção de três meses. Eu trataria uma semana de volatilidade de tráfego como ruído por enquanto porque ela não é persistente. A implicação mais profunda é o enfraquecimento da aderência do produto. O próximo teste deveria ser a retenção por coorte.",
+    "promptPt": "Separe sinal de ruído em um conjunto de resultados de negócio."
   },
   {
     "id": "fw-038",
@@ -5479,7 +5812,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "The strategy assumes that faster delivery increases conversion. The mechanism is reduced purchase hesitation. If that mechanism holds, conversion should rise most in time-sensitive categories. The strategy fails if customers are actually more price-sensitive than time-sensitive.",
-    "prompt": "Explain the causal logic of one strategy."
+    "prompt": "Explain the causal logic of one strategy.",
+    "purposePt": "Explicar por que uma estratégia deveria funcionar, e não apenas o que ela é.",
+    "stepsPt": [
+      "A estratégia pressupõe que...",
+      "O mecanismo é...",
+      "Se esse mecanismo se sustentar,...",
+      "A estratégia falha se..."
+    ],
+    "examplePt": "A estratégia pressupõe que uma entrega mais rápida aumenta a conversão. O mecanismo é a redução da hesitação de compra. Se esse mecanismo se sustentar, a conversão deveria subir mais nas categorias sensíveis ao tempo. A estratégia falha se os clientes forem, na verdade, mais sensíveis a preço do que a tempo.",
+    "promptPt": "Explique a lógica causal de uma estratégia."
   },
   {
     "id": "fw-039",
@@ -5507,7 +5849,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "The immediate effect would be faster approvals. The second-order effect could be weaker control if teams bypass review too often. That creates a risk that speed improves while quality declines. So I would design the policy to keep review for high-risk cases.",
-    "prompt": "Describe a decision's immediate and second-order effects."
+    "prompt": "Describe a decision's immediate and second-order effects.",
+    "purposePt": "Ir além da consequência imediata de uma decisão.",
+    "stepsPt": [
+      "O efeito imediato seria...",
+      "O efeito de segunda ordem poderia ser...",
+      "Isso cria o risco de que...",
+      "Então, eu desenharia a política para..."
+    ],
+    "examplePt": "O efeito imediato seria aprovações mais rápidas. O efeito de segunda ordem poderia ser um controle mais fraco se as equipes contornarem a revisão com frequência. Isso cria o risco de que a velocidade melhore enquanto a qualidade caia. Então, eu desenharia a política para manter a revisão nos casos de alto risco.",
+    "promptPt": "Descreva os efeitos imediatos e de segunda ordem de uma decisão."
   },
   {
     "id": "fw-040",
@@ -5535,7 +5886,16 @@ const ideaFrameworks = [
       ]
     ],
     "example": "What we know is that demand is strong in two cities. What remains uncertain is national repeat behavior. The decision is reversible because a pilot limits commitment. Given that, the best next move is to test before a full rollout.",
-    "prompt": "Recommend a move while explicitly naming what is unknown."
+    "prompt": "Recommend a move while explicitly naming what is unknown.",
+    "purposePt": "Tomar uma decisão mesmo quando a informação está incompleta.",
+    "stepsPt": [
+      "O que sabemos é...",
+      "O que permanece incerto é...",
+      "A decisão é reversível / difícil de reverter porque...",
+      "Dado isso, o melhor próximo movimento é..."
+    ],
+    "examplePt": "O que sabemos é que a demanda é forte em duas cidades. O que permanece incerto é o comportamento de recompra em nível nacional. A decisão é reversível porque um piloto limita o compromisso. Dado isso, o melhor próximo movimento é testar antes de um rollout completo.",
+    "promptPt": "Recomende um movimento deixando explicitamente claro o que ainda é desconhecido."
   }
 ];
 
@@ -5587,6 +5947,74 @@ const businessRoles = [
         "the rate at which customers stop buying or leave",
         "Customer churn is highest during the first 60 days."
       ]
+    ],
+    "rolePt": "Clientes",
+    "definitionPt": "Pessoas ou organizações que compram produtos ou serviços de uma empresa.",
+    "semanticGroups": [
+      {
+        "label": "Lifecycle & status",
+        "labelPt": "Ciclo e status",
+        "items": [
+          {
+            "en": "new customers",
+            "pt": "clientes novos"
+          },
+          {
+            "en": "existing customers",
+            "pt": "clientes existentes"
+          },
+          {
+            "en": "repeat customers",
+            "pt": "clientes recorrentes"
+          },
+          {
+            "en": "churned customers",
+            "pt": "clientes perdidos"
+          }
+        ]
+      },
+      {
+        "label": "Relationship model",
+        "labelPt": "Modelo de relação",
+        "items": [
+          {
+            "en": "loyal customers",
+            "pt": "clientes fiéis"
+          }
+        ]
+      },
+      {
+        "label": "Value & priority",
+        "labelPt": "Valor e prioridade",
+        "items": [
+          {
+            "en": "high-value customers",
+            "pt": "clientes de alto valor"
+          }
+        ]
+      },
+      {
+        "label": "Performance & risk",
+        "labelPt": "Desempenho e risco",
+        "items": [
+          {
+            "en": "at-risk customers",
+            "pt": "clientes em risco"
+          },
+          {
+            "en": "dissatisfied customers",
+            "pt": "clientes insatisfeitos"
+          }
+        ]
+      }
+    ],
+    "collocationsPt": [
+      "adquirir clientes",
+      "reter clientes",
+      "base de clientes",
+      "necessidades dos clientes",
+      "satisfação do cliente",
+      "churn / perda de clientes"
     ]
   },
   {
@@ -5636,6 +6064,74 @@ const businessRoles = [
         "keeping clients over repeated engagements",
         "Client retention is one of our strongest growth drivers."
       ]
+    ],
+    "rolePt": "Clientes de serviços",
+    "definitionPt": "Clientes em uma relação contínua de serviços, consultoria ou trabalho profissional.",
+    "semanticGroups": [
+      {
+        "label": "Lifecycle & status",
+        "labelPt": "Ciclo e status",
+        "items": [
+          {
+            "en": "new clients",
+            "pt": "clientes novos"
+          },
+          {
+            "en": "existing clients",
+            "pt": "clientes existentes"
+          },
+          {
+            "en": "retained clients",
+            "pt": "clientes retidos"
+          },
+          {
+            "en": "former clients",
+            "pt": "clientes antigos"
+          }
+        ]
+      },
+      {
+        "label": "Relationship model",
+        "labelPt": "Modelo de relação",
+        "items": [
+          {
+            "en": "long-term clients",
+            "pt": "clientes de longo prazo"
+          },
+          {
+            "en": "enterprise clients",
+            "pt": "clientes corporativos"
+          }
+        ]
+      },
+      {
+        "label": "Value & priority",
+        "labelPt": "Valor e prioridade",
+        "items": [
+          {
+            "en": "priority clients",
+            "pt": "clientes prioritários"
+          }
+        ]
+      },
+      {
+        "label": "Geography & scope",
+        "labelPt": "Geografia e escopo",
+        "items": [
+          {
+            "en": "international clients",
+            "pt": "clientes internacionais"
+          }
+        ]
+      }
+    ],
+    "collocationsPt": [
+      "atender um cliente",
+      "relacionamento com o cliente",
+      "expectativas do cliente",
+      "briefing do cliente",
+      "com contato direto com clientes",
+      "retenção de clientes"
     ]
   },
   {
@@ -5685,6 +6181,74 @@ const businessRoles = [
         "work done to identify and contact potential buyers",
         "Prospecting activity increased, but response quality stayed flat."
       ]
+    ],
+    "rolePt": "Potenciais clientes",
+    "definitionPt": "Pessoas ou organizações com potencial real de se tornar clientes.",
+    "semanticGroups": [
+      {
+        "label": "Lifecycle & status",
+        "labelPt": "Ciclo e status",
+        "items": [
+          {
+            "en": "qualified prospects",
+            "pt": "potenciais clientes qualificados"
+          },
+          {
+            "en": "warm prospects",
+            "pt": "potenciais clientes mornos"
+          },
+          {
+            "en": "cold prospects",
+            "pt": "potenciais clientes frios"
+          }
+        ]
+      },
+      {
+        "label": "Types & segments",
+        "labelPt": "Tipos e segmentos",
+        "items": [
+          {
+            "en": "high-intent prospects",
+            "pt": "potenciais clientes com alta intenção"
+          },
+          {
+            "en": "inbound prospects",
+            "pt": "prospects de entrada"
+          },
+          {
+            "en": "outbound prospects",
+            "pt": "prospects de prospecção ativa"
+          }
+        ]
+      },
+      {
+        "label": "Value & priority",
+        "labelPt": "Valor e prioridade",
+        "items": [
+          {
+            "en": "strategic prospects",
+            "pt": "potenciais clientes estratégicos"
+          }
+        ]
+      },
+      {
+        "label": "Relationship model",
+        "labelPt": "Modelo de relação",
+        "items": [
+          {
+            "en": "enterprise prospects",
+            "pt": "potenciais clientes corporativos"
+          }
+        ]
+      }
+    ],
+    "collocationsPt": [
+      "qualificar um prospect",
+      "pipeline de prospects",
+      "engajar um prospect",
+      "necessidades do prospect",
+      "converter um prospect",
+      "atividade de prospecção"
     ]
   },
   {
@@ -5734,6 +6298,62 @@ const businessRoles = [
         "turn leads into qualified opportunities or customers",
         "The new landing page converts leads more effectively."
       ]
+    ],
+    "rolePt": "Leads",
+    "definitionPt": "Contatos identificados como possíveis oportunidades comerciais.",
+    "semanticGroups": [
+      {
+        "label": "Types & segments",
+        "labelPt": "Tipos e segmentos",
+        "items": [
+          {
+            "en": "inbound leads",
+            "pt": "leads de entrada"
+          },
+          {
+            "en": "outbound leads",
+            "pt": "leads de prospecção ativa"
+          }
+        ]
+      },
+      {
+        "label": "Lifecycle & status",
+        "labelPt": "Ciclo e status",
+        "items": [
+          {
+            "en": "marketing-qualified leads",
+            "pt": "leads qualificados pelo marketing"
+          },
+          {
+            "en": "sales-qualified leads",
+            "pt": "leads qualificados por vendas"
+          },
+          {
+            "en": "hot leads",
+            "pt": "leads quentes"
+          },
+          {
+            "en": "warm leads",
+            "pt": "leads mornos"
+          },
+          {
+            "en": "cold leads",
+            "pt": "leads frios"
+          },
+          {
+            "en": "unqualified leads",
+            "pt": "leads não qualificados"
+          }
+        ]
+      }
+    ],
+    "collocationsPt": [
+      "gerar leads",
+      "nutrir leads",
+      "qualidade dos leads",
+      "pontuação de leads",
+      "fazer follow-up de um lead",
+      "converter leads"
     ]
   },
   {
@@ -5783,6 +6403,74 @@ const businessRoles = [
         "risk that the account will not renew",
         "Usage decline is an early signal of renewal risk."
       ]
+    ],
+    "rolePt": "Contas-chave",
+    "definitionPt": "Clientes estratégicos cuja receita, potencial ou importância exige gestão dedicada.",
+    "semanticGroups": [
+      {
+        "label": "Value & priority",
+        "labelPt": "Valor e prioridade",
+        "items": [
+          {
+            "en": "strategic accounts",
+            "pt": "contas estratégicas"
+          },
+          {
+            "en": "priority accounts",
+            "pt": "contas prioritárias"
+          },
+          {
+            "en": "high-revenue accounts",
+            "pt": "contas de alta receita"
+          },
+          {
+            "en": "high-growth accounts",
+            "pt": "contas de alto crescimento"
+          }
+        ]
+      },
+      {
+        "label": "Geography & scope",
+        "labelPt": "Geografia e escopo",
+        "items": [
+          {
+            "en": "global accounts",
+            "pt": "contas globais"
+          },
+          {
+            "en": "national accounts",
+            "pt": "contas nacionais"
+          }
+        ]
+      },
+      {
+        "label": "Performance & risk",
+        "labelPt": "Desempenho e risco",
+        "items": [
+          {
+            "en": "at-risk accounts",
+            "pt": "contas em risco"
+          }
+        ]
+      },
+      {
+        "label": "Types & segments",
+        "labelPt": "Tipos e segmentos",
+        "items": [
+          {
+            "en": "named accounts",
+            "pt": "contas nomeadas"
+          }
+        ]
+      }
+    ],
+    "collocationsPt": [
+      "gerenciar uma conta-chave",
+      "plano da conta",
+      "crescimento da conta",
+      "penetração na conta",
+      "patrocinador executivo",
+      "risco de renovação"
     ]
   },
   {
@@ -5832,6 +6520,68 @@ const businessRoles = [
         "the overall quality of using a product or service",
         "The new flow improves user experience without adding complexity."
       ]
+    ],
+    "rolePt": "Usuários finais",
+    "definitionPt": "Pessoas que efetivamente usam um produto ou serviço, mesmo quando não são os compradores.",
+    "semanticGroups": [
+      {
+        "label": "Lifecycle & status",
+        "labelPt": "Ciclo e status",
+        "items": [
+          {
+            "en": "active users",
+            "pt": "usuários ativos"
+          },
+          {
+            "en": "new users",
+            "pt": "usuários novos"
+          },
+          {
+            "en": "inactive users",
+            "pt": "usuários inativos"
+          }
+        ]
+      },
+      {
+        "label": "Types & segments",
+        "labelPt": "Tipos e segmentos",
+        "items": [
+          {
+            "en": "power users",
+            "pt": "usuários avançados"
+          },
+          {
+            "en": "casual users",
+            "pt": "usuários casuais"
+          },
+          {
+            "en": "frequent users",
+            "pt": "usuários frequentes"
+          }
+        ]
+      },
+      {
+        "label": "Relationship model",
+        "labelPt": "Modelo de relação",
+        "items": [
+          {
+            "en": "internal users",
+            "pt": "usuários internos"
+          },
+          {
+            "en": "external users",
+            "pt": "usuários externos"
+          }
+        ]
+      }
+    ],
+    "collocationsPt": [
+      "necessidades do usuário",
+      "comportamento do usuário",
+      "adoção pelo usuário",
+      "feedback do usuário",
+      "jornada do usuário",
+      "experiência do usuário"
     ]
   },
   {
@@ -5881,6 +6631,68 @@ const businessRoles = [
         "risk created by relying heavily on a supplier",
         "Dual sourcing reduces supplier dependency."
       ]
+    ],
+    "rolePt": "Fornecedores",
+    "definitionPt": "Organizações que fornecem materiais, componentes, produtos ou serviços necessários à operação.",
+    "semanticGroups": [
+      {
+        "label": "Relationship model",
+        "labelPt": "Modelo de relação",
+        "items": [
+          {
+            "en": "approved suppliers",
+            "pt": "fornecedores homologados"
+          },
+          {
+            "en": "preferred suppliers",
+            "pt": "fornecedores preferenciais"
+          },
+          {
+            "en": "sole-source suppliers",
+            "pt": "fornecedores de fonte única"
+          },
+          {
+            "en": "backup suppliers",
+            "pt": "fornecedores alternativos"
+          }
+        ]
+      },
+      {
+        "label": "Value & priority",
+        "labelPt": "Valor e prioridade",
+        "items": [
+          {
+            "en": "strategic suppliers",
+            "pt": "fornecedores estratégicos"
+          },
+          {
+            "en": "tier-one suppliers",
+            "pt": "fornecedores de primeiro nível"
+          }
+        ]
+      },
+      {
+        "label": "Geography & scope",
+        "labelPt": "Geografia e escopo",
+        "items": [
+          {
+            "en": "local suppliers",
+            "pt": "fornecedores locais"
+          },
+          {
+            "en": "overseas suppliers",
+            "pt": "fornecedores estrangeiros"
+          }
+        ]
+      }
+    ],
+    "collocationsPt": [
+      "base de fornecedores",
+      "desempenho do fornecedor",
+      "homologar um fornecedor",
+      "comprar / abastecer-se de um fornecedor",
+      "lead time do fornecedor",
+      "dependência do fornecedor"
     ]
   },
   {
@@ -5930,6 +6742,68 @@ const businessRoles = [
         "the commercial working relationship with a vendor",
         "The vendor relationship improved after we clarified governance."
       ]
+    ],
+    "rolePt": "Fornecedores / prestadores",
+    "definitionPt": "Empresas contratadas para fornecer produtos, tecnologia ou serviços.",
+    "semanticGroups": [
+      {
+        "label": "Relationship model",
+        "labelPt": "Modelo de relação",
+        "items": [
+          {
+            "en": "approved vendors",
+            "pt": "fornecedores homologados"
+          },
+          {
+            "en": "preferred vendors",
+            "pt": "fornecedores preferenciais"
+          },
+          {
+            "en": "incumbent vendors",
+            "pt": "fornecedores atuais"
+          },
+          {
+            "en": "alternative vendors",
+            "pt": "fornecedores alternativos"
+          }
+        ]
+      },
+      {
+        "label": "Function & specialty",
+        "labelPt": "Função e especialidade",
+        "items": [
+          {
+            "en": "software vendors",
+            "pt": "fornecedores de software"
+          },
+          {
+            "en": "service vendors",
+            "pt": "fornecedores de serviços"
+          }
+        ]
+      },
+      {
+        "label": "Geography & scope",
+        "labelPt": "Geografia e escopo",
+        "items": [
+          {
+            "en": "local vendors",
+            "pt": "fornecedores locais"
+          },
+          {
+            "en": "global vendors",
+            "pt": "fornecedores globais"
+          }
+        ]
+      }
+    ],
+    "collocationsPt": [
+      "seleção de fornecedor",
+      "contrato com fornecedor",
+      "gestão de fornecedores",
+      "dependência / aprisionamento ao fornecedor",
+      "avaliação do fornecedor",
+      "relacionamento com o fornecedor"
     ]
   },
   {
@@ -5979,6 +6853,74 @@ const businessRoles = [
         "a formal assessment of a manufacturing site",
         "The factory audit identified two compliance gaps."
       ]
+    ],
+    "rolePt": "Fabricantes",
+    "definitionPt": "Organizações responsáveis por produzir fisicamente bens ou componentes.",
+    "semanticGroups": [
+      {
+        "label": "Relationship model",
+        "labelPt": "Modelo de relação",
+        "items": [
+          {
+            "en": "contract manufacturers",
+            "pt": "fabricantes contratados"
+          },
+          {
+            "en": "approved manufacturers",
+            "pt": "fabricantes homologados"
+          },
+          {
+            "en": "backup manufacturers",
+            "pt": "fabricantes alternativos"
+          }
+        ]
+      },
+      {
+        "label": "Types & segments",
+        "labelPt": "Tipos e segmentos",
+        "items": [
+          {
+            "en": "original equipment manufacturers",
+            "pt": "fabricantes de equipamento original (OEM)"
+          },
+          {
+            "en": "high-volume manufacturers",
+            "pt": "fabricantes de alto volume"
+          }
+        ]
+      },
+      {
+        "label": "Geography & scope",
+        "labelPt": "Geografia e escopo",
+        "items": [
+          {
+            "en": "local manufacturers",
+            "pt": "fabricantes locais"
+          },
+          {
+            "en": "offshore manufacturers",
+            "pt": "fabricantes offshore"
+          }
+        ]
+      },
+      {
+        "label": "Function & specialty",
+        "labelPt": "Função e especialidade",
+        "items": [
+          {
+            "en": "specialist manufacturers",
+            "pt": "fabricantes especialistas"
+          }
+        ]
+      }
+    ],
+    "collocationsPt": [
+      "capacidade de fabricação",
+      "linha de produção",
+      "lote / rodada de produção",
+      "defeito de fabricação",
+      "alocação de capacidade",
+      "auditoria de fábrica"
     ]
   },
   {
@@ -6028,6 +6970,74 @@ const businessRoles = [
         "rights to distribute within a geographic area",
         "Territory rights are exclusive for the first two years."
       ]
+    ],
+    "rolePt": "Distribuidores",
+    "definitionPt": "Empresas que levam produtos do fabricante ao mercado, canais ou clientes.",
+    "semanticGroups": [
+      {
+        "label": "Types & segments",
+        "labelPt": "Tipos e segmentos",
+        "items": [
+          {
+            "en": "authorized distributors",
+            "pt": "distribuidores autorizados"
+          },
+          {
+            "en": "master distributors",
+            "pt": "distribuidores master"
+          }
+        ]
+      },
+      {
+        "label": "Geography & scope",
+        "labelPt": "Geografia e escopo",
+        "items": [
+          {
+            "en": "regional distributors",
+            "pt": "distribuidores regionais"
+          },
+          {
+            "en": "national distributors",
+            "pt": "distribuidores nacionais"
+          },
+          {
+            "en": "local distributors",
+            "pt": "distribuidores locais"
+          }
+        ]
+      },
+      {
+        "label": "Relationship model",
+        "labelPt": "Modelo de relação",
+        "items": [
+          {
+            "en": "exclusive distributors",
+            "pt": "distribuidores exclusivos"
+          },
+          {
+            "en": "channel distributors",
+            "pt": "distribuidores de canal"
+          }
+        ]
+      },
+      {
+        "label": "Function & specialty",
+        "labelPt": "Função e especialidade",
+        "items": [
+          {
+            "en": "specialist distributors",
+            "pt": "distribuidores especialistas"
+          }
+        ]
+      }
+    ],
+    "collocationsPt": [
+      "acordo de distribuição",
+      "rede de distribuição",
+      "cobertura de canais",
+      "venda ao cliente final pelo canal",
+      "manutenção de estoque",
+      "direitos territoriais"
     ]
   },
   {
@@ -6077,6 +7087,62 @@ const businessRoles = [
         "faster transportation at higher cost",
         "We approved expedited freight to protect the launch date."
       ]
+    ],
+    "rolePt": "Operadores logísticos",
+    "definitionPt": "Empresas que transportam, armazenam, desembaraçam ou entregam mercadorias.",
+    "semanticGroups": [
+      {
+        "label": "Function & specialty",
+        "labelPt": "Função e especialidade",
+        "items": [
+          {
+            "en": "freight forwarders",
+            "pt": "agentes de carga"
+          },
+          {
+            "en": "3PL providers",
+            "pt": "operadores logísticos 3PL"
+          },
+          {
+            "en": "warehouse operators",
+            "pt": "operadores de armazém"
+          },
+          {
+            "en": "customs brokers",
+            "pt": "despachantes aduaneiros"
+          }
+        ]
+      },
+      {
+        "label": "Types & segments",
+        "labelPt": "Tipos e segmentos",
+        "items": [
+          {
+            "en": "carriers",
+            "pt": "transportadoras"
+          },
+          {
+            "en": "couriers",
+            "pt": "empresas de courier"
+          },
+          {
+            "en": "last-mile providers",
+            "pt": "operadores de última milha"
+          },
+          {
+            "en": "express carriers",
+            "pt": "transportadoras expressas"
+          }
+        ]
+      }
+    ],
+    "collocationsPt": [
+      "capacidade de transporte",
+      "rastreamento de remessa",
+      "desembaraço aduaneiro",
+      "janela de entrega",
+      "entrega de última milha",
+      "frete expresso / acelerado"
     ]
   },
   {
@@ -6126,6 +7192,74 @@ const businessRoles = [
         "create value collaboratively",
         "We want to co-create value rather than simply resell each other's services."
       ]
+    ],
+    "rolePt": "Parceiros estratégicos",
+    "definitionPt": "Organizações que colaboram para criar valor estratégico, comercial ou tecnológico conjunto.",
+    "semanticGroups": [
+      {
+        "label": "Function & specialty",
+        "labelPt": "Função e especialidade",
+        "items": [
+          {
+            "en": "technology partners",
+            "pt": "parceiros de tecnologia"
+          },
+          {
+            "en": "implementation partners",
+            "pt": "parceiros de implementação"
+          }
+        ]
+      },
+      {
+        "label": "Relationship model",
+        "labelPt": "Modelo de relação",
+        "items": [
+          {
+            "en": "channel partners",
+            "pt": "parceiros de canal"
+          },
+          {
+            "en": "joint-venture partners",
+            "pt": "parceiros de joint venture"
+          },
+          {
+            "en": "ecosystem partners",
+            "pt": "parceiros de ecossistema"
+          }
+        ]
+      },
+      {
+        "label": "Geography & scope",
+        "labelPt": "Geografia e escopo",
+        "items": [
+          {
+            "en": "local partners",
+            "pt": "parceiros locais"
+          }
+        ]
+      },
+      {
+        "label": "Types & segments",
+        "labelPt": "Tipos e segmentos",
+        "items": [
+          {
+            "en": "innovation partners",
+            "pt": "parceiros de inovação"
+          },
+          {
+            "en": "commercial partners",
+            "pt": "parceiros comerciais"
+          }
+        ]
+      }
+    ],
+    "collocationsPt": [
+      "parceria estratégica",
+      "ecossistema de parceiros",
+      "go-to-market conjunto",
+      "incentivos compartilhados",
+      "capacitação de parceiros",
+      "cocriar valor"
     ]
   },
   {
@@ -6175,6 +7309,80 @@ const businessRoles = [
         "active support from stakeholders",
         "We need stakeholder buy-in before moving to implementation."
       ]
+    ],
+    "rolePt": "Stakeholders / partes interessadas",
+    "definitionPt": "Pessoas ou grupos que influenciam, são afetados ou têm interesse em uma iniciativa.",
+    "semanticGroups": [
+      {
+        "label": "Relationship model",
+        "labelPt": "Modelo de relação",
+        "items": [
+          {
+            "en": "internal stakeholders",
+            "pt": "stakeholders internos"
+          },
+          {
+            "en": "external stakeholders",
+            "pt": "stakeholders externos"
+          }
+        ]
+      },
+      {
+        "label": "Value & priority",
+        "labelPt": "Valor e prioridade",
+        "items": [
+          {
+            "en": "key stakeholders",
+            "pt": "stakeholders principais"
+          }
+        ]
+      },
+      {
+        "label": "Authority & seniority",
+        "labelPt": "Autoridade e senioridade",
+        "items": [
+          {
+            "en": "senior stakeholders",
+            "pt": "stakeholders seniores"
+          }
+        ]
+      },
+      {
+        "label": "Geography & scope",
+        "labelPt": "Geografia e escopo",
+        "items": [
+          {
+            "en": "local stakeholders",
+            "pt": "stakeholders locais"
+          },
+          {
+            "en": "global stakeholders",
+            "pt": "stakeholders globais"
+          }
+        ]
+      },
+      {
+        "label": "Performance & risk",
+        "labelPt": "Desempenho e risco",
+        "items": [
+          {
+            "en": "supportive stakeholders",
+            "pt": "stakeholders favoráveis"
+          },
+          {
+            "en": "critical stakeholders",
+            "pt": "stakeholders críticos"
+          }
+        ]
+      }
+    ],
+    "collocationsPt": [
+      "alinhamento de stakeholders",
+      "mapeamento de stakeholders",
+      "expectativas dos stakeholders",
+      "engajar stakeholders",
+      "gerenciar stakeholders",
+      "adesão / apoio dos stakeholders"
     ]
   },
   {
@@ -6224,6 +7432,74 @@ const businessRoles = [
         "public and active senior support",
         "Visible sponsorship matters during organizational change."
       ]
+    ],
+    "rolePt": "Patrocinadores executivos",
+    "definitionPt": "Pessoas com autoridade que apoiam, protegem ou viabilizam uma iniciativa.",
+    "semanticGroups": [
+      {
+        "label": "Authority & seniority",
+        "labelPt": "Autoridade e senioridade",
+        "items": [
+          {
+            "en": "executive sponsors",
+            "pt": "patrocinadores executivos"
+          },
+          {
+            "en": "senior sponsors",
+            "pt": "patrocinadores seniores"
+          }
+        ]
+      },
+      {
+        "label": "Types & segments",
+        "labelPt": "Tipos e segmentos",
+        "items": [
+          {
+            "en": "project sponsors",
+            "pt": "patrocinadores de projeto"
+          },
+          {
+            "en": "business sponsors",
+            "pt": "patrocinadores de negócios"
+          },
+          {
+            "en": "program sponsors",
+            "pt": "patrocinadores de programa"
+          },
+          {
+            "en": "co-sponsors",
+            "pt": "copatrocinadores"
+          }
+        ]
+      },
+      {
+        "label": "Geography & scope",
+        "labelPt": "Geografia e escopo",
+        "items": [
+          {
+            "en": "regional sponsors",
+            "pt": "patrocinadores regionais"
+          }
+        ]
+      },
+      {
+        "label": "Lifecycle & status",
+        "labelPt": "Ciclo e status",
+        "items": [
+          {
+            "en": "active sponsors",
+            "pt": "patrocinadores ativos"
+          }
+        ]
+      }
+    ],
+    "collocationsPt": [
+      "garantir patrocínio executivo",
+      "apoio do patrocinador",
+      "alinhamento com o patrocinador",
+      "escalar para o patrocinador",
+      "mandato do patrocinador",
+      "patrocínio visível"
     ]
   },
   {
@@ -6273,6 +7549,68 @@ const businessRoles = [
         "defined authority over specific decisions",
         "The new governance model clarifies decision rights."
       ]
+    ],
+    "rolePt": "Tomadores de decisão",
+    "definitionPt": "Pessoas com autoridade formal ou influência decisiva para escolher um caminho.",
+    "semanticGroups": [
+      {
+        "label": "Authority & seniority",
+        "labelPt": "Autoridade e senioridade",
+        "items": [
+          {
+            "en": "final decision-makers",
+            "pt": "tomadores de decisão finais"
+          },
+          {
+            "en": "economic decision-makers",
+            "pt": "tomadores de decisão econômica"
+          },
+          {
+            "en": "technical decision-makers",
+            "pt": "tomadores de decisão técnica"
+          },
+          {
+            "en": "senior decision-makers",
+            "pt": "tomadores de decisão seniores"
+          },
+          {
+            "en": "authorized decision-makers",
+            "pt": "tomadores de decisão autorizados"
+          }
+        ]
+      },
+      {
+        "label": "Geography & scope",
+        "labelPt": "Geografia e escopo",
+        "items": [
+          {
+            "en": "local decision-makers",
+            "pt": "tomadores de decisão locais"
+          }
+        ]
+      },
+      {
+        "label": "Types & segments",
+        "labelPt": "Tipos e segmentos",
+        "items": [
+          {
+            "en": "joint decision-makers",
+            "pt": "tomadores de decisão conjunta"
+          },
+          {
+            "en": "informed decision-makers",
+            "pt": "tomadores de decisão informados"
+          }
+        ]
+      }
+    ],
+    "collocationsPt": [
+      "autoridade de decisão",
+      "critérios de decisão",
+      "processo decisório",
+      "influenciar uma decisão",
+      "tomar a decisão final",
+      "direitos / alçadas de decisão"
     ]
   },
   {
@@ -6322,6 +7660,68 @@ const businessRoles = [
         "move effectively through required steps",
         "A local colleague helped us navigate the process."
       ]
+    ],
+    "rolePt": "Gatekeepers / controladores de acesso",
+    "definitionPt": "Pessoas ou funções que controlam acesso, aprovações, informações ou etapas de um processo.",
+    "semanticGroups": [
+      {
+        "label": "Function & specialty",
+        "labelPt": "Função e especialidade",
+        "items": [
+          {
+            "en": "procurement gatekeepers",
+            "pt": "gatekeepers de compras"
+          },
+          {
+            "en": "technical gatekeepers",
+            "pt": "gatekeepers técnicos"
+          },
+          {
+            "en": "legal gatekeepers",
+            "pt": "gatekeepers jurídicos"
+          },
+          {
+            "en": "security gatekeepers",
+            "pt": "gatekeepers de segurança"
+          }
+        ]
+      },
+      {
+        "label": "Types & segments",
+        "labelPt": "Tipos e segmentos",
+        "items": [
+          {
+            "en": "administrative gatekeepers",
+            "pt": "gatekeepers administrativos"
+          },
+          {
+            "en": "process gatekeepers",
+            "pt": "gatekeepers de processo"
+          },
+          {
+            "en": "informal gatekeepers",
+            "pt": "gatekeepers informais"
+          }
+        ]
+      },
+      {
+        "label": "Geography & scope",
+        "labelPt": "Geografia e escopo",
+        "items": [
+          {
+            "en": "local gatekeepers",
+            "pt": "gatekeepers locais"
+          }
+        ]
+      }
+    ],
+    "collocationsPt": [
+      "etapa de aprovação",
+      "controlar acesso",
+      "liberar uma etapa de aprovação",
+      "papel de gatekeeper",
+      "gargalo de aprovação",
+      "navegar pelo processo"
     ]
   },
   {
@@ -6371,6 +7771,68 @@ const businessRoles = [
         "communicate or coordinate with regulatory authorities",
         "Legal will engage with regulators before the final submission."
       ]
+    ],
+    "rolePt": "Reguladores",
+    "definitionPt": "Órgãos e autoridades que definem, fiscalizam ou aplicam regras de um mercado.",
+    "semanticGroups": [
+      {
+        "label": "Geography & scope",
+        "labelPt": "Geografia e escopo",
+        "items": [
+          {
+            "en": "national regulators",
+            "pt": "reguladores nacionais"
+          },
+          {
+            "en": "local regulators",
+            "pt": "reguladores locais"
+          }
+        ]
+      },
+      {
+        "label": "Function & specialty",
+        "labelPt": "Função e especialidade",
+        "items": [
+          {
+            "en": "industry regulators",
+            "pt": "reguladores setoriais"
+          },
+          {
+            "en": "financial regulators",
+            "pt": "reguladores financeiros"
+          },
+          {
+            "en": "data regulators",
+            "pt": "reguladores de dados"
+          },
+          {
+            "en": "licensing authorities",
+            "pt": "autoridades de licenciamento"
+          }
+        ]
+      },
+      {
+        "label": "Types & segments",
+        "labelPt": "Tipos e segmentos",
+        "items": [
+          {
+            "en": "market regulators",
+            "pt": "reguladores de mercado"
+          },
+          {
+            "en": "supervisory authorities",
+            "pt": "autoridades supervisoras"
+          }
+        ]
+      }
+    ],
+    "collocationsPt": [
+      "aprovação regulatória",
+      "requisito regulatório",
+      "conformidade regulatória",
+      "risco regulatório",
+      "protocolo / submissão regulatória",
+      "interagir com reguladores"
     ]
   },
   {
@@ -6420,6 +7882,62 @@ const businessRoles = [
         "support provided by a manager",
         "The change will fail without visible managerial support."
       ]
+    ],
+    "rolePt": "Gestores",
+    "definitionPt": "Pessoas responsáveis por coordenar pessoas, desempenho, recursos e decisões operacionais.",
+    "semanticGroups": [
+      {
+        "label": "Authority & seniority",
+        "labelPt": "Autoridade e senioridade",
+        "items": [
+          {
+            "en": "line managers",
+            "pt": "gestores de linha"
+          },
+          {
+            "en": "people managers",
+            "pt": "gestores de pessoas"
+          },
+          {
+            "en": "functional managers",
+            "pt": "gestores funcionais"
+          },
+          {
+            "en": "project managers",
+            "pt": "gerentes de projeto"
+          },
+          {
+            "en": "senior managers",
+            "pt": "gestores seniores"
+          },
+          {
+            "en": "hiring managers",
+            "pt": "gestores contratantes"
+          },
+          {
+            "en": "matrix managers",
+            "pt": "gestores matriciais"
+          }
+        ]
+      },
+      {
+        "label": "Geography & scope",
+        "labelPt": "Geografia e escopo",
+        "items": [
+          {
+            "en": "regional managers",
+            "pt": "gestores regionais"
+          }
+        ]
+      }
+    ],
+    "collocationsPt": [
+      "gerenciar desempenho",
+      "definir expectativas",
+      "alocar recursos",
+      "remover bloqueios",
+      "desenvolver / orientar a equipe",
+      "apoio gerencial"
     ]
   },
   {
@@ -6469,6 +7987,74 @@ const businessRoles = [
         "entrust meaningful responsibility",
         "I try to give ownership rather than prescribe every step."
       ]
+    ],
+    "rolePt": "Subordinados diretos",
+    "definitionPt": "Pessoas que se reportam diretamente a um gestor.",
+    "semanticGroups": [
+      {
+        "label": "Lifecycle & status",
+        "labelPt": "Ciclo e status",
+        "items": [
+          {
+            "en": "new direct reports",
+            "pt": "subordinados novos diretos"
+          },
+          {
+            "en": "new hires",
+            "pt": "novas contratações"
+          }
+        ]
+      },
+      {
+        "label": "Authority & seniority",
+        "labelPt": "Autoridade e senioridade",
+        "items": [
+          {
+            "en": "senior direct reports",
+            "pt": "subordinados seniores diretos"
+          },
+          {
+            "en": "junior direct reports",
+            "pt": "subordinados juniores diretos"
+          }
+        ]
+      },
+      {
+        "label": "Performance & risk",
+        "labelPt": "Desempenho e risco",
+        "items": [
+          {
+            "en": "high performers",
+            "pt": "profissionais de alto desempenho"
+          }
+        ]
+      },
+      {
+        "label": "Types & segments",
+        "labelPt": "Tipos e segmentos",
+        "items": [
+          {
+            "en": "developing employees",
+            "pt": "funcionários em desenvolvimento"
+          },
+          {
+            "en": "team leads",
+            "pt": "líderes de equipe"
+          },
+          {
+            "en": "individual contributors",
+            "pt": "contribuidores individuais"
+          }
+        ]
+      }
+    ],
+    "collocationsPt": [
+      "delegar a um subordinado direto",
+      "desenvolver um subordinado direto",
+      "reunião individual (1:1)",
+      "expectativas de desempenho",
+      "desenvolvimento de carreira",
+      "dar autonomia e responsabilidade"
     ]
   },
   {
@@ -6518,6 +8104,68 @@ const businessRoles = [
         "feedback exchanged among colleagues",
         "Peer feedback helped us improve the process quickly."
       ]
+    ],
+    "rolePt": "Pares e colegas",
+    "definitionPt": "Profissionais do mesmo nível ou de áreas relacionadas com quem você colabora.",
+    "semanticGroups": [
+      {
+        "label": "Types & segments",
+        "labelPt": "Tipos e segmentos",
+        "items": [
+          {
+            "en": "close colleagues",
+            "pt": "colegas próximos"
+          },
+          {
+            "en": "cross-functional peers",
+            "pt": "pares multifuncionais"
+          },
+          {
+            "en": "business peers",
+            "pt": "pares de negócios"
+          },
+          {
+            "en": "trusted colleagues",
+            "pt": "colegas de confiança"
+          },
+          {
+            "en": "counterparts",
+            "pt": "contrapartes"
+          }
+        ]
+      },
+      {
+        "label": "Geography & scope",
+        "labelPt": "Geografia e escopo",
+        "items": [
+          {
+            "en": "regional peers",
+            "pt": "pares regionais"
+          },
+          {
+            "en": "global peers",
+            "pt": "pares globais"
+          }
+        ]
+      },
+      {
+        "label": "Function & specialty",
+        "labelPt": "Função e especialidade",
+        "items": [
+          {
+            "en": "technical peers",
+            "pt": "pares técnicos"
+          }
+        ]
+      }
+    ],
+    "collocationsPt": [
+      "trabalhar de forma multifuncional",
+      "alinhamento entre pares",
+      "pedir a opinião de um colega",
+      "coordenar com uma contraparte",
+      "construir confiança com colegas",
+      "feedback entre pares"
     ]
   },
   {
@@ -6567,6 +8215,68 @@ const businessRoles = [
         "communication designed for senior leadership",
         "Executive-level communication should be concise and decision-oriented."
       ]
+    ],
+    "rolePt": "Executivos",
+    "definitionPt": "Líderes seniores responsáveis por decisões de alto nível, direção e resultados do negócio.",
+    "semanticGroups": [
+      {
+        "label": "Authority & seniority",
+        "labelPt": "Autoridade e senioridade",
+        "items": [
+          {
+            "en": "senior executives",
+            "pt": "executivos seniores"
+          },
+          {
+            "en": "C-suite executives",
+            "pt": "executivos C-level"
+          },
+          {
+            "en": "business-unit leaders",
+            "pt": "líderes de unidade de negócio"
+          },
+          {
+            "en": "executive committee members",
+            "pt": "membros do comitê executivo"
+          },
+          {
+            "en": "general managers",
+            "pt": "gerentes-gerais"
+          }
+        ]
+      },
+      {
+        "label": "Geography & scope",
+        "labelPt": "Geografia e escopo",
+        "items": [
+          {
+            "en": "regional executives",
+            "pt": "executivos regionais"
+          },
+          {
+            "en": "country leaders",
+            "pt": "líderes de país"
+          }
+        ]
+      },
+      {
+        "label": "Types & segments",
+        "labelPt": "Tipos e segmentos",
+        "items": [
+          {
+            "en": "functional executives",
+            "pt": "executivos funcionais"
+          }
+        ]
+      }
+    ],
+    "collocationsPt": [
+      "alinhamento executivo",
+      "resumo executivo",
+      "decisão executiva",
+      "atenção executiva",
+      "fazer um briefing para um executivo",
+      "comunicação em nível executivo"
     ]
   },
   {
@@ -6616,6 +8326,80 @@ const businessRoles = [
         "the reasoning that supports an investment",
         "The investment thesis depends on sustained margin expansion."
       ]
+    ],
+    "rolePt": "Investidores",
+    "definitionPt": "Pessoas ou instituições que alocam capital esperando retorno financeiro.",
+    "semanticGroups": [
+      {
+        "label": "Types & segments",
+        "labelPt": "Tipos e segmentos",
+        "items": [
+          {
+            "en": "institutional investors",
+            "pt": "investidores institucionais"
+          },
+          {
+            "en": "retail investors",
+            "pt": "investidores de varejo"
+          },
+          {
+            "en": "potential investors",
+            "pt": "investidores potenciais"
+          }
+        ]
+      },
+      {
+        "label": "Value & priority",
+        "labelPt": "Valor e prioridade",
+        "items": [
+          {
+            "en": "strategic investors",
+            "pt": "investidores estratégicos"
+          },
+          {
+            "en": "anchor investors",
+            "pt": "investidores âncora"
+          }
+        ]
+      },
+      {
+        "label": "Relationship model",
+        "labelPt": "Modelo de relação",
+        "items": [
+          {
+            "en": "long-term investors",
+            "pt": "investidores de longo prazo"
+          }
+        ]
+      },
+      {
+        "label": "Lifecycle & status",
+        "labelPt": "Ciclo e status",
+        "items": [
+          {
+            "en": "active investors",
+            "pt": "investidores ativos"
+          }
+        ]
+      },
+      {
+        "label": "Geography & scope",
+        "labelPt": "Geografia e escopo",
+        "items": [
+          {
+            "en": "foreign investors",
+            "pt": "investidores estrangeiros"
+          }
+        ]
+      }
+    ],
+    "collocationsPt": [
+      "confiança dos investidores",
+      "expectativas dos investidores",
+      "relações com investidores",
+      "atrair investidores",
+      "apetite dos investidores",
+      "tese de investimento"
     ]
   },
   {
@@ -6665,6 +8449,74 @@ const businessRoles = [
         "an ownership position that provides control",
         "The parent company retains a controlling stake."
       ]
+    ],
+    "rolePt": "Acionistas",
+    "definitionPt": "Proprietários de ações ou participações em uma empresa.",
+    "semanticGroups": [
+      {
+        "label": "Value & priority",
+        "labelPt": "Valor e prioridade",
+        "items": [
+          {
+            "en": "major shareholders",
+            "pt": "acionistas majoritários"
+          },
+          {
+            "en": "minority shareholders",
+            "pt": "acionistas minoritários"
+          },
+          {
+            "en": "controlling shareholders",
+            "pt": "acionistas controladores"
+          }
+        ]
+      },
+      {
+        "label": "Types & segments",
+        "labelPt": "Tipos e segmentos",
+        "items": [
+          {
+            "en": "institutional shareholders",
+            "pt": "acionistas institucionais"
+          },
+          {
+            "en": "founding shareholders",
+            "pt": "acionistas fundadores"
+          },
+          {
+            "en": "public shareholders",
+            "pt": "acionistas de empresas abertas"
+          }
+        ]
+      },
+      {
+        "label": "Relationship model",
+        "labelPt": "Modelo de relação",
+        "items": [
+          {
+            "en": "long-term shareholders",
+            "pt": "acionistas de longo prazo"
+          }
+        ]
+      },
+      {
+        "label": "Performance & risk",
+        "labelPt": "Desempenho e risco",
+        "items": [
+          {
+            "en": "activist shareholders",
+            "pt": "acionistas ativistas"
+          }
+        ]
+      }
+    ],
+    "collocationsPt": [
+      "valor para o acionista",
+      "retorno ao acionista",
+      "aprovação dos acionistas",
+      "interesses dos acionistas",
+      "assembleia de acionistas",
+      "participação de controle"
     ]
   },
   {
@@ -6714,6 +8566,62 @@ const businessRoles = [
         "professional guidance without direct ownership",
         "The partner will provide advisory support during the transition."
       ]
+    ],
+    "rolePt": "Consultores",
+    "definitionPt": "Especialistas externos contratados para aconselhar, analisar ou executar um escopo definido.",
+    "semanticGroups": [
+      {
+        "label": "Function & specialty",
+        "labelPt": "Função e especialidade",
+        "items": [
+          {
+            "en": "management consultants",
+            "pt": "consultores de gestão"
+          },
+          {
+            "en": "strategy consultants",
+            "pt": "consultores de estratégia"
+          },
+          {
+            "en": "technical consultants",
+            "pt": "consultores técnicos"
+          },
+          {
+            "en": "implementation consultants",
+            "pt": "consultores de implementação"
+          },
+          {
+            "en": "specialist advisors",
+            "pt": "consultores especialistas"
+          },
+          {
+            "en": "consulting teams",
+            "pt": "equipes de consultoria"
+          }
+        ]
+      },
+      {
+        "label": "Relationship model",
+        "labelPt": "Modelo de relação",
+        "items": [
+          {
+            "en": "independent consultants",
+            "pt": "consultores independentes"
+          },
+          {
+            "en": "external advisors",
+            "pt": "consultores externos"
+          }
+        ]
+      }
+    ],
+    "collocationsPt": [
+      "contratar / envolver um consultor",
+      "projeto / contrato de consultoria",
+      "escopo do trabalho",
+      "perspectiva externa",
+      "especialização profunda no assunto",
+      "apoio consultivo"
     ]
   },
   {
@@ -6763,6 +8671,86 @@ const businessRoles = [
         "create meaningful distinction from rivals",
         "The product needs to differentiate from competitors on more than design."
       ]
+    ],
+    "rolePt": "Concorrentes",
+    "definitionPt": "Empresas ou alternativas que disputam clientes, recursos, atenção ou participação de mercado.",
+    "semanticGroups": [
+      {
+        "label": "Types & segments",
+        "labelPt": "Tipos e segmentos",
+        "items": [
+          {
+            "en": "direct competitors",
+            "pt": "concorrentes diretos"
+          },
+          {
+            "en": "indirect competitors",
+            "pt": "concorrentes indiretos"
+          }
+        ]
+      },
+      {
+        "label": "Authority & seniority",
+        "labelPt": "Autoridade e senioridade",
+        "items": [
+          {
+            "en": "market leaders",
+            "pt": "líderes de mercado"
+          }
+        ]
+      },
+      {
+        "label": "Lifecycle & status",
+        "labelPt": "Ciclo e status",
+        "items": [
+          {
+            "en": "new entrants",
+            "pt": "novos entrantes"
+          }
+        ]
+      },
+      {
+        "label": "Performance & risk",
+        "labelPt": "Desempenho e risco",
+        "items": [
+          {
+            "en": "low-cost competitors",
+            "pt": "concorrentes de baixo custo"
+          }
+        ]
+      },
+      {
+        "label": "Value & priority",
+        "labelPt": "Valor e prioridade",
+        "items": [
+          {
+            "en": "premium competitors",
+            "pt": "concorrentes premium"
+          }
+        ]
+      },
+      {
+        "label": "Geography & scope",
+        "labelPt": "Geografia e escopo",
+        "items": [
+          {
+            "en": "local competitors",
+            "pt": "concorrentes locais"
+          },
+          {
+            "en": "global competitors",
+            "pt": "concorrentes globais"
+          }
+        ]
+      }
+    ],
+    "collocationsPt": [
+      "cenário competitivo",
+      "vantagem competitiva",
+      "análise de concorrentes",
+      "comparar com concorrentes",
+      "resposta competitiva",
+      "diferenciar-se dos concorrentes"
     ]
   },
   {
@@ -6812,6 +8800,74 @@ const businessRoles = [
         "competition or tension between sales channels",
         "Direct sales created channel conflict with some resellers."
       ]
+    ],
+    "rolePt": "Revendedores",
+    "definitionPt": "Empresas que compram ou representam produtos para revendê-los a clientes finais.",
+    "semanticGroups": [
+      {
+        "label": "Types & segments",
+        "labelPt": "Tipos e segmentos",
+        "items": [
+          {
+            "en": "authorized resellers",
+            "pt": "revendedores autorizados"
+          },
+          {
+            "en": "value-added resellers",
+            "pt": "revendedores de valor agregado"
+          },
+          {
+            "en": "online resellers",
+            "pt": "revendedores online"
+          }
+        ]
+      },
+      {
+        "label": "Geography & scope",
+        "labelPt": "Geografia e escopo",
+        "items": [
+          {
+            "en": "regional resellers",
+            "pt": "revendedores regionais"
+          },
+          {
+            "en": "local resellers",
+            "pt": "revendedores locais"
+          }
+        ]
+      },
+      {
+        "label": "Function & specialty",
+        "labelPt": "Função e especialidade",
+        "items": [
+          {
+            "en": "specialist resellers",
+            "pt": "revendedores especialistas"
+          }
+        ]
+      },
+      {
+        "label": "Relationship model",
+        "labelPt": "Modelo de relação",
+        "items": [
+          {
+            "en": "exclusive resellers",
+            "pt": "revendedores exclusivos"
+          },
+          {
+            "en": "channel resellers",
+            "pt": "revendedores de canal"
+          }
+        ]
+      }
+    ],
+    "collocationsPt": [
+      "rede de revendedores",
+      "margem do revendedor",
+      "acordo com revendedor",
+      "capacitar revendedores",
+      "desempenho do revendedor",
+      "conflito de canais"
     ]
   },
   {
@@ -6861,6 +8917,74 @@ const businessRoles = [
         "assign part of contracted work to another provider",
         "The vendor may subcontract work with prior approval."
       ]
+    ],
+    "rolePt": "Contratados / prestadores",
+    "definitionPt": "Profissionais ou empresas contratados para executar um trabalho definido sem integrar o quadro permanente.",
+    "semanticGroups": [
+      {
+        "label": "Relationship model",
+        "labelPt": "Modelo de relação",
+        "items": [
+          {
+            "en": "independent contractors",
+            "pt": "contratados independentes"
+          },
+          {
+            "en": "external contractors",
+            "pt": "contratados externos"
+          },
+          {
+            "en": "approved contractors",
+            "pt": "contratados homologados"
+          }
+        ]
+      },
+      {
+        "label": "Function & specialty",
+        "labelPt": "Função e especialidade",
+        "items": [
+          {
+            "en": "specialist contractors",
+            "pt": "contratados especialistas"
+          }
+        ]
+      },
+      {
+        "label": "Types & segments",
+        "labelPt": "Tipos e segmentos",
+        "items": [
+          {
+            "en": "temporary contractors",
+            "pt": "contratados temporários"
+          },
+          {
+            "en": "project contractors",
+            "pt": "contratados de projeto"
+          },
+          {
+            "en": "subcontractors",
+            "pt": "subcontratados"
+          }
+        ]
+      },
+      {
+        "label": "Geography & scope",
+        "labelPt": "Geografia e escopo",
+        "items": [
+          {
+            "en": "local contractors",
+            "pt": "contratados locais"
+          }
+        ]
+      }
+    ],
+    "collocationsPt": [
+      "contratar um prestador",
+      "contrato com prestador",
+      "capacidade do prestador",
+      "gerenciar prestadores",
+      "onboarding de prestadores",
+      "subcontratar trabalho"
     ]
   },
   {
@@ -6910,6 +9034,62 @@ const businessRoles = [
         "present concise information to directors",
         "The CFO will brief the board on the financing options."
       ]
+    ],
+    "rolePt": "Membros do conselho",
+    "definitionPt": "Diretores e conselheiros responsáveis por supervisão, governança e decisões formais do conselho.",
+    "semanticGroups": [
+      {
+        "label": "Authority & seniority",
+        "labelPt": "Autoridade e senioridade",
+        "items": [
+          {
+            "en": "executive directors",
+            "pt": "diretores executivos"
+          },
+          {
+            "en": "non-executive directors",
+            "pt": "diretores não executivos"
+          },
+          {
+            "en": "independent directors",
+            "pt": "conselheiros independentes"
+          },
+          {
+            "en": "board chair",
+            "pt": "presidente do conselho"
+          },
+          {
+            "en": "committee chairs",
+            "pt": "presidentes de comitês"
+          },
+          {
+            "en": "nominee directors",
+            "pt": "conselheiros indicados"
+          },
+          {
+            "en": "outside directors",
+            "pt": "conselheiros externos"
+          }
+        ]
+      },
+      {
+        "label": "Function & specialty",
+        "labelPt": "Função e especialidade",
+        "items": [
+          {
+            "en": "audit committee members",
+            "pt": "membros do comitê de auditoria"
+          }
+        ]
+      }
+    ],
+    "collocationsPt": [
+      "supervisão do conselho",
+      "aprovação do conselho",
+      "reunião do conselho",
+      "mandato do conselho",
+      "governança do conselho",
+      "apresentar briefing ao conselho"
     ]
   },
   {
@@ -6959,6 +9139,74 @@ const businessRoles = [
         "input employees provide about work and the organization",
         "Employee feedback highlighted a lack of role clarity."
       ]
+    ],
+    "rolePt": "Funcionários",
+    "definitionPt": "Pessoas empregadas por uma organização em diferentes funções, regimes e níveis.",
+    "semanticGroups": [
+      {
+        "label": "Relationship model",
+        "labelPt": "Modelo de relação",
+        "items": [
+          {
+            "en": "full-time employees",
+            "pt": "funcionários em tempo integral"
+          },
+          {
+            "en": "part-time employees",
+            "pt": "funcionários em tempo parcial"
+          },
+          {
+            "en": "remote employees",
+            "pt": "funcionários remotos"
+          }
+        ]
+      },
+      {
+        "label": "Lifecycle & status",
+        "labelPt": "Ciclo e status",
+        "items": [
+          {
+            "en": "new employees",
+            "pt": "funcionários novos"
+          }
+        ]
+      },
+      {
+        "label": "Types & segments",
+        "labelPt": "Tipos e segmentos",
+        "items": [
+          {
+            "en": "long-tenured employees",
+            "pt": "funcionários com longa permanência"
+          },
+          {
+            "en": "frontline employees",
+            "pt": "funcionários da linha de frente"
+          },
+          {
+            "en": "knowledge workers",
+            "pt": "trabalhadores do conhecimento"
+          }
+        ]
+      },
+      {
+        "label": "Performance & risk",
+        "labelPt": "Desempenho e risco",
+        "items": [
+          {
+            "en": "high performers",
+            "pt": "profissionais de alto desempenho"
+          }
+        ]
+      }
+    ],
+    "collocationsPt": [
+      "engajamento dos funcionários",
+      "experiência do funcionário",
+      "retenção de funcionários",
+      "rotatividade de funcionários",
+      "desenvolvimento de funcionários",
+      "feedback dos funcionários"
     ]
   },
   {
@@ -7008,6 +9256,80 @@ const businessRoles = [
         "the experience candidates have during hiring",
         "Fast communication improves candidate experience."
       ]
+    ],
+    "rolePt": "Recrutadores",
+    "definitionPt": "Profissionais responsáveis por atrair, avaliar e conduzir candidatos pelo processo de contratação.",
+    "semanticGroups": [
+      {
+        "label": "Relationship model",
+        "labelPt": "Modelo de relação",
+        "items": [
+          {
+            "en": "internal recruiters",
+            "pt": "recrutadores internos"
+          },
+          {
+            "en": "agency recruiters",
+            "pt": "recrutadores de agência"
+          }
+        ]
+      },
+      {
+        "label": "Authority & seniority",
+        "labelPt": "Autoridade e senioridade",
+        "items": [
+          {
+            "en": "executive recruiters",
+            "pt": "recrutadores executivos"
+          }
+        ]
+      },
+      {
+        "label": "Function & specialty",
+        "labelPt": "Função e especialidade",
+        "items": [
+          {
+            "en": "technical recruiters",
+            "pt": "recrutadores técnicos"
+          }
+        ]
+      },
+      {
+        "label": "Geography & scope",
+        "labelPt": "Geografia e escopo",
+        "items": [
+          {
+            "en": "campus recruiters",
+            "pt": "recrutadores universitários"
+          },
+          {
+            "en": "regional recruiters",
+            "pt": "recrutadores regionais"
+          }
+        ]
+      },
+      {
+        "label": "Types & segments",
+        "labelPt": "Tipos e segmentos",
+        "items": [
+          {
+            "en": "talent partners",
+            "pt": "parceiros de talentos"
+          },
+          {
+            "en": "headhunter firms",
+            "pt": "empresas de headhunting"
+          }
+        ]
+      }
+    ],
+    "collocationsPt": [
+      "processo de recrutamento",
+      "pipeline de candidatos",
+      "triar candidatos",
+      "buscar / prospectar talentos",
+      "agência de recrutamento",
+      "experiência do candidato"
     ]
   }
 ];
@@ -7622,6 +9944,8 @@ document.getElementById("dailyThinkingAudio")?.addEventListener("click", () => s
 document.getElementById("openThinkingFromDashboard")?.addEventListener("click", () => { showView("vocabulary"); setVocabMode("thinking"); document.getElementById("thinkingToolkitPanel")?.scrollIntoView({ behavior: "smooth", block: "start" }); });
 
 
+const frameworkStepLabelPt = {"Point": "Ponto", "Reason": "Razão", "Example": "Exemplo", "Close": "Fecho", "Frame": "Enquadramento", "First": "Primeiro", "Second": "Segundo", "Third": "Terceiro", "Headline": "Conclusão principal", "Evidence": "Evidência", "Ask": "Pedido", "What": "O quê", "So what": "E daí / significado", "Now what": "E agora / ação", "Context": "Contexto", "Action": "Ação", "Before": "Antes", "Now": "Agora", "Next": "Próximo", "Problem": "Problema", "Cause": "Causa", "Solution": "Solução", "Issue": "Questão", "Impact": "Impacto", "Fact": "Fato", "Meaning": "Significado", "Response": "Resposta", "Option A": "Opção A", "Option B": "Opção B", "Criterion": "Critério", "Recommend": "Recomendação", "Goal": "Objetivo", "Obstacle": "Obstáculo", "Option": "Opção", "Situation": "Situação", "Task": "Tarefa", "Result": "Resultado", "Challenge": "Desafio", "Behavior": "Comportamento", "Acknowledge": "Reconhecer", "Bridge": "Ponte", "Position": "Posição", "Clarify": "Esclarecer", "Confirm": "Confirmar", "Respond": "Responder", "Claim": "Afirmação", "Implication": "Implicação", "Observation": "Observação", "Interpretation": "Interpretação", "Data": "Dados", "Insight": "Insight", "Measure": "Medida", "Trend": "Tendência", "Driver": "Fator", "Assumption": "Premissa", "Support": "Suporte", "Caution": "Ressalva", "Conclusion": "Conclusão", "Hypothesis": "Hipótese", "Test": "Teste", "Update": "Atualização", "Options": "Opções", "Criteria": "Critérios", "Decision": "Decisão", "Risk": "Risco", "Probability": "Probabilidade", "Mitigation": "Mitigação", "Trade-off": "Trade-off", "Choice": "Escolha", "Consequence": "Consequência", "Complication": "Complicação", "Question": "Pergunta", "Answer": "Resposta", "Status": "Status", "Change": "Mudança", "Need": "Necessidade", "Concern": "Preocupação", "Alternative": "Alternativa", "Conditional give": "Concessão condicional", "Expected get": "Contrapartida esperada", "Value": "Valor", "Interest": "Interesse", "Constraint": "Restrição", "Intent": "Intenção", "Check": "Checagem", "Adapt": "Adaptar", "Principle": "Princípio", "Reality": "Realidade", "Adaptation": "Adaptação", "Alignment": "Alinhamento", "Signal": "Sinal", "Noise": "Ruído", "Premise": "Premissa", "Mechanism": "Mecanismo", "Outcome": "Resultado", "First order": "Primeira ordem", "Second order": "Segunda ordem", "Guardrail": "Proteção", "Known": "Conhecido", "Unknown": "Desconhecido", "Reversibility": "Reversibilidade", "Forward": "Próximo movimento", "Failure mode": "Modo de falha", "Design": "Desenho", "Proposal": "Proposta", "Move": "Movimento", "Containment": "Contenção"};
+
 // Idea Frameworks — connected structures for fluent speaking
 let frameworkIndex = 0;
 let frameworkLevel = "All";
@@ -7635,7 +9959,7 @@ function filteredFrameworks() {
     const matchesLevel = frameworkLevel === "All" || item.level === frameworkLevel;
     const matchesContext = frameworkContext === "All" || item.context === frameworkContext;
     const matchesCategory = frameworkCategory === "All" || item.category === frameworkCategory;
-    const searchable = `${item.name} ${item.category} ${item.context} ${item.level} ${item.purpose} ${item.example} ${item.prompt} ${item.steps.flat().join(" ")}`.toLowerCase();
+    const searchable = `${item.name} ${item.category} ${item.context} ${item.level} ${item.purpose} ${item.purposePt || ""} ${item.example} ${item.examplePt || ""} ${item.prompt} ${item.promptPt || ""} ${item.steps.flat().join(" ")} ${(item.stepsPt || []).join(" ")}`.toLowerCase();
     return matchesLevel && matchesContext && matchesCategory && (!needle || searchable.includes(needle));
   });
 }
@@ -7670,9 +9994,12 @@ function renderFrameworkCard() {
   document.getElementById("frameworkIndex").textContent = `${frameworkIndex + 1}/${list.length}`;
   document.getElementById("frameworkName").textContent = item.name;
   document.getElementById("frameworkPurpose").textContent = item.purpose;
+  document.getElementById("frameworkPurposePt").textContent = item.purposePt || "";
   document.getElementById("frameworkExample").textContent = item.example;
-  document.getElementById("frameworkPrompt").textContent = item.prompt;
-  document.getElementById("frameworkFlow").innerHTML = item.steps.map(([label, phrase], i) => `<button class="framework-step" data-framework-step="${i}"><span>${i + 1}</span><small>${escapeHtml(label)}</small><strong>${escapeHtml(phrase)}</strong></button>${i < item.steps.length - 1 ? '<b class="flow-arrow">→</b>' : ''}`).join("");
+  document.getElementById("frameworkExamplePt").textContent = item.examplePt || "";
+  document.getElementById("frameworkPrompt").textContent = item.promptPt || item.prompt;
+  document.getElementById("frameworkPromptEn").textContent = item.prompt;
+  document.getElementById("frameworkFlow").innerHTML = item.steps.map(([label, phrase], i) => `<button class="framework-step" data-framework-step="${i}"><span>${i + 1}</span><small>${escapeHtml(label)} · ${escapeHtml(frameworkStepLabelPt[label] || label)}</small><strong>${escapeHtml(phrase)}</strong><em>${escapeHtml((item.stepsPt || [])[i] || "")}</em></button>${i < item.steps.length - 1 ? '<b class="flow-arrow">→</b>' : ''}`).join("");
   document.querySelectorAll("[data-framework-step]").forEach(btn => btn.addEventListener("click", () => { const step = item.steps[Number(btn.dataset.frameworkStep)]; if (step) speakEnglish(step[1].replace(/X|Y/g, "the option"), state.vocabRate || 0.7); }));
   const active = state.frameworkActive.includes(item.id); const mark = document.getElementById("markFrameworkActive");
   mark.textContent = active ? "Framework dominado ✓" : "Marcar como dominado"; mark.classList.toggle("success-button", active);
@@ -7694,7 +10021,7 @@ let roleIndex = 0;
 let roleEcosystem = "All";
 let roleLevel = "All";
 let roleSearch = "";
-function roleSearchText(item) { return `${item.role} ${item.ecosystem} ${item.level} ${item.definition} ${item.semantic.join(" ")} ${item.collocations.flat().join(" ")}`.toLowerCase(); }
+function roleSearchText(item) { return `${item.role} ${item.rolePt || ""} ${item.ecosystem} ${item.level} ${item.definition} ${item.definitionPt || ""} ${item.semantic.join(" ")} ${(item.semanticGroups || []).flatMap(g => g.items.map(x => x.pt)).join(" ")} ${item.collocations.flat().join(" ")} ${(item.collocationsPt || []).join(" ")}`.toLowerCase(); }
 function filteredRoles() {
   const needle = roleSearch.trim().toLowerCase();
   return businessRoles.filter(item => (roleEcosystem === "All" || item.ecosystem === roleEcosystem) && (roleLevel === "All" || item.level === roleLevel) && (!needle || roleSearchText(item).includes(needle)));
@@ -7711,7 +10038,7 @@ function renderBusinessRoles() {
   const empty = document.getElementById("roleEmpty");
   if (!list.length) { empty.classList.remove("hidden"); document.getElementById("roleCard").classList.add("hidden"); document.getElementById("roleList").innerHTML = ""; renderVocabSpeed(); return; }
   empty.classList.add("hidden"); document.getElementById("roleCard").classList.remove("hidden"); renderRoleCard();
-  document.getElementById("roleList").innerHTML = list.map((item, i) => `<button class="role-list-item ${state.roleSaved.includes(item.id) ? "active" : ""}" data-role-row="${i}"><span><strong>${escapeHtml(item.role)}</strong><small>${escapeHtml(item.ecosystem)} · ${item.semantic.length} terms · ${item.collocations.length} collocations</small></span><span>${state.roleSaved.includes(item.id) ? "SAVED ✓" : item.level.toUpperCase()}</span></button>`).join("");
+  document.getElementById("roleList").innerHTML = list.map((item, i) => `<button class="role-list-item ${state.roleSaved.includes(item.id) ? "active" : ""}" data-role-row="${i}"><span><strong>${escapeHtml(item.role)}</strong><em class="role-list-pt">${escapeHtml(item.rolePt || "")}</em><small>${escapeHtml(item.ecosystem)} · ${item.semantic.length} terms · ${item.collocations.length} collocations</small></span><span>${state.roleSaved.includes(item.id) ? "SAVED ✓" : item.level.toUpperCase()}</span></button>`).join("");
   document.querySelectorAll("[data-role-row]").forEach(btn => btn.addEventListener("click", () => { roleIndex = Number(btn.dataset.roleRow); renderRoleCard(); document.getElementById("roleCard").scrollIntoView({ behavior: "smooth", block: "center" }); }));
   renderVocabSpeed();
 }
@@ -7721,10 +10048,14 @@ function renderRoleCard() {
   document.getElementById("roleEcosystem").textContent = item.ecosystem.toUpperCase();
   document.getElementById("roleLevel").textContent = item.level.toUpperCase();
   document.getElementById("roleIndex").textContent = `${roleIndex + 1}/${list.length}`;
-  document.getElementById("roleName").textContent = item.role; document.getElementById("roleDefinition").textContent = item.definition;
-  document.getElementById("roleSemantic").innerHTML = item.semantic.map((term, i) => `<button class="semantic-chip" data-role-semantic="${i}">🔊 ${escapeHtml(term)}</button>`).join("");
-  document.getElementById("roleCollocations").innerHTML = item.collocations.map(([term, meaning, example], i) => `<article class="collocation-row"><button class="collocation-audio" data-role-collocation="${i}" aria-label="Ouvir ${escapeHtml(term)}">🔊</button><div><strong>${escapeHtml(term)}</strong><p>${escapeHtml(meaning)}</p><small>${escapeHtml(example)}</small></div><button class="collocation-example-audio" data-role-example="${i}" aria-label="Ouvir exemplo">🎧</button></article>`).join("");
-  document.querySelectorAll("[data-role-semantic]").forEach(btn => btn.addEventListener("click", () => speakEnglish(item.semantic[Number(btn.dataset.roleSemantic)], state.vocabRate || 0.7)));
+  document.getElementById("roleName").textContent = item.role; document.getElementById("roleNamePt").textContent = item.rolePt || "";
+  document.getElementById("roleDefinition").textContent = item.definition; document.getElementById("roleDefinitionPt").textContent = item.definitionPt || "";
+  const semanticGroups = item.semanticGroups || [{ label: "Semantic field", labelPt: "Campo semântico", items: item.semantic.map(en => ({ en, pt: en })) }];
+  let semanticFlatIndex = 0;
+  document.getElementById("roleSemantic").innerHTML = semanticGroups.map(group => `<section class="semantic-group"><div class="semantic-group-title"><strong>${escapeHtml(group.label)}</strong><span>${escapeHtml(group.labelPt)}</span></div><div class="semantic-cloud">${group.items.map(term => { const idx = semanticFlatIndex++; return `<button class="semantic-chip semantic-chip-bilingual" data-role-semantic="${idx}"><span>🔊 ${escapeHtml(term.en)}</span><small>${escapeHtml(term.pt)}</small></button>`; }).join("")}</div></section>`).join("");
+  const semanticFlat = semanticGroups.flatMap(group => group.items);
+  document.getElementById("roleCollocations").innerHTML = item.collocations.map(([term, meaning, example], i) => `<article class="collocation-row"><button class="collocation-audio" data-role-collocation="${i}" aria-label="Ouvir ${escapeHtml(term)}">🔊</button><div><strong>${escapeHtml(term)}</strong><em class="collocation-pt">${escapeHtml((item.collocationsPt || [])[i] || "")}</em><p>${escapeHtml(meaning)}</p><small>${escapeHtml(example)}</small></div><button class="collocation-example-audio" data-role-example="${i}" aria-label="Ouvir exemplo">🎧</button></article>`).join("");
+  document.querySelectorAll("[data-role-semantic]").forEach(btn => btn.addEventListener("click", () => { const term = semanticFlat[Number(btn.dataset.roleSemantic)]; if (term) speakEnglish(term.en, state.vocabRate || 0.7); }));
   document.querySelectorAll("[data-role-collocation]").forEach(btn => btn.addEventListener("click", () => speakEnglish(item.collocations[Number(btn.dataset.roleCollocation)][0], state.vocabRate || 0.7)));
   document.querySelectorAll("[data-role-example]").forEach(btn => btn.addEventListener("click", () => speakEnglish(item.collocations[Number(btn.dataset.roleExample)][2], state.vocabRate || 0.7)));
   const saved = state.roleSaved.includes(item.id); const mark = document.getElementById("markRoleSaved");

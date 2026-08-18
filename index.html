@@ -136,7 +136,7 @@
           <button class="module-tab active" id="vocabLibraryTab" data-vocab-mode="library" role="tab" aria-selected="true">A+ Active Vocabulary <span>366</span></button>
           <button class="module-tab" id="thinkingToolkitTab" data-vocab-mode="thinking" role="tab" aria-selected="false">✦ Thinking Toolkit <span>108</span></button>
           <button class="module-tab" id="frameworksTab" data-vocab-mode="frameworks" role="tab" aria-selected="false">⛓ Idea Frameworks <span>40</span></button>
-          <button class="module-tab" id="rolesTab" data-vocab-mode="roles" role="tab" aria-selected="false">◎ Business Roles <span>24</span></button>
+          <button class="module-tab" id="rolesTab" data-vocab-mode="roles" role="tab" aria-selected="false">◎ Business Roles <span>30</span></button>
         </div>
 
         <div id="vocabLibraryPanel">
@@ -190,11 +190,11 @@
           <div id="frameworkEmpty" class="card vocab-empty hidden"><strong>Nenhum framework encontrado.</strong><p>Tente outra busca ou remova algum filtro.</p></div>
           <article class="card flashcard framework-card" id="frameworkCard">
             <div class="flashcard-top"><div class="flash-tags"><span class="pill" id="frameworkContext">MEETINGS</span><span class="pill" id="frameworkCategory">STRUCTURED ANSWER</span><span class="pill level-pill" id="frameworkLevel">CORE</span></div><span class="muted" id="frameworkIndex">1/40</span></div>
-            <span class="muted">Framework de fluidez</span><h2 id="frameworkName">PREP</h2><p class="flash-definition" id="frameworkPurpose"></p>
+            <span class="muted">Framework de fluidez</span><h2 id="frameworkName">PREP</h2><p class="flash-definition" id="frameworkPurpose"></p><p class="translation-line" id="frameworkPurposePt"></p>
             <div class="framework-flow" id="frameworkFlow"></div>
             <div class="vocab-audio-actions"><button class="secondary audio-action" id="speakFramework">🔊 Ouvir framework</button><button class="secondary audio-action" id="speakFrameworkExample">🎧 Ouvir exemplo completo</button><span class="audio-hint">Toque em cada etapa para ouvir apenas o conector. Depois tente reproduzir o fluxo sem olhar.</span></div>
-            <div class="example-box"><span>Full example</span><strong id="frameworkExample"></strong></div>
-            <div class="production-prompt"><span>Produza o fluxo</span><p id="frameworkPrompt"></p></div>
+            <div class="example-box"><span>Full example</span><strong id="frameworkExample"></strong><p class="translation-block" id="frameworkExamplePt"></p></div>
+            <div class="production-prompt"><span>Produza o fluxo</span><p id="frameworkPrompt"></p><small class="translation-source" id="frameworkPromptEn"></small></div>
             <div class="button-row vocab-navigation"><button class="secondary" id="prevFramework">← Anterior</button><button class="primary" id="markFrameworkActive">Marcar como dominado</button><button class="secondary" id="nextFramework">Próximo →</button></div>
           </article>
           <div class="thinking-list" id="frameworkList"></div>
@@ -212,9 +212,9 @@
           <div id="roleEmpty" class="card vocab-empty hidden"><strong>Nenhum papel encontrado.</strong><p>Tente outra busca ou remova algum filtro.</p></div>
           <article class="card role-card" id="roleCard">
             <div class="flashcard-top"><div class="flash-tags"><span class="pill" id="roleEcosystem">MARKET</span><span class="pill level-pill" id="roleLevel">CORE</span></div><span class="muted" id="roleIndex">1/24</span></div>
-            <span class="muted">Business role</span><div class="role-title-row"><h2 id="roleName">Customers</h2><button class="secondary compact-audio" id="speakRoleName">🔊</button></div><p class="flash-definition" id="roleDefinition"></p>
-            <div class="semantic-section"><div class="semantic-heading"><span>Semantic field</span><small>Toque em qualquer termo para ouvir</small></div><div class="semantic-cloud" id="roleSemantic"></div></div>
-            <div class="collocation-section"><div class="semantic-heading"><span>High-value collocations</span><small>Expressão + significado + uso real</small></div><div class="role-collocations" id="roleCollocations"></div></div>
+            <span class="muted">Business role</span><div class="role-title-row"><div><h2 id="roleName">Customers</h2><p class="role-name-pt" id="roleNamePt">Clientes</p></div><button class="secondary compact-audio" id="speakRoleName">🔊</button></div><p class="flash-definition" id="roleDefinition"></p><p class="translation-line" id="roleDefinitionPt"></p>
+            <div class="semantic-section"><div class="semantic-heading"><span>Semantic field · Campo semântico</span><small>Organizado por classificação · toque em qualquer termo para ouvir</small></div><div class="semantic-taxonomy" id="roleSemantic"></div></div>
+            <div class="collocation-section"><div class="semantic-heading"><span>High-value collocations · Combinações de alto valor</span><small>English + português + significado + uso real</small></div><div class="role-collocations" id="roleCollocations"></div></div>
             <div class="button-row vocab-navigation"><button class="secondary" id="prevRole">← Anterior</button><button class="primary" id="markRoleSaved">Guardar este papel</button><button class="secondary" id="nextRole">Próximo →</button></div>
           </article>
           <div class="role-list" id="roleList"></div>
