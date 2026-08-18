@@ -13,6 +13,7 @@ const defaultState = {
   partStats: Object.fromEntries(Array.from({ length: 7 }, (_, i) => [i + 1, { answered: 0, correct: 0 }])),
   latencies: [],
   vocabActive: [],
+  smartActive: [],
   vocabRate: 0.7,
   routineDone: {},
   events: [],
@@ -30,6 +31,7 @@ function loadState() {
   merged.errors = Array.isArray(saved.errors) ? saved.errors : [];
   merged.latencies = Array.isArray(saved.latencies) ? saved.latencies : [];
   merged.vocabActive = Array.isArray(saved.vocabActive) ? saved.vocabActive : [];
+  merged.smartActive = Array.isArray(saved.smartActive) ? saved.smartActive : [];
   merged.routineDone = saved.routineDone || {};
   merged.events = Array.isArray(saved.events) ? saved.events : [];
   return merged;
@@ -2648,6 +2650,981 @@ const vocabulary = [
   }
 ];
 
+const smartPhrases = [
+  {
+    "id": "smart-001",
+    "category": "Introduzir pensamento",
+    "phrase": "From my perspective,",
+    "meaning": "do meu ponto de vista",
+    "example": "From my perspective, the biggest risk is execution rather than strategy.",
+    "cue": "Quando quiser abrir uma opinião com segurança.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-002",
+    "category": "Introduzir pensamento",
+    "phrase": "The way I see it,",
+    "meaning": "da forma como eu vejo",
+    "example": "The way I see it, we have a timing problem, not a demand problem.",
+    "cue": "Quando quiser dar sua leitura pessoal sem soar absoluto.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-003",
+    "category": "Introduzir pensamento",
+    "phrase": "At a high level,",
+    "meaning": "em linhas gerais / em nível macro",
+    "example": "At a high level, the plan is sound, but the implementation needs work.",
+    "cue": "Quando quiser começar pelo quadro geral.",
+    "level": "Pro"
+  },
+  {
+    "id": "smart-004",
+    "category": "Introduzir pensamento",
+    "phrase": "If we look at the bigger picture,",
+    "meaning": "se olharmos o panorama maior",
+    "example": "If we look at the bigger picture, this delay may actually protect the launch quality.",
+    "cue": "Quando quiser tirar a conversa do detalhe e ampliar o horizonte.",
+    "level": "Pro"
+  },
+  {
+    "id": "smart-005",
+    "category": "Introduzir pensamento",
+    "phrase": "What stands out to me is...",
+    "meaning": "o que mais me chama atenção é...",
+    "example": "What stands out to me is the gap between customer demand and our current capacity.",
+    "cue": "Quando quiser destacar o dado ou fato mais relevante.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-006",
+    "category": "Introduzir pensamento",
+    "phrase": "The key point here is...",
+    "meaning": "o ponto principal aqui é...",
+    "example": "The key point here is that we can recover the schedule without increasing risk.",
+    "cue": "Quando quiser conduzir a atenção para o essencial.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-007",
+    "category": "Introduzir pensamento",
+    "phrase": "One way to think about this is...",
+    "meaning": "uma forma de pensar sobre isso é...",
+    "example": "One way to think about this is as a sequencing problem rather than a resource problem.",
+    "cue": "Quando quiser oferecer um enquadramento intelectual.",
+    "level": "Pro"
+  },
+  {
+    "id": "smart-008",
+    "category": "Introduzir pensamento",
+    "phrase": "To put this in context,",
+    "meaning": "para colocar isso em contexto",
+    "example": "To put this in context, our current lead time is already 20% better than last quarter.",
+    "cue": "Quando quiser acrescentar contexto antes da conclusão.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-009",
+    "category": "Introduzir pensamento",
+    "phrase": "The question we should be asking is...",
+    "meaning": "a pergunta que deveríamos fazer é...",
+    "example": "The question we should be asking is whether this solution scales beyond the pilot.",
+    "cue": "Quando quiser reformular o problema e elevar a discussão.",
+    "level": "Advanced"
+  },
+  {
+    "id": "smart-010",
+    "category": "Estruturar raciocínio",
+    "phrase": "First and foremost,",
+    "meaning": "antes de tudo / em primeiro lugar",
+    "example": "First and foremost, we need to protect the customer experience.",
+    "cue": "Quando quiser estabelecer prioridade logo no início.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-011",
+    "category": "Estruturar raciocínio",
+    "phrase": "There are three things to consider.",
+    "meaning": "há três coisas a considerar",
+    "example": "There are three things to consider: cost, timing, and operational risk.",
+    "cue": "Quando quiser criar estrutura instantânea para uma resposta.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-012",
+    "category": "Estruturar raciocínio",
+    "phrase": "Let me break that down.",
+    "meaning": "deixe-me decompor isso",
+    "example": "Let me break that down. The issue has a commercial side and an operational side.",
+    "cue": "Quando quiser dividir um problema complexo em partes.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-013",
+    "category": "Estruturar raciocínio",
+    "phrase": "The first point is...",
+    "meaning": "o primeiro ponto é...",
+    "example": "The first point is that demand is still strong despite the delay.",
+    "cue": "Quando quiser iniciar uma sequência lógica.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-014",
+    "category": "Estruturar raciocínio",
+    "phrase": "Building on that,",
+    "meaning": "partindo disso / desenvolvendo esse ponto",
+    "example": "Building on that, we can use the same process for the next market.",
+    "cue": "Quando quiser conectar sua ideia à anterior.",
+    "level": "Pro"
+  },
+  {
+    "id": "smart-015",
+    "category": "Estruturar raciocínio",
+    "phrase": "More importantly,",
+    "meaning": "mais importante ainda",
+    "example": "More importantly, the new process gives us much better visibility.",
+    "cue": "Quando quiser subir a prioridade de um argumento.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-016",
+    "category": "Estruturar raciocínio",
+    "phrase": "Beyond that,",
+    "meaning": "além disso / para além disso",
+    "example": "Beyond that, we should consider the long-term maintenance cost.",
+    "cue": "Quando quiser adicionar uma segunda camada ao raciocínio.",
+    "level": "Pro"
+  },
+  {
+    "id": "smart-017",
+    "category": "Estruturar raciocínio",
+    "phrase": "That brings me to...",
+    "meaning": "isso me leva a...",
+    "example": "That brings me to the second issue: ownership.",
+    "cue": "Quando quiser fazer uma transição elegante.",
+    "level": "Pro"
+  },
+  {
+    "id": "smart-018",
+    "category": "Estruturar raciocínio",
+    "phrase": "In practical terms,",
+    "meaning": "em termos práticos",
+    "example": "In practical terms, this means moving two people to the project for one week.",
+    "cue": "Quando quiser converter uma ideia abstrata em ação.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-019",
+    "category": "Nuance e ressalvas",
+    "phrase": "To some extent,",
+    "meaning": "até certo ponto",
+    "example": "To some extent, I agree, but the effect is smaller than it appears.",
+    "cue": "Quando algo é parcialmente verdadeiro.",
+    "level": "Pro"
+  },
+  {
+    "id": "smart-020",
+    "category": "Nuance e ressalvas",
+    "phrase": "That said,",
+    "meaning": "dito isso / ainda assim",
+    "example": "That said, I don't think we should delay the decision.",
+    "cue": "Quando quiser reconhecer um ponto e introduzir contraste.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-021",
+    "category": "Nuance e ressalvas",
+    "phrase": "Having said that,",
+    "meaning": "tendo dito isso / mesmo assim",
+    "example": "Having said that, there is still a strong case for moving forward.",
+    "cue": "Quando quiser fazer uma ressalva depois de concordar.",
+    "level": "Pro"
+  },
+  {
+    "id": "smart-022",
+    "category": "Nuance e ressalvas",
+    "phrase": "It depends on...",
+    "meaning": "depende de...",
+    "example": "It depends on whether our priority is speed or cost efficiency.",
+    "cue": "Quando a resposta depende de uma condição.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-023",
+    "category": "Nuance e ressalvas",
+    "phrase": "The reality is a bit more nuanced.",
+    "meaning": "a realidade é um pouco mais complexa",
+    "example": "The reality is a bit more nuanced. Sales are down, but margin quality has improved.",
+    "cue": "Quando a conversa está simplificando demais o problema.",
+    "level": "Advanced"
+  },
+  {
+    "id": "smart-024",
+    "category": "Nuance e ressalvas",
+    "phrase": "I wouldn't frame it as X; I'd frame it as Y.",
+    "meaning": "eu não enquadraria como X; enquadraria como Y",
+    "example": "I wouldn't frame it as a cost problem; I'd frame it as a prioritization problem.",
+    "cue": "Quando quiser mudar o enquadramento sem confrontar diretamente.",
+    "level": "Advanced"
+  },
+  {
+    "id": "smart-025",
+    "category": "Nuance e ressalvas",
+    "phrase": "There's an important distinction between...",
+    "meaning": "há uma distinção importante entre...",
+    "example": "There's an important distinction between being busy and making progress.",
+    "cue": "Quando dois conceitos estão sendo tratados como iguais.",
+    "level": "Advanced"
+  },
+  {
+    "id": "smart-026",
+    "category": "Nuance e ressalvas",
+    "phrase": "That's true in principle, but...",
+    "meaning": "isso é verdade em princípio, mas...",
+    "example": "That's true in principle, but the operational constraints are different here.",
+    "cue": "Quando a teoria faz sentido, mas a prática é diferente.",
+    "level": "Pro"
+  },
+  {
+    "id": "smart-027",
+    "category": "Nuance e ressalvas",
+    "phrase": "It's not necessarily a question of X or Y.",
+    "meaning": "não é necessariamente uma questão de X ou Y",
+    "example": "It's not necessarily a question of speed or quality; we may be able to improve both.",
+    "cue": "Quando quiser escapar de uma falsa escolha binária.",
+    "level": "Advanced"
+  },
+  {
+    "id": "smart-028",
+    "category": "Discordar com inteligência",
+    "phrase": "I see your point, but...",
+    "meaning": "entendo seu ponto, mas...",
+    "example": "I see your point, but I think the timing assumption is too optimistic.",
+    "cue": "Quando quiser discordar preservando a relação.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-029",
+    "category": "Discordar com inteligência",
+    "phrase": "I would challenge one assumption there.",
+    "meaning": "eu questionaria uma premissa aí",
+    "example": "I would challenge one assumption there: that demand will remain flat.",
+    "cue": "Quando quiser atacar a premissa, não a pessoa.",
+    "level": "Pro"
+  },
+  {
+    "id": "smart-030",
+    "category": "Discordar com inteligência",
+    "phrase": "I'm not sure I fully agree with that conclusion.",
+    "meaning": "não tenho certeza se concordo totalmente com essa conclusão",
+    "example": "I'm not sure I fully agree with that conclusion. The data could support another interpretation.",
+    "cue": "Quando quiser discordar de modo diplomático.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-031",
+    "category": "Discordar com inteligência",
+    "phrase": "I think there's another way to interpret the data.",
+    "meaning": "acho que há outra forma de interpretar os dados",
+    "example": "I think there's another way to interpret the data, especially if we separate new and returning customers.",
+    "cue": "Quando quiser oferecer uma leitura alternativa baseada em evidência.",
+    "level": "Pro"
+  },
+  {
+    "id": "smart-032",
+    "category": "Discordar com inteligência",
+    "phrase": "That's a fair point. My concern is...",
+    "meaning": "é um ponto válido; minha preocupação é...",
+    "example": "That's a fair point. My concern is the dependency on a single supplier.",
+    "cue": "Quando quiser validar antes de levantar uma objeção.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-033",
+    "category": "Discordar com inteligência",
+    "phrase": "I would push back slightly on...",
+    "meaning": "eu faria uma pequena ressalva / contestaria levemente...",
+    "example": "I would push back slightly on the idea that this is only a pricing issue.",
+    "cue": "Quando quiser desafiar uma ideia com tom executivo.",
+    "level": "Advanced"
+  },
+  {
+    "id": "smart-034",
+    "category": "Discordar com inteligência",
+    "phrase": "I think we may be overlooking...",
+    "meaning": "acho que podemos estar deixando de considerar...",
+    "example": "I think we may be overlooking the impact on the support team.",
+    "cue": "Quando quiser apontar um ponto cego.",
+    "level": "Pro"
+  },
+  {
+    "id": "smart-035",
+    "category": "Discordar com inteligência",
+    "phrase": "Before we conclude that, I'd like to test...",
+    "meaning": "antes de concluirmos isso, eu gostaria de testar...",
+    "example": "Before we conclude that, I'd like to test the assumption against the last two quarters.",
+    "cue": "Quando quiser desacelerar uma conclusão precipitada.",
+    "level": "Advanced"
+  },
+  {
+    "id": "smart-036",
+    "category": "Discordar com inteligência",
+    "phrase": "Let me offer a different perspective.",
+    "meaning": "deixe-me oferecer uma perspectiva diferente",
+    "example": "Let me offer a different perspective. The delay could give us time to reduce launch risk.",
+    "cue": "Quando quiser mudar a direção da discussão de forma elegante.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-037",
+    "category": "Hipótese e incerteza",
+    "phrase": "My working assumption is...",
+    "meaning": "minha premissa de trabalho é...",
+    "example": "My working assumption is that demand will remain stable through September.",
+    "cue": "Quando precisar agir antes de ter certeza total.",
+    "level": "Pro"
+  },
+  {
+    "id": "smart-038",
+    "category": "Hipótese e incerteza",
+    "phrase": "My current hypothesis is...",
+    "meaning": "minha hipótese atual é...",
+    "example": "My current hypothesis is that the conversion drop is caused by slower page speed.",
+    "cue": "Quando quiser apresentar uma explicação ainda testável.",
+    "level": "Advanced"
+  },
+  {
+    "id": "smart-039",
+    "category": "Hipótese e incerteza",
+    "phrase": "Based on what we know so far,",
+    "meaning": "com base no que sabemos até agora",
+    "example": "Based on what we know so far, the issue appears to be isolated to one region.",
+    "cue": "Quando quiser deixar claro o limite da informação disponível.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-040",
+    "category": "Hipótese e incerteza",
+    "phrase": "At this stage, I would say...",
+    "meaning": "neste estágio, eu diria...",
+    "example": "At this stage, I would say the launch is still achievable.",
+    "cue": "Quando quiser dar uma avaliação provisória.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-041",
+    "category": "Hipótese e incerteza",
+    "phrase": "One possibility is...",
+    "meaning": "uma possibilidade é...",
+    "example": "One possibility is that the customer mix changed after the campaign.",
+    "cue": "Quando quiser abrir uma hipótese sem parecer categórico.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-042",
+    "category": "Hipótese e incerteza",
+    "phrase": "A plausible explanation is...",
+    "meaning": "uma explicação plausível é...",
+    "example": "A plausible explanation is that customers are waiting for the new model.",
+    "cue": "Quando quiser formular uma hipótese com linguagem analítica.",
+    "level": "Advanced"
+  },
+  {
+    "id": "smart-043",
+    "category": "Hipótese e incerteza",
+    "phrase": "I wouldn't rule out...",
+    "meaning": "eu não descartaria...",
+    "example": "I wouldn't rule out a temporary supply issue.",
+    "cue": "Quando algo ainda merece permanecer no conjunto de hipóteses.",
+    "level": "Pro"
+  },
+  {
+    "id": "smart-044",
+    "category": "Hipótese e incerteza",
+    "phrase": "The evidence seems to suggest...",
+    "meaning": "as evidências parecem sugerir...",
+    "example": "The evidence seems to suggest that the change improved retention.",
+    "cue": "Quando quiser inferir sem afirmar certeza excessiva.",
+    "level": "Advanced"
+  },
+  {
+    "id": "smart-045",
+    "category": "Hipótese e incerteza",
+    "phrase": "We need more data before we can say...",
+    "meaning": "precisamos de mais dados antes de afirmar...",
+    "example": "We need more data before we can say the new process is more efficient.",
+    "cue": "Quando quiser conter uma conclusão prematura.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-046",
+    "category": "Causa e consequência",
+    "phrase": "The main driver appears to be...",
+    "meaning": "o principal fator parece ser...",
+    "example": "The main driver appears to be lower conversion in mobile traffic.",
+    "cue": "Quando quiser identificar o fator que mais explica um resultado.",
+    "level": "Pro"
+  },
+  {
+    "id": "smart-047",
+    "category": "Causa e consequência",
+    "phrase": "This is likely a result of...",
+    "meaning": "isso provavelmente é resultado de...",
+    "example": "This is likely a result of the change in our product mix.",
+    "cue": "Quando quiser ligar resultado a uma causa provável.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-048",
+    "category": "Causa e consequência",
+    "phrase": "That creates a knock-on effect on...",
+    "meaning": "isso gera um efeito em cadeia sobre...",
+    "example": "That creates a knock-on effect on inventory, staffing, and cash flow.",
+    "cue": "Quando uma causa produz consequências secundárias.",
+    "level": "Advanced"
+  },
+  {
+    "id": "smart-049",
+    "category": "Causa e consequência",
+    "phrase": "The underlying issue is...",
+    "meaning": "o problema subjacente é...",
+    "example": "The underlying issue is that responsibilities are not clearly defined.",
+    "cue": "Quando quiser ir além do sintoma.",
+    "level": "Pro"
+  },
+  {
+    "id": "smart-050",
+    "category": "Causa e consequência",
+    "phrase": "What is driving this is...",
+    "meaning": "o que está impulsionando isso é...",
+    "example": "What is driving this is a shift toward higher-margin products.",
+    "cue": "Quando quiser explicar o mecanismo por trás de uma mudança.",
+    "level": "Pro"
+  },
+  {
+    "id": "smart-051",
+    "category": "Causa e consequência",
+    "phrase": "This leads to...",
+    "meaning": "isso leva a...",
+    "example": "This leads to longer lead times and more manual work.",
+    "cue": "Quando quiser conectar causa e consequência de forma direta.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-052",
+    "category": "Causa e consequência",
+    "phrase": "If we address X, we should see Y.",
+    "meaning": "se atacarmos X, deveremos observar Y",
+    "example": "If we address the onboarding gap, we should see faster time to productivity.",
+    "cue": "Quando quiser ligar uma ação a um resultado esperado.",
+    "level": "Pro"
+  },
+  {
+    "id": "smart-053",
+    "category": "Causa e consequência",
+    "phrase": "The root cause may be...",
+    "meaning": "a causa raiz pode ser...",
+    "example": "The root cause may be inconsistent data definitions across teams.",
+    "cue": "Quando quiser propor uma causa estrutural ainda não confirmada.",
+    "level": "Pro"
+  },
+  {
+    "id": "smart-054",
+    "category": "Causa e consequência",
+    "phrase": "The risk is that...",
+    "meaning": "o risco é que...",
+    "example": "The risk is that we solve the short-term issue and create a bigger one later.",
+    "cue": "Quando quiser explicitar consequência negativa potencial.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-055",
+    "category": "Evidência e exemplos",
+    "phrase": "For example,",
+    "meaning": "por exemplo",
+    "example": "For example, our best-performing region grew despite the price increase.",
+    "cue": "Quando quiser concretizar uma afirmação.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-056",
+    "category": "Evidência e exemplos",
+    "phrase": "To illustrate that,",
+    "meaning": "para ilustrar isso",
+    "example": "To illustrate that, one team cut lead time by two days using the new workflow.",
+    "cue": "Quando quiser tornar um raciocínio abstrato mais visível.",
+    "level": "Pro"
+  },
+  {
+    "id": "smart-057",
+    "category": "Evidência e exemplos",
+    "phrase": "A good example is...",
+    "meaning": "um bom exemplo é...",
+    "example": "A good example is the pilot we ran in Shanghai last quarter.",
+    "cue": "Quando já tem um caso concreto forte.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-058",
+    "category": "Evidência e exemplos",
+    "phrase": "The data point I'd focus on is...",
+    "meaning": "o dado em que eu focaria é...",
+    "example": "The data point I'd focus on is repeat purchase rate, not total traffic.",
+    "cue": "Quando quiser escolher a métrica mais informativa.",
+    "level": "Advanced"
+  },
+  {
+    "id": "smart-059",
+    "category": "Evidência e exemplos",
+    "phrase": "What supports this view is...",
+    "meaning": "o que sustenta essa visão é...",
+    "example": "What supports this view is the improvement we saw after the second iteration.",
+    "cue": "Quando quiser conectar opinião a evidência.",
+    "level": "Pro"
+  },
+  {
+    "id": "smart-060",
+    "category": "Evidência e exemplos",
+    "phrase": "The strongest evidence is...",
+    "meaning": "a evidência mais forte é...",
+    "example": "The strongest evidence is the consistency of the result across all three markets.",
+    "cue": "Quando quiser hierarquizar provas.",
+    "level": "Pro"
+  },
+  {
+    "id": "smart-061",
+    "category": "Evidência e exemplos",
+    "phrase": "If we look at...",
+    "meaning": "se olharmos para...",
+    "example": "If we look at the last six months, the pattern becomes much clearer.",
+    "cue": "Quando quiser direcionar a atenção para um recorte específico.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-062",
+    "category": "Evidência e exemplos",
+    "phrase": "One concrete example would be...",
+    "meaning": "um exemplo concreto seria...",
+    "example": "One concrete example would be the reduction in rework after automation.",
+    "cue": "Quando quiser apoiar uma ideia com algo tangível.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-063",
+    "category": "Evidência e exemplos",
+    "phrase": "The numbers tell a slightly different story.",
+    "meaning": "os números contam uma história um pouco diferente",
+    "example": "The numbers tell a slightly different story: volume is down, but profitability is up.",
+    "cue": "Quando os dados contradizem a narrativa dominante.",
+    "level": "Advanced"
+  },
+  {
+    "id": "smart-064",
+    "category": "Recomendação e decisão",
+    "phrase": "My recommendation would be to...",
+    "meaning": "minha recomendação seria...",
+    "example": "My recommendation would be to run a two-week pilot before a full rollout.",
+    "cue": "Quando quiser formular uma recomendação clara.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-065",
+    "category": "Recomendação e decisão",
+    "phrase": "If I were making the decision, I'd...",
+    "meaning": "se eu estivesse tomando a decisão, eu...",
+    "example": "If I were making the decision, I'd protect quality and move the date by three days.",
+    "cue": "Quando pedirem sua decisão pessoal.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-066",
+    "category": "Recomendação e decisão",
+    "phrase": "The most pragmatic option is...",
+    "meaning": "a opção mais pragmática é...",
+    "example": "The most pragmatic option is to phase the launch by region.",
+    "cue": "Quando quiser privilegiar viabilidade sobre perfeição.",
+    "level": "Pro"
+  },
+  {
+    "id": "smart-067",
+    "category": "Recomendação e decisão",
+    "phrase": "I would prioritize...",
+    "meaning": "eu priorizaria...",
+    "example": "I would prioritize the customer-facing issues first.",
+    "cue": "Quando precisar ordenar recursos ou problemas.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-068",
+    "category": "Recomendação e decisão",
+    "phrase": "The best next step is...",
+    "meaning": "o melhor próximo passo é...",
+    "example": "The best next step is to validate the assumption with the operations team.",
+    "cue": "Quando a discussão precisa virar ação.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-069",
+    "category": "Recomendação e decisão",
+    "phrase": "I think we should optimize for...",
+    "meaning": "acho que devemos otimizar para...",
+    "example": "I think we should optimize for learning speed rather than short-term volume.",
+    "cue": "Quando quiser explicitar qual objetivo deve guiar a decisão.",
+    "level": "Advanced"
+  },
+  {
+    "id": "smart-070",
+    "category": "Recomendação e decisão",
+    "phrase": "If we have to choose, I'd favor...",
+    "meaning": "se tivermos que escolher, eu favoreceria...",
+    "example": "If we have to choose, I'd favor the option with lower execution risk.",
+    "cue": "Quando houver trade-off real.",
+    "level": "Pro"
+  },
+  {
+    "id": "smart-071",
+    "category": "Recomendação e decisão",
+    "phrase": "The lowest-risk path is...",
+    "meaning": "o caminho de menor risco é...",
+    "example": "The lowest-risk path is to keep the current process while we validate the new one.",
+    "cue": "Quando o critério principal for redução de risco.",
+    "level": "Pro"
+  },
+  {
+    "id": "smart-072",
+    "category": "Recomendação e decisão",
+    "phrase": "The decision should come down to...",
+    "meaning": "a decisão deveria se resumir a...",
+    "example": "The decision should come down to which option creates more long-term value.",
+    "cue": "Quando quiser definir o critério central da escolha.",
+    "level": "Advanced"
+  },
+  {
+    "id": "smart-073",
+    "category": "Síntese e conclusão",
+    "phrase": "So, if I pull that together,",
+    "meaning": "então, juntando tudo",
+    "example": "So, if I pull that together, the opportunity is attractive but the timing is tight.",
+    "cue": "Quando quiser sintetizar vários pontos em uma frase.",
+    "level": "Pro"
+  },
+  {
+    "id": "smart-074",
+    "category": "Síntese e conclusão",
+    "phrase": "The way I'd summarize it is...",
+    "meaning": "a forma como eu resumiria é...",
+    "example": "The way I'd summarize it is: good strategy, weak execution discipline.",
+    "cue": "Quando quiser encerrar com uma formulação memorável.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-075",
+    "category": "Síntese e conclusão",
+    "phrase": "In short,",
+    "meaning": "em resumo",
+    "example": "In short, we can do it, but not with the current scope and timeline.",
+    "cue": "Quando quiser condensar rapidamente.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-076",
+    "category": "Síntese e conclusão",
+    "phrase": "Ultimately,",
+    "meaning": "em última análise",
+    "example": "Ultimately, this is a question of where we want to place the risk.",
+    "cue": "Quando quiser chegar ao princípio decisivo.",
+    "level": "Pro"
+  },
+  {
+    "id": "smart-077",
+    "category": "Síntese e conclusão",
+    "phrase": "What this means in practice is...",
+    "meaning": "o que isso significa na prática é...",
+    "example": "What this means in practice is that we need one owner and one deadline.",
+    "cue": "Quando quiser converter análise em implicação prática.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-078",
+    "category": "Síntese e conclusão",
+    "phrase": "If we step back,",
+    "meaning": "se nos afastarmos um pouco / olhando de fora",
+    "example": "If we step back, the pattern is actually quite consistent.",
+    "cue": "Quando quiser recuperar perspectiva depois de muitos detalhes.",
+    "level": "Pro"
+  },
+  {
+    "id": "smart-079",
+    "category": "Síntese e conclusão",
+    "phrase": "Taken together,",
+    "meaning": "considerados em conjunto",
+    "example": "Taken together, these signals point to a capacity problem rather than a demand problem.",
+    "cue": "Quando várias evidências sustentam uma conclusão.",
+    "level": "Advanced"
+  },
+  {
+    "id": "smart-080",
+    "category": "Síntese e conclusão",
+    "phrase": "My main takeaway is...",
+    "meaning": "minha principal conclusão é...",
+    "example": "My main takeaway is that speed matters, but predictability matters more.",
+    "cue": "Quando quiser deixar uma ideia principal para o grupo.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-081",
+    "category": "Síntese e conclusão",
+    "phrase": "The conclusion I'd draw is...",
+    "meaning": "a conclusão que eu tiraria é...",
+    "example": "The conclusion I'd draw is that the pilot worked, but we are not ready to scale yet.",
+    "cue": "Quando quiser deixar claro que a conclusão deriva da análise.",
+    "level": "Advanced"
+  },
+  {
+    "id": "smart-082",
+    "category": "Ganhar tempo para pensar",
+    "phrase": "That's a good question.",
+    "meaning": "essa é uma boa pergunta",
+    "example": "That's a good question. I think there are two issues we need to separate.",
+    "cue": "Quando precisar de um segundo sem ficar em silêncio.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-083",
+    "category": "Ganhar tempo para pensar",
+    "phrase": "Let me think about that for a second.",
+    "meaning": "deixe-me pensar nisso por um segundo",
+    "example": "Let me think about that for a second. I would probably start with the customer impact.",
+    "cue": "Quando realmente precisa organizar a resposta.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-084",
+    "category": "Ganhar tempo para pensar",
+    "phrase": "There are a couple of ways I could answer that.",
+    "meaning": "há algumas formas de responder isso",
+    "example": "There are a couple of ways I could answer that. Let me start with the operational side.",
+    "cue": "Quando quiser ganhar tempo e criar estrutura.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-085",
+    "category": "Ganhar tempo para pensar",
+    "phrase": "Let me make sure I understand the question.",
+    "meaning": "deixe-me ter certeza de que entendi a pergunta",
+    "example": "Let me make sure I understand the question. Are you asking about cost or overall value?",
+    "cue": "Quando a pergunta é ambígua e você quer confirmar.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-086",
+    "category": "Ganhar tempo para pensar",
+    "phrase": "If I understand you correctly,",
+    "meaning": "se eu entendi corretamente",
+    "example": "If I understand you correctly, you're asking whether we can scale this without adding headcount.",
+    "cue": "Quando quiser reformular a pergunta e comprar tempo.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-087",
+    "category": "Ganhar tempo para pensar",
+    "phrase": "The first thing that comes to mind is...",
+    "meaning": "a primeira coisa que me vem à mente é...",
+    "example": "The first thing that comes to mind is the dependency on supplier capacity.",
+    "cue": "Quando precisa começar sem ter a resposta completa pronta.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-088",
+    "category": "Ganhar tempo para pensar",
+    "phrase": "Off the top of my head,",
+    "meaning": "de imediato / sem analisar profundamente",
+    "example": "Off the top of my head, I can think of two alternatives.",
+    "cue": "Quando deixa claro que é uma resposta inicial.",
+    "level": "Pro"
+  },
+  {
+    "id": "smart-089",
+    "category": "Ganhar tempo para pensar",
+    "phrase": "Before I answer that directly,",
+    "meaning": "antes de responder diretamente",
+    "example": "Before I answer that directly, I think we need to clarify what success means here.",
+    "cue": "Quando precisa estabelecer contexto antes da resposta.",
+    "level": "Pro"
+  },
+  {
+    "id": "smart-090",
+    "category": "Ganhar tempo para pensar",
+    "phrase": "The short answer is...",
+    "meaning": "a resposta curta é...",
+    "example": "The short answer is yes, but only if we reduce the scope.",
+    "cue": "Quando quiser começar com a conclusão e depois explicar.",
+    "level": "Core"
+  },
+  {
+    "id": "smart-091",
+    "category": "Raciocínio analítico",
+    "phrase": "Conceptually,",
+    "meaning": "conceitualmente",
+    "example": "Conceptually, the model makes sense; the question is whether it works at scale.",
+    "cue": "Quando quiser separar lógica conceitual de execução.",
+    "level": "Advanced"
+  },
+  {
+    "id": "smart-092",
+    "category": "Raciocínio analítico",
+    "phrase": "In principle,",
+    "meaning": "em princípio",
+    "example": "In principle, I agree with the approach, but we need to test the assumptions.",
+    "cue": "Quando algo funciona teoricamente.",
+    "level": "Pro"
+  },
+  {
+    "id": "smart-093",
+    "category": "Raciocínio analítico",
+    "phrase": "Empirically,",
+    "meaning": "empiricamente / olhando para evidências",
+    "example": "Empirically, we haven't seen that effect in the markets we tested.",
+    "cue": "Quando quiser enfatizar o que os dados realmente mostram.",
+    "level": "Advanced"
+  },
+  {
+    "id": "smart-094",
+    "category": "Raciocínio analítico",
+    "phrase": "From a systems perspective,",
+    "meaning": "sob uma perspectiva sistêmica",
+    "example": "From a systems perspective, optimizing one team could make the overall flow worse.",
+    "cue": "Quando quiser pensar em interdependências e efeitos de segunda ordem.",
+    "level": "Advanced"
+  },
+  {
+    "id": "smart-095",
+    "category": "Raciocínio analítico",
+    "phrase": "From an operational standpoint,",
+    "meaning": "do ponto de vista operacional",
+    "example": "From an operational standpoint, the simpler option is more reliable.",
+    "cue": "Quando quiser delimitar a lente operacional.",
+    "level": "Pro"
+  },
+  {
+    "id": "smart-096",
+    "category": "Raciocínio analítico",
+    "phrase": "Strategically speaking,",
+    "meaning": "estrategicamente falando",
+    "example": "Strategically speaking, entering now gives us a learning advantage.",
+    "cue": "Quando quiser elevar a análise para estratégia.",
+    "level": "Pro"
+  },
+  {
+    "id": "smart-097",
+    "category": "Raciocínio analítico",
+    "phrase": "On balance,",
+    "meaning": "considerando prós e contras",
+    "example": "On balance, the benefits outweigh the execution risk.",
+    "cue": "Quando quiser apresentar uma conclusão ponderada.",
+    "level": "Advanced"
+  },
+  {
+    "id": "smart-098",
+    "category": "Raciocínio analítico",
+    "phrase": "The assumption behind that is...",
+    "meaning": "a premissa por trás disso é...",
+    "example": "The assumption behind that is that customers value speed more than customization.",
+    "cue": "Quando quiser tornar uma premissa invisível explícita.",
+    "level": "Advanced"
+  },
+  {
+    "id": "smart-099",
+    "category": "Raciocínio analítico",
+    "phrase": "The implication is...",
+    "meaning": "a implicação é...",
+    "example": "The implication is that we need to redesign the process, not just add capacity.",
+    "cue": "Quando quiser mostrar o que uma conclusão exige ou produz.",
+    "level": "Advanced"
+  },
+  {
+    "id": "smart-100",
+    "category": "Linguagem executiva",
+    "phrase": "Here's how I would frame it.",
+    "meaning": "é assim que eu enquadraria a questão",
+    "example": "Here's how I would frame it: we are trading short-term speed for long-term scalability.",
+    "cue": "Quando quiser controlar o enquadramento de uma discussão executiva.",
+    "level": "Advanced"
+  },
+  {
+    "id": "smart-101",
+    "category": "Linguagem executiva",
+    "phrase": "The business case rests on...",
+    "meaning": "o caso de negócio se sustenta em...",
+    "example": "The business case rests on higher retention and lower support cost.",
+    "cue": "Quando quiser resumir os pilares econômicos de uma proposta.",
+    "level": "Advanced"
+  },
+  {
+    "id": "smart-102",
+    "category": "Linguagem executiva",
+    "phrase": "The trade-off we're making is...",
+    "meaning": "o trade-off que estamos fazendo é...",
+    "example": "The trade-off we're making is less flexibility in exchange for more predictability.",
+    "cue": "Quando quiser tornar explícito o custo de uma escolha.",
+    "level": "Advanced"
+  },
+  {
+    "id": "smart-103",
+    "category": "Linguagem executiva",
+    "phrase": "What changes the equation is...",
+    "meaning": "o que muda a equação é...",
+    "example": "What changes the equation is the new distribution agreement.",
+    "cue": "Quando um novo fator altera substancialmente a decisão.",
+    "level": "Advanced"
+  },
+  {
+    "id": "smart-104",
+    "category": "Linguagem executiva",
+    "phrase": "The strategic question is...",
+    "meaning": "a questão estratégica é...",
+    "example": "The strategic question is whether we want to win on speed or differentiation.",
+    "cue": "Quando quiser elevar a discussão para escolha estratégica.",
+    "level": "Advanced"
+  },
+  {
+    "id": "smart-105",
+    "category": "Linguagem executiva",
+    "phrase": "The cost of doing nothing is...",
+    "meaning": "o custo de não fazer nada é...",
+    "example": "The cost of doing nothing is another quarter of lost customer growth.",
+    "cue": "Quando quiser incluir a inação como alternativa com custo.",
+    "level": "Advanced"
+  },
+  {
+    "id": "smart-106",
+    "category": "Linguagem executiva",
+    "phrase": "The critical dependency is...",
+    "meaning": "a dependência crítica é...",
+    "example": "The critical dependency is getting regulatory approval before the launch window.",
+    "cue": "Quando quiser identificar o elemento que condiciona todo o plano.",
+    "level": "Advanced"
+  },
+  {
+    "id": "smart-107",
+    "category": "Linguagem executiva",
+    "phrase": "The decision we need from this group is...",
+    "meaning": "a decisão que precisamos deste grupo é...",
+    "example": "The decision we need from this group is whether to fund phase two this quarter.",
+    "cue": "Quando quiser encerrar uma reunião com pedido claro.",
+    "level": "Advanced"
+  },
+  {
+    "id": "smart-108",
+    "category": "Linguagem executiva",
+    "phrase": "If we want X, we need to be willing to Y.",
+    "meaning": "se queremos X, precisamos estar dispostos a Y",
+    "example": "If we want faster growth, we need to be willing to accept more short-term volatility.",
+    "cue": "Quando quiser explicitar o preço necessário para alcançar um objetivo.",
+    "level": "Advanced"
+  }
+];
+
 const scenarios = [
   { id: "meeting-delay", type: "MEETING", level: 2, title: "Project delay", prompt: "The launch is two weeks behind schedule. Your manager asks: ‘What do you recommend we do next?’", brief: ["State the problem", "Recommend 2 actions", "Mention one risk"] },
   { id: "interview-problem", type: "INTERVIEW", level: 3, title: "Problem solving", prompt: "Tell me about a difficult professional problem you solved and how you made the decision.", brief: ["Situation", "Decision", "Result"] },
@@ -2699,6 +3676,7 @@ function renderDashboard() {
   renderPartMiniGrid();
   renderInsights();
   renderVocabPreview();
+  renderDailyThinkingTip();
   renderTopStats();
   save();
 }
@@ -3062,6 +4040,112 @@ document.getElementById("markActive").addEventListener("click", () => {
   renderDashboard();
 });
 
+
+// Thinking Toolkit — mental shortcuts for fluent reasoning
+let vocabMode = "library";
+let thinkingIndex = 0;
+let thinkingFilter = "All";
+let thinkingSearch = "";
+
+function setVocabMode(mode) {
+  vocabMode = mode === "thinking" ? "thinking" : "library";
+  document.getElementById("vocabLibraryPanel")?.classList.toggle("hidden", vocabMode !== "library");
+  document.getElementById("thinkingToolkitPanel")?.classList.toggle("hidden", vocabMode !== "thinking");
+  document.querySelectorAll("[data-vocab-mode]").forEach(btn => {
+    const active = btn.dataset.vocabMode === vocabMode;
+    btn.classList.toggle("active", active);
+    btn.setAttribute("aria-selected", String(active));
+  });
+  if (vocabMode === "thinking") renderThinkingToolkit();
+}
+
+document.querySelectorAll("[data-vocab-mode]").forEach(btn => btn.addEventListener("click", () => setVocabMode(btn.dataset.vocabMode)));
+
+function filteredThinking() {
+  const needle = thinkingSearch.trim().toLowerCase();
+  return smartPhrases.filter(item => {
+    const matchesCategory = thinkingFilter === "All" || item.category === thinkingFilter;
+    const searchable = `${item.phrase} ${item.meaning} ${item.example} ${item.cue} ${item.category}`.toLowerCase();
+    return matchesCategory && (!needle || searchable.includes(needle));
+  });
+}
+
+function renderThinkingToolkit() {
+  const list = filteredThinking();
+  const categories = ["All", ...new Set(smartPhrases.map(item => item.category))];
+  const activeCount = state.smartActive.filter(id => smartPhrases.some(item => item.id === id)).length;
+  document.getElementById("thinkingStats").innerHTML = `<article class="card mini-stat"><span>Atalhos</span><strong>${smartPhrases.length}</strong><small>estruturas curadas</small></article><article class="card mini-stat"><span>Funções mentais</span><strong>${categories.length - 1}</strong><small>do framing à síntese</small></article><article class="card mini-stat"><span>Guardados</span><strong>${activeCount}</strong><small>seu repertório rápido</small></article><article class="card mini-stat"><span>Visíveis</span><strong>${list.length}</strong><small>filtro atual</small></article>`;
+  document.getElementById("thinkingFilters").innerHTML = categories.map(cat => `<button class="filter-chip ${thinkingFilter === cat ? "active" : ""}" data-thinking-filter="${escapeHtml(cat)}">${escapeHtml(cat === "All" ? "Todas as funções" : cat)}</button>`).join("");
+  document.querySelectorAll("[data-thinking-filter]").forEach(btn => btn.addEventListener("click", () => { thinkingFilter = btn.dataset.thinkingFilter; thinkingIndex = 0; renderThinkingToolkit(); }));
+  if (!list.length) {
+    document.getElementById("thinkingCard").classList.add("hidden");
+    document.getElementById("thinkingList").innerHTML = `<article class="card vocab-empty"><strong>Nenhum atalho encontrado.</strong><p>Tente outra busca ou função mental.</p></article>`;
+    return;
+  }
+  document.getElementById("thinkingCard").classList.remove("hidden");
+  renderThinkingCard();
+  document.getElementById("thinkingList").innerHTML = list.map((item, i) => `<button class="thinking-row ${state.smartActive.includes(item.id) ? "active" : ""}" data-thinking-row="${i}"><span><strong>${escapeHtml(item.phrase)}</strong><small>${escapeHtml(item.category)} · ${escapeHtml(item.level)}</small></span><span>${state.smartActive.includes(item.id) ? "READY ✓" : "TRAIN"}</span></button>`).join("");
+  document.querySelectorAll("[data-thinking-row]").forEach(btn => btn.addEventListener("click", () => { thinkingIndex = Number(btn.dataset.thinkingRow); renderThinkingCard(); document.getElementById("thinkingCard").scrollIntoView({ behavior: "smooth", block: "center" }); }));
+}
+
+function renderThinkingCard() {
+  const list = filteredThinking();
+  if (!list.length) return;
+  thinkingIndex = (thinkingIndex + list.length) % list.length;
+  const item = list[thinkingIndex];
+  document.getElementById("thinkingCategory").textContent = item.category.toUpperCase();
+  document.getElementById("thinkingLevel").textContent = item.level.toUpperCase();
+  document.getElementById("thinkingIndex").textContent = `${thinkingIndex + 1}/${list.length}`;
+  document.getElementById("thinkingPhrase").textContent = item.phrase;
+  document.getElementById("thinkingMeaning").textContent = item.meaning;
+  document.getElementById("thinkingCue").textContent = item.cue;
+  document.getElementById("thinkingExample").textContent = item.example;
+  const active = state.smartActive.includes(item.id);
+  const mark = document.getElementById("markThinkingActive");
+  mark.textContent = active ? "Atalho guardado ✓" : "Guardar como atalho";
+  mark.classList.toggle("success-button", active);
+}
+
+document.getElementById("thinkingSearch")?.addEventListener("input", e => { thinkingSearch = e.target.value; thinkingIndex = 0; renderThinkingToolkit(); });
+document.getElementById("prevThinking")?.addEventListener("click", () => { thinkingIndex--; renderThinkingCard(); });
+document.getElementById("nextThinking")?.addEventListener("click", () => { thinkingIndex++; renderThinkingCard(); });
+document.getElementById("speakThinkingPhrase")?.addEventListener("click", () => { const item = filteredThinking()[thinkingIndex]; if (item) speakEnglish(item.phrase.replace(/X|Y/g, "the option"), state.vocabRate || 0.7); });
+document.getElementById("speakThinkingExample")?.addEventListener("click", () => { const item = filteredThinking()[thinkingIndex]; if (item) speakEnglish(item.example, state.vocabRate || 0.7); });
+document.getElementById("markThinkingActive")?.addEventListener("click", () => {
+  const item = filteredThinking()[thinkingIndex];
+  if (!item) return;
+  if (state.smartActive.includes(item.id)) state.smartActive = state.smartActive.filter(id => id !== item.id);
+  else {
+    state.smartActive.push(item.id);
+    state.xp += 8;
+    logEvent("smart_phrase_active", { id: item.id, phrase: item.phrase, category: item.category });
+    showToast("Atalho mental guardado · +8 XP");
+  }
+  save();
+  renderThinkingToolkit();
+  renderDashboard();
+});
+
+function dailySmartPhrase() {
+  const d = new Date();
+  const key = `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;
+  let hash = 0;
+  for (const ch of key) hash = (hash * 31 + ch.charCodeAt(0)) >>> 0;
+  return smartPhrases[hash % smartPhrases.length];
+}
+
+function renderDailyThinkingTip() {
+  const item = dailySmartPhrase();
+  if (!item) return;
+  document.getElementById("dailyThinkingCategory").textContent = item.category.toUpperCase();
+  document.getElementById("dailyThinkingPhrase").textContent = item.phrase;
+  document.getElementById("dailyThinkingMeaning").textContent = `${item.meaning} · ${item.cue}`;
+  document.getElementById("dailyThinkingExample").textContent = item.example;
+}
+
+document.getElementById("dailyThinkingAudio")?.addEventListener("click", () => speakEnglish(dailySmartPhrase().example, state.vocabRate || 0.7));
+document.getElementById("openThinkingFromDashboard")?.addEventListener("click", () => { showView("vocabulary"); setVocabMode("thinking"); document.getElementById("thinkingToolkitPanel")?.scrollIntoView({ behavior: "smooth", block: "start" }); });
+
 // Error Engine
 function getDominantError() {
   const counts = {};
@@ -3081,6 +4165,50 @@ function renderErrors() {
   list.innerHTML = state.errors.slice(0, 30).map(e => `<article class="card error-card"><div class="card-head"><span class="tag">${escapeHtml(e.category)}</span><span class="muted">Part ${e.part || "—"}</span></div><strong>${escapeHtml(e.question)}</strong><span>Você marcou: ${escapeHtml(e.chosen)}</span><span>Correto: ${escapeHtml(e.correct)}</span><p class="muted">${escapeHtml(e.explanation)}</p></article>`).join("");
 }
 
+
+const coachProfiles = {
+  PROJECT: { blueprint: ["Frame", "Impact", "Plan", "Commit"], categories: ["Introduzir pensamento", "Estruturar raciocínio", "Recomendação e decisão", "Linguagem executiva"] },
+  CLIENT: { blueprint: ["Acknowledge", "Clarify", "Options", "Next step"], categories: ["Nuance e ressalvas", "Discordar com inteligência", "Recomendação e decisão", "Síntese e conclusão"] },
+  FINANCE: { blueprint: ["Context", "Trade-off", "Recommendation", "Risk"], categories: ["Raciocínio analítico", "Nuance e ressalvas", "Recomendação e decisão", "Linguagem executiva"] },
+  LEADERSHIP: { blueprint: ["Observation", "Impact", "Expectation", "Support"], categories: ["Introduzir pensamento", "Nuance e ressalvas", "Recomendação e decisão", "Síntese e conclusão"] },
+  INTERVIEW: { blueprint: ["Answer", "Evidence", "Meaning", "Close"], categories: ["Ganhar tempo para pensar", "Introduzir pensamento", "Evidência e exemplos", "Síntese e conclusão"] },
+  MEETING: { blueprint: ["Acknowledge", "Reframe", "Reason", "Question"], categories: ["Ganhar tempo para pensar", "Discordar com inteligência", "Nuance e ressalvas", "Introduzir pensamento"] },
+  CRISIS: { blueprint: ["Facts", "Contain", "Options", "Decision"], categories: ["Estruturar raciocínio", "Causa e consequência", "Recomendação e decisão", "Linguagem executiva"] },
+  ANALYSIS: { blueprint: ["Claim", "Evidence", "Limitation", "Inference"], categories: ["Raciocínio analítico", "Evidência e exemplos", "Hipótese e incerteza", "Discordar com inteligência"] },
+  NEGOTIATION: { blueprint: ["Constraint", "Value", "Alternative", "Agreement"], categories: ["Nuance e ressalvas", "Discordar com inteligência", "Recomendação e decisão", "Linguagem executiva"] },
+  EXECUTIVE: { blueprint: ["Frame", "Evidence", "Trade-off", "Ownership"], categories: ["Linguagem executiva", "Evidência e exemplos", "Recomendação e decisão", "Síntese e conclusão"] }
+};
+
+function tipsForScenario(scenario) {
+  const profile = coachProfiles[scenario.type] || coachProfiles.MEETING;
+  const picks = [];
+  profile.categories.forEach((cat, i) => {
+    const pool = smartPhrases.filter(item => item.category === cat);
+    if (pool.length) picks.push(pool[(scenario.level + i * 2) % pool.length]);
+  });
+  return { profile, picks };
+}
+
+let scenarioTipsVisible = true;
+function renderScenarioCoach(scenario) {
+  const { profile, picks } = tipsForScenario(scenario);
+  document.getElementById("scenarioBlueprint").innerHTML = profile.blueprint.map((step, i) => `<span><b>${i + 1}</b>${escapeHtml(step)}</span>`).join("");
+  document.getElementById("scenarioTips").innerHTML = picks.map(item => `<button class="scenario-tip" data-coach-phrase="${escapeHtml(item.id)}"><span>${escapeHtml(item.category)}</span><strong>${escapeHtml(item.phrase)}</strong><small>${escapeHtml(item.cue)}</small><em>🔊</em></button>`).join("");
+  document.getElementById("scenarioTips").classList.toggle("hidden", !scenarioTipsVisible);
+  document.getElementById("scenarioBlueprint").classList.toggle("hidden", !scenarioTipsVisible);
+  const toggle = document.getElementById("toggleScenarioTips");
+  if (toggle) toggle.textContent = scenarioTipsVisible ? "Ocultar dicas" : "Mostrar dicas";
+  document.querySelectorAll("[data-coach-phrase]").forEach(btn => btn.addEventListener("click", () => {
+    const item = smartPhrases.find(p => p.id === btn.dataset.coachPhrase);
+    if (item) speakEnglish(item.example, state.vocabRate || 0.7);
+  }));
+}
+
+document.getElementById("toggleScenarioTips")?.addEventListener("click", () => {
+  scenarioTipsVisible = !scenarioTipsVisible;
+  if (selectedScenario) renderScenarioCoach(selectedScenario);
+});
+
 // Shanghai Work
 let selectedScenario = scenarios[0];
 function renderWork() {
@@ -3095,6 +4223,7 @@ function openScenario(id) {
   document.getElementById("scenarioLevel").textContent = `LEVEL ${selectedScenario.level}`;
   document.getElementById("scenarioPrompt").textContent = selectedScenario.prompt;
   document.getElementById("scenarioBrief").innerHTML = selectedScenario.brief.map(x => `<span>${escapeHtml(x)}</span>`).join("");
+  renderScenarioCoach(selectedScenario);
   document.getElementById("latency").textContent = "—";
   document.getElementById("scenarioPanel").scrollIntoView({ behavior: "smooth", block: "center" });
 }
@@ -3173,5 +4302,6 @@ renderToeicOverview();
 renderToeic();
 setListeningPhrase(false);
 renderVocabulary();
+renderThinkingToolkit();
 renderErrors();
 renderWork();

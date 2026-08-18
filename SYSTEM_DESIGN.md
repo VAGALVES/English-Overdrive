@@ -116,3 +116,14 @@ Track improvement, not just engagement: diagnostic delta, error recurrence, mast
 - **ADR-004:** no frontend secrets.
 - **ADR-005:** event-based learning history.
 - **ADR-006:** semantic design tokens for all themes/breakpoints.
+
+
+## Thinking Toolkit & Response Coach
+
+A camada de fluência passa a incluir uma biblioteca de **mental shortcuts**. O princípio é separar intenção cognitiva de formulação linguística: o usuário reconhece o tipo de movimento mental que deseja fazer e recupera uma estrutura inglesa pronta.
+
+Fluxo:
+
+`Intent → Mental shortcut → User idea → Spoken response → Performance event`
+
+O Shanghai Work usa o mesmo banco para gerar coaching contextual por cenário, combinando um Response Blueprint com atalhos relevantes. No futuro, o Adaptive Engine deverá priorizar atalhos que o usuário ainda não consegue recuperar espontaneamente sob pressão.

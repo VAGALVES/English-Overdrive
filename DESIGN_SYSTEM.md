@@ -31,3 +31,14 @@ Saved preference wins. Without saved preference, follow `prefers-color-scheme`. 
 
 ## Accessibility contract
 Visible `:focus-visible`; `prefers-reduced-motion`; `aria-current` navigation; live theme announcement; text labels retained in mobile navigation; correct/wrong answers have text feedback in addition to color.
+
+
+## Thinking Toolkit components
+- `module-tabs`: alternância entre Active Vocabulary e Thinking Toolkit.
+- `thinking-card`: foco em uma estrutura mental por vez, com cue, exemplo e áudio.
+- `mental-cue`: traduz intenção cognitiva em gatilho de recuperação.
+- `response-coach`: coaching contextual dentro de cenários de speaking.
+- `blueprint-row`: estrutura visual de 4 passos para organizar respostas sob pressão.
+- `scenario-tip`: atalho contextual clicável com áudio.
+
+Princípio visual: dicas devem reduzir carga cognitiva, não competir com o prompt principal. O coaching usa `accent-soft` e bordas semânticas para funcionar como camada auxiliar.

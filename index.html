@@ -107,6 +107,11 @@
             <button class="secondary" data-go="vocabulary">Abrir Active Vocabulary</button>
           </article>
         </div>
+
+        <article class="card thinking-tip-card" id="dailyThinkingTip">
+          <div class="card-head"><div><span class="muted">Mental Shortcut of the Day</span><h2>Dica para pensar em inglês</h2></div><span class="pill" id="dailyThinkingCategory">THINKING</span></div>
+          <div class="thinking-tip-layout"><div><strong class="thinking-tip-phrase" id="dailyThinkingPhrase">The way I see it,</strong><p id="dailyThinkingMeaning" class="muted"></p><div class="thinking-example"><span>Use assim</span><p id="dailyThinkingExample"></p></div></div><div class="thinking-tip-actions"><button class="secondary" id="dailyThinkingAudio">🔊 Ouvir</button><button class="primary" id="openThinkingFromDashboard">Abrir Thinking Toolkit →</button></div></div>
+        </article>
       </section>
 
       <section id="diagnostic" class="view">
@@ -126,41 +131,31 @@
       </section>
 
       <section id="vocabulary" class="view">
-        <div class="section-head"><div><span class="muted">Produção, não reconhecimento</span><h2>Active Vocabulary</h2><p class="section-description">Biblioteca curada para TOEIC, reuniões, carreira internacional e trabalho real. Prioridade para palavras, collocations e expressões que você realmente precisa produzir.</p></div><span class="pill" id="vocabMastery">0% ACTIVE</span></div>
-        <div class="vocab-stats" id="vocabStats"></div>
+        <div class="section-head"><div><span class="muted">Repertório para pensar e produzir</span><h2>Vocabulary & Thinking</h2><p class="section-description">Duas camadas complementares: palavras/expressões de alto valor e atalhos mentais para estruturar raciocínio, ganhar tempo e responder com mais clareza e sofisticação.</p></div><span class="pill" id="vocabMastery">0% ACTIVE</span></div>
+        <div class="module-tabs" role="tablist" aria-label="Módulos de vocabulário">
+          <button class="module-tab active" id="vocabLibraryTab" data-vocab-mode="library" role="tab" aria-selected="true">A+ Active Vocabulary <span>276</span></button>
+          <button class="module-tab" id="thinkingToolkitTab" data-vocab-mode="thinking" role="tab" aria-selected="false">✦ Thinking Toolkit <span>108</span></button>
+        </div>
 
-        <article class="card vocab-control-panel">
-          <div class="vocab-search-wrap">
-            <label for="vocabSearch">Buscar na biblioteca</label>
-            <input id="vocabSearch" class="vocab-search" type="search" inputmode="search" autocomplete="off" placeholder="Ex.: deadline, reunião, forecast, negotiate…" />
-          </div>
-          <div class="vocab-audio-control">
-            <div class="audio-control-title"><span>Velocidade do áudio</span><strong id="vocabSpeedLabel">0.7×</strong></div>
-            <div class="speed-buttons" aria-label="Velocidade do áudio do vocabulário">
-              <button class="speed-chip" data-vocab-rate="0.5">0.5× <small>Muito lenta</small></button>
-              <button class="speed-chip" data-vocab-rate="0.7">0.7× <small>Lenta</small></button>
-              <button class="speed-chip" data-vocab-rate="0.85">0.85× <small>Treino</small></button>
-              <button class="speed-chip" data-vocab-rate="1">1× <small>Natural</small></button>
-            </div>
-          </div>
-        </article>
+        <div id="vocabLibraryPanel">
+          <div class="vocab-stats" id="vocabStats"></div>
+          <article class="card vocab-control-panel">
+            <div class="vocab-search-wrap"><label for="vocabSearch">Buscar na biblioteca</label><input id="vocabSearch" class="vocab-search" type="search" inputmode="search" autocomplete="off" placeholder="Ex.: deadline, reunião, forecast, negotiate…" /></div>
+            <div class="vocab-audio-control"><div class="audio-control-title"><span>Velocidade do áudio</span><strong id="vocabSpeedLabel">0.7×</strong></div><div class="speed-buttons" aria-label="Velocidade do áudio do vocabulário"><button class="speed-chip" data-vocab-rate="0.5">0.5× <small>Muito lenta</small></button><button class="speed-chip" data-vocab-rate="0.7">0.7× <small>Lenta</small></button><button class="speed-chip" data-vocab-rate="0.85">0.85× <small>Treino</small></button><button class="speed-chip" data-vocab-rate="1">1× <small>Natural</small></button></div></div>
+          </article>
+          <div class="vocab-filter-label">Nível de prioridade</div><div class="filter-row" id="vocabLevelFilters"></div><div class="vocab-filter-label">Contexto</div><div class="filter-row" id="vocabFilters"></div>
+          <div id="vocabEmpty" class="card vocab-empty hidden"><strong>Nenhuma entrada encontrada.</strong><p>Tente outra busca ou remova algum filtro.</p></div>
+          <article class="card flashcard" id="flashcard"><div class="flashcard-top"><div class="flash-tags"><span class="pill" id="flashCategory">Meetings</span><span class="pill level-pill" id="flashLevel">CORE</span></div><span class="muted" id="flashIndex">1/276</span></div><span class="muted">Palavra ou expressão</span><h2 id="flashTerm">follow up</h2><p class="flash-definition" id="flashDefinition">acompanhar / dar continuidade</p><div class="vocab-audio-actions"><button class="secondary audio-action" id="speakVocabTerm">🔊 Ouvir expressão</button><button class="secondary audio-action" id="speakVocabExample">🎧 Ouvir exemplo</button><span class="audio-hint">Use 0.5×–0.7× para percepção e shadowing; depois volte a 1×.</span></div><div class="example-box"><span>Example</span><strong id="flashExample">I'll follow up with the supplier this afternoon.</strong></div><div class="production-prompt"><span>Produza sem traduzir</span><p id="flashPrompt">Diga em inglês: “Vou acompanhar isso amanhã.”</p></div><div class="button-row vocab-navigation"><button class="secondary" id="prevVocab">← Anterior</button><button class="primary" id="markActive">Marcar como ativa</button><button class="secondary" id="nextVocab">Próxima →</button></div></article>
+          <div class="vocab-list" id="vocabList"></div>
+        </div>
 
-        <div class="vocab-filter-label">Nível de prioridade</div>
-        <div class="filter-row" id="vocabLevelFilters"></div>
-        <div class="vocab-filter-label">Contexto</div>
-        <div class="filter-row" id="vocabFilters"></div>
-
-        <div id="vocabEmpty" class="card vocab-empty hidden"><strong>Nenhuma entrada encontrada.</strong><p>Tente outra busca ou remova algum filtro.</p></div>
-        <article class="card flashcard" id="flashcard">
-          <div class="flashcard-top"><div class="flash-tags"><span class="pill" id="flashCategory">Meetings</span><span class="pill level-pill" id="flashLevel">CORE</span></div><span class="muted" id="flashIndex">1/276</span></div>
-          <span class="muted">Palavra ou expressão</span><h2 id="flashTerm">follow up</h2>
-          <p class="flash-definition" id="flashDefinition">acompanhar / dar continuidade</p>
-          <div class="vocab-audio-actions"><button class="secondary audio-action" id="speakVocabTerm">🔊 Ouvir expressão</button><button class="secondary audio-action" id="speakVocabExample">🎧 Ouvir exemplo</button><span class="audio-hint">Use 0.5×–0.7× para percepção e shadowing; depois volte a 1×.</span></div>
-          <div class="example-box"><span>Example</span><strong id="flashExample">I'll follow up with the supplier this afternoon.</strong></div>
-          <div class="production-prompt"><span>Produza sem traduzir</span><p id="flashPrompt">Diga em inglês: “Vou acompanhar isso amanhã.”</p></div>
-          <div class="button-row vocab-navigation"><button class="secondary" id="prevVocab">← Anterior</button><button class="primary" id="markActive">Marcar como ativa</button><button class="secondary" id="nextVocab">Próxima →</button></div>
-        </article>
-        <div class="vocab-list" id="vocabList"></div>
+        <div id="thinkingToolkitPanel" class="hidden">
+          <article class="card thinking-hero"><div><span class="pill">MENTAL SHORTCUTS</span><h2>Não procure palavras. Puxe uma estrutura.</h2><p>Associe uma intenção mental a uma expressão pronta: introduzir uma ideia, organizar três pontos, discordar com elegância, formular hipótese, mostrar evidência, concluir ou simplesmente ganhar dois segundos para pensar.</p></div><div class="thinking-formula"><span>INTENÇÃO</span><strong>→</strong><span>ATALHO</span><strong>→</strong><span>IDEIA</span></div></article>
+          <div class="thinking-stats" id="thinkingStats"></div>
+          <article class="card thinking-controls"><div class="vocab-search-wrap"><label for="thinkingSearch">Buscar atalho mental</label><input id="thinkingSearch" class="vocab-search" type="search" inputmode="search" autocomplete="off" placeholder="Ex.: discordar, hipótese, bigger picture, data…" /></div><div><span class="vocab-filter-label">Função mental</span><div class="filter-row" id="thinkingFilters"></div></div></article>
+          <article class="card thinking-card" id="thinkingCard"><div class="thinking-card-top"><div><span class="pill" id="thinkingCategory">INTRODUZIR</span><span class="pill level-pill" id="thinkingLevel">CORE</span></div><span class="muted" id="thinkingIndex">1/108</span></div><span class="muted">Atalho mental</span><h2 id="thinkingPhrase">From my perspective,</h2><p class="thinking-meaning" id="thinkingMeaning"></p><div class="mental-cue"><span>Quando puxar isso da memória</span><p id="thinkingCue"></p></div><div class="example-box"><span>Example</span><strong id="thinkingExample"></strong></div><div class="vocab-audio-actions"><button class="secondary audio-action" id="speakThinkingPhrase">🔊 Ouvir atalho</button><button class="secondary audio-action" id="speakThinkingExample">🎧 Ouvir exemplo</button><span class="audio-hint">O Thinking Toolkit usa a mesma velocidade definida no Active Vocabulary.</span></div><div class="button-row vocab-navigation"><button class="secondary" id="prevThinking">← Anterior</button><button class="primary" id="markThinkingActive">Guardar como atalho</button><button class="secondary" id="nextThinking">Próximo →</button></div></article>
+          <div class="thinking-list" id="thinkingList"></div>
+        </div>
       </section>
 
       <section id="errors" class="view">
@@ -174,7 +169,7 @@
         <div class="section-head"><div><span class="muted">Inglês profissional</span><h2>Shanghai Work</h2></div><span class="pill">REAL-WORLD MODE</span></div>
         <div class="work-levels"><span class="pill">LEVEL 01 · CLEAR</span><span class="pill">LEVEL 05 · INTERRUPTIONS</span><span class="pill">LEVEL 10 · PRESSURE</span></div>
         <div class="scenario-grid" id="scenarioGrid"></div>
-        <article class="card hidden scenario-panel" id="scenarioPanel"><div class="card-head"><span class="pill" id="scenarioType"></span><span class="muted" id="scenarioLevel"></span></div><h2 id="scenarioPrompt"></h2><div class="scenario-brief" id="scenarioBrief"></div><p class="muted">Clique em iniciar e responda em voz alta. Pare o cronômetro quando sua primeira palavra sair.</p><div class="latency-display"><span>Response latency</span><strong id="latency">—</strong></div><div class="button-row"><button class="primary" id="startLatency">Iniciar</button><button class="secondary" id="stopLatency" disabled>Comecei a falar</button><button class="secondary" id="newScenario">Outro cenário</button></div></article>
+        <article class="card hidden scenario-panel" id="scenarioPanel"><div class="card-head"><span class="pill" id="scenarioType"></span><span class="muted" id="scenarioLevel"></span></div><h2 id="scenarioPrompt"></h2><div class="scenario-brief" id="scenarioBrief"></div><div class="response-coach"><div class="response-coach-head"><div><span class="muted">Thinking Coach</span><strong>Response Blueprint</strong></div><button class="text-button" id="toggleScenarioTips">Ocultar dicas</button></div><div id="scenarioBlueprint" class="blueprint-row"></div><div id="scenarioTips" class="scenario-tips"></div></div><p class="muted">Clique em iniciar e responda em voz alta. Pare o cronômetro quando sua primeira palavra sair. Use as dicas como trampolim mental, não como roteiro para decorar.</p><div class="latency-display"><span>Response latency</span><strong id="latency">—</strong></div><div class="button-row"><button class="primary" id="startLatency">Iniciar</button><button class="secondary" id="stopLatency" disabled>Comecei a falar</button><button class="secondary" id="newScenario">Outro cenário</button></div></article>
         <article class="card work-history"><div class="card-head"><div><span class="muted">Performance</span><h2>Response Latency</h2></div><span class="pill" id="avgLatency">—</span></div><div id="latencyHistory" class="latency-history"></div></article>
       </section>
     </main>
