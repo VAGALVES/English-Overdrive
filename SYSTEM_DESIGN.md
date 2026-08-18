@@ -127,3 +127,6 @@ Fluxo:
 `Intent → Mental shortcut → User idea → Spoken response → Performance event`
 
 O Shanghai Work usa o mesmo banco para gerar coaching contextual por cenário, combinando um Response Blueprint com atalhos relevantes. No futuro, o Adaptive Engine deverá priorizar atalhos que o usuário ainda não consegue recuperar espontaneamente sob pressão.
+
+## Toolkit metadata — v0.2.4
+O Thinking Toolkit passa a ter três dimensões independentes de metadados para recuperação: **prioridade**, **contexto** e **função mental**. A filtragem combina as três dimensões com busca textual. Os contextos são derivados de uma taxonomia controlada para evitar categorias arbitrárias e permitir evolução futura para recomendações adaptativas por situação de trabalho.

@@ -3625,6 +3625,53 @@ const smartPhrases = [
   }
 ];
 
+const THINKING_CONTEXT_ORDER = [
+  "Reuniões",
+  "Apresentações",
+  "Entrevistas",
+  "Análise & Dados",
+  "Estratégia",
+  "Negociação",
+  "Liderança",
+  "Problemas & Decisões",
+  "Comunicação executiva",
+  "Operações"
+];
+
+const THINKING_CONTEXT_BY_CATEGORY = {
+  "Introduzir pensamento": ["Reuniões", "Apresentações", "Entrevistas"],
+  "Estruturar raciocínio": ["Apresentações", "Reuniões", "Comunicação executiva"],
+  "Nuance e ressalvas": ["Reuniões", "Negociação", "Comunicação executiva"],
+  "Discordar com inteligência": ["Negociação", "Reuniões", "Liderança"],
+  "Hipótese e incerteza": ["Análise & Dados", "Problemas & Decisões", "Estratégia"],
+  "Causa e consequência": ["Problemas & Decisões", "Análise & Dados", "Operações"],
+  "Evidência e exemplos": ["Análise & Dados", "Apresentações", "Comunicação executiva"],
+  "Recomendação e decisão": ["Problemas & Decisões", "Liderança", "Comunicação executiva"],
+  "Síntese e conclusão": ["Reuniões", "Apresentações", "Comunicação executiva"],
+  "Ganhar tempo para pensar": ["Entrevistas", "Reuniões", "Negociação"],
+  "Raciocínio analítico": ["Análise & Dados", "Estratégia", "Comunicação executiva"],
+  "Linguagem executiva": ["Comunicação executiva", "Estratégia", "Liderança"]
+};
+
+function thinkingContexts(item) {
+  const base = [...(THINKING_CONTEXT_BY_CATEGORY[item.category] || ["Reuniões"])];
+  const haystack = `${item.phrase} ${item.meaning} ${item.example} ${item.cue}`.toLowerCase();
+  const add = context => { if (!base.includes(context)) base.push(context); };
+  if (/interview|hire|career|candidate|recruit|question/.test(haystack)) add("Entrevistas");
+  if (/data|metric|evidence|number|trend|analysis|analytical|empirical|fact/.test(haystack)) add("Análise & Dados");
+  if (/client|negotiat|trade-off|push back|deadline|constraint/.test(haystack)) add("Negociação");
+  if (/strateg|bigger picture|long-term|portfolio|direction|positioning/.test(haystack)) add("Estratégia");
+  if (/team|employee|leadership|manager|stakeholder|group/.test(haystack)) add("Liderança");
+  if (/present|illustrat|example|summary|conclu|audience/.test(haystack)) add("Apresentações");
+  if (/decision|recommend|priorit|option|risk|root cause|problem|solution/.test(haystack)) add("Problemas & Decisões");
+  if (/operat|process|workflow|capacity|lead time|execution/.test(haystack)) add("Operações");
+  return base;
+}
+
+function thinkingPrimaryContext(item) {
+  return thinkingContexts(item)[0] || "Reuniões";
+}
+
 const scenarios = [
   { id: "meeting-delay", type: "MEETING", level: 2, title: "Project delay", prompt: "The launch is two weeks behind schedule. Your manager asks: ‘What do you recommend we do next?’", brief: ["State the problem", "Recommend 2 actions", "Mention one risk"] },
   { id: "interview-problem", type: "INTERVIEW", level: 3, title: "Problem solving", prompt: "Tell me about a difficult professional problem you solved and how you made the decision.", brief: ["Situation", "Decision", "Result"] },
@@ -3961,8 +4008,10 @@ function renderVocabSpeed() {
   document.querySelectorAll("[data-vocab-rate]").forEach(btn => {
     btn.classList.toggle("active", Math.abs(Number(btn.dataset.vocabRate) - rate) < 0.001);
   });
-  const label = document.getElementById("vocabSpeedLabel");
-  if (label) label.textContent = `${rate.toFixed(2).replace(/0$/, "")}×`;
+  ["vocabSpeedLabel", "thinkingSpeedLabel"].forEach(id => {
+    const label = document.getElementById(id);
+    if (label) label.textContent = `${rate.toFixed(2).replace(/0$/, "")}×`;
+  });
 }
 
 function renderVocabulary() {
@@ -4016,7 +4065,7 @@ document.querySelectorAll("[data-vocab-rate]").forEach(btn => btn.addEventListen
   state.vocabRate = Number(btn.dataset.vocabRate);
   save();
   renderVocabSpeed();
-  showToast(`Áudio do vocabulário: ${state.vocabRate.toFixed(2).replace(/0$/, "")}×`);
+  showToast(`Velocidade do áudio: ${state.vocabRate.toFixed(2).replace(/0$/, "")}×`);
 }));
 document.getElementById("prevVocab").addEventListener("click", () => { vocabIndex--; renderFlashcard(); });
 document.getElementById("nextVocab").addEventListener("click", () => { vocabIndex++; renderFlashcard(); });
@@ -4045,6 +4094,8 @@ document.getElementById("markActive").addEventListener("click", () => {
 let vocabMode = "library";
 let thinkingIndex = 0;
 let thinkingFilter = "All";
+let thinkingLevel = "All";
+let thinkingContext = "All";
 let thinkingSearch = "";
 
 function setVocabMode(mode) {
@@ -4064,28 +4115,54 @@ document.querySelectorAll("[data-vocab-mode]").forEach(btn => btn.addEventListen
 function filteredThinking() {
   const needle = thinkingSearch.trim().toLowerCase();
   return smartPhrases.filter(item => {
+    const contexts = thinkingContexts(item);
     const matchesCategory = thinkingFilter === "All" || item.category === thinkingFilter;
-    const searchable = `${item.phrase} ${item.meaning} ${item.example} ${item.cue} ${item.category}`.toLowerCase();
-    return matchesCategory && (!needle || searchable.includes(needle));
+    const matchesLevel = thinkingLevel === "All" || item.level === thinkingLevel;
+    const matchesContext = thinkingContext === "All" || contexts.includes(thinkingContext);
+    const searchable = `${item.phrase} ${item.meaning} ${item.example} ${item.cue} ${item.category} ${item.level} ${contexts.join(" ")}`.toLowerCase();
+    return matchesCategory && matchesLevel && matchesContext && (!needle || searchable.includes(needle));
   });
+}
+
+function centerThinkingFilter(containerId) {
+  requestAnimationFrame(() => document.querySelector(`#${containerId} .filter-chip.active`)?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" }));
 }
 
 function renderThinkingToolkit() {
   const list = filteredThinking();
   const categories = ["All", ...new Set(smartPhrases.map(item => item.category))];
+  const levels = ["All", "Core", "Pro", "Advanced"];
   const activeCount = state.smartActive.filter(id => smartPhrases.some(item => item.id === id)).length;
-  document.getElementById("thinkingStats").innerHTML = `<article class="card mini-stat"><span>Atalhos</span><strong>${smartPhrases.length}</strong><small>estruturas curadas</small></article><article class="card mini-stat"><span>Funções mentais</span><strong>${categories.length - 1}</strong><small>do framing à síntese</small></article><article class="card mini-stat"><span>Guardados</span><strong>${activeCount}</strong><small>seu repertório rápido</small></article><article class="card mini-stat"><span>Visíveis</span><strong>${list.length}</strong><small>filtro atual</small></article>`;
+  const usedContexts = THINKING_CONTEXT_ORDER.filter(ctx => smartPhrases.some(item => thinkingContexts(item).includes(ctx)));
+
+  document.getElementById("thinkingStats").innerHTML = `<article class="card mini-stat"><span>Biblioteca</span><strong>${smartPhrases.length}</strong><small>atalhos curados</small></article><article class="card mini-stat"><span>Guardados</span><strong>${activeCount}</strong><small>repertório rápido</small></article><article class="card mini-stat"><span>Visíveis</span><strong>${list.length}</strong><small>filtro atual</small></article><article class="card mini-stat"><span>Contextos</span><strong>${usedContexts.length}</strong><small>situações de uso</small></article>`;
+
+  document.getElementById("thinkingLevelFilters").innerHTML = levels.map(level => `<button class="filter-chip ${thinkingLevel === level ? "active" : ""}" data-thinking-level="${level}">${level === "All" ? "Todos os níveis" : level}</button>`).join("");
+  document.getElementById("thinkingContextFilters").innerHTML = ["All", ...usedContexts].map(ctx => `<button class="filter-chip ${thinkingContext === ctx ? "active" : ""}" data-thinking-context="${escapeHtml(ctx)}">${escapeHtml(ctx === "All" ? "Todos os contextos" : ctx)}</button>`).join("");
   document.getElementById("thinkingFilters").innerHTML = categories.map(cat => `<button class="filter-chip ${thinkingFilter === cat ? "active" : ""}" data-thinking-filter="${escapeHtml(cat)}">${escapeHtml(cat === "All" ? "Todas as funções" : cat)}</button>`).join("");
-  document.querySelectorAll("[data-thinking-filter]").forEach(btn => btn.addEventListener("click", () => { thinkingFilter = btn.dataset.thinkingFilter; thinkingIndex = 0; renderThinkingToolkit(); requestAnimationFrame(() => document.querySelector("#thinkingFilters .filter-chip.active")?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" })); }));
+
+  document.querySelectorAll("[data-thinking-level]").forEach(btn => btn.addEventListener("click", () => { thinkingLevel = btn.dataset.thinkingLevel; thinkingIndex = 0; renderThinkingToolkit(); centerThinkingFilter("thinkingLevelFilters"); }));
+  document.querySelectorAll("[data-thinking-context]").forEach(btn => btn.addEventListener("click", () => { thinkingContext = btn.dataset.thinkingContext; thinkingIndex = 0; renderThinkingToolkit(); centerThinkingFilter("thinkingContextFilters"); }));
+  document.querySelectorAll("[data-thinking-filter]").forEach(btn => btn.addEventListener("click", () => { thinkingFilter = btn.dataset.thinkingFilter; thinkingIndex = 0; renderThinkingToolkit(); centerThinkingFilter("thinkingFilters"); }));
+
+  const empty = document.getElementById("thinkingEmpty");
   if (!list.length) {
+    empty?.classList.remove("hidden");
     document.getElementById("thinkingCard").classList.add("hidden");
-    document.getElementById("thinkingList").innerHTML = `<article class="card vocab-empty"><strong>Nenhum atalho encontrado.</strong><p>Tente outra busca ou função mental.</p></article>`;
+    document.getElementById("thinkingList").innerHTML = "";
+    renderVocabSpeed();
     return;
   }
+
+  empty?.classList.add("hidden");
   document.getElementById("thinkingCard").classList.remove("hidden");
   renderThinkingCard();
-  document.getElementById("thinkingList").innerHTML = list.map((item, i) => `<button class="thinking-row ${state.smartActive.includes(item.id) ? "active" : ""}" data-thinking-row="${i}"><span><strong>${escapeHtml(item.phrase)}</strong><small>${escapeHtml(item.category)} · ${escapeHtml(item.level)}</small></span><span>${state.smartActive.includes(item.id) ? "READY ✓" : "TRAIN"}</span></button>`).join("");
+  document.getElementById("thinkingList").innerHTML = list.map((item, i) => {
+    const context = thinkingPrimaryContext(item);
+    return `<button class="thinking-row ${state.smartActive.includes(item.id) ? "active" : ""}" data-thinking-row="${i}"><span><strong>${escapeHtml(item.phrase)}</strong><small>${escapeHtml(context)} · ${escapeHtml(item.category)} · ${escapeHtml(item.level)}</small></span><span>${state.smartActive.includes(item.id) ? "READY ✓" : "TRAIN"}</span></button>`;
+  }).join("");
   document.querySelectorAll("[data-thinking-row]").forEach(btn => btn.addEventListener("click", () => { thinkingIndex = Number(btn.dataset.thinkingRow); renderThinkingCard(); document.getElementById("thinkingCard").scrollIntoView({ behavior: "smooth", block: "center" }); }));
+  renderVocabSpeed();
 }
 
 function renderThinkingCard() {
@@ -4093,6 +4170,7 @@ function renderThinkingCard() {
   if (!list.length) return;
   thinkingIndex = (thinkingIndex + list.length) % list.length;
   const item = list[thinkingIndex];
+  document.getElementById("thinkingContext").textContent = thinkingPrimaryContext(item).toUpperCase();
   document.getElementById("thinkingCategory").textContent = item.category.toUpperCase();
   document.getElementById("thinkingLevel").textContent = item.level.toUpperCase();
   document.getElementById("thinkingIndex").textContent = `${thinkingIndex + 1}/${list.length}`;
@@ -4100,6 +4178,7 @@ function renderThinkingCard() {
   document.getElementById("thinkingMeaning").textContent = item.meaning;
   document.getElementById("thinkingCue").textContent = item.cue;
   document.getElementById("thinkingExample").textContent = item.example;
+  document.getElementById("thinkingPrompt").textContent = `Use “${item.phrase}” agora em uma frase sua. Situação: ${item.cue}`;
   const active = state.smartActive.includes(item.id);
   const mark = document.getElementById("markThinkingActive");
   mark.textContent = active ? "Atalho guardado ✓" : "Guardar como atalho";
@@ -4118,7 +4197,7 @@ document.getElementById("markThinkingActive")?.addEventListener("click", () => {
   else {
     state.smartActive.push(item.id);
     state.xp += 8;
-    logEvent("smart_phrase_active", { id: item.id, phrase: item.phrase, category: item.category });
+    logEvent("smart_phrase_active", { id: item.id, phrase: item.phrase, category: item.category, context: thinkingPrimaryContext(item) });
     showToast("Atalho mental guardado · +8 XP");
   }
   save();

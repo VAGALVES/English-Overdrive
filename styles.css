@@ -49,3 +49,21 @@ html[data-theme="light"]{color-scheme:light;--bg:#f3f6f8;--bg-elevated:#fff;--si
 .thinking-filter-row .filter-chip{flex:0 0 auto;scroll-snap-align:start;white-space:nowrap}
 @media(max-width:900px){.filter-scroll-hint{display:inline}.thinking-filter-row{margin-right:calc(clamp(18px,2.5vw,26px)*-1);padding-right:clamp(28px,8vw,56px)}}
 @media(max-width:680px){.thinking-controls{overflow:visible}.thinking-filter-block{overflow:visible}.thinking-filter-row{width:calc(100% + 18px);max-width:none;margin-right:-18px;padding-right:34px;scrollbar-width:none}.thinking-filter-row::-webkit-scrollbar{display:none}.thinking-filter-row .filter-chip{min-height:44px;padding:9px 13px;font-size:10px}.filter-scroll-hint{font-size:8px}}
+
+/* Toolkit learning-card coherence v0.2.4 */
+#thinkingToolkitPanel .thinking-filter-block{margin:10px 0 2px}
+#thinkingToolkitPanel .thinking-filter-label-row{padding:0 2px}
+#thinkingToolkitPanel .thinking-card{min-height:430px}
+#thinkingToolkitPanel .thinking-card .flashcard-top{margin-bottom:36px}
+#thinkingToolkitPanel .thinking-card .flash-tags{align-items:center}
+#thinkingToolkitPanel .thinking-card .flash-definition{margin-top:4px}
+#thinkingToolkitPanel .toolkit-cue{background:var(--accent-soft);border-color:var(--accent-ring)}
+#thinkingToolkitPanel .thinking-list{margin-top:14px}
+#thinkingToolkitPanel .thinking-row small{max-width:58ch}
+
+@media(max-width:680px){
+  #thinkingToolkitPanel .thinking-card{min-height:0}
+  #thinkingToolkitPanel .thinking-card .flashcard-top{margin-bottom:22px}
+  .vocab-navigation #markThinkingActive{grid-column:1/-1;grid-row:1}
+  #thinkingToolkitPanel .thinking-filter-block{margin-top:12px}
+}
