@@ -1,31 +1,20 @@
-# English Overdrive v0.2.2 — Thinking Toolkit
+# English Overdrive v0.2.3 — Toolkit Mobile Filter Fix
 
-PWA mobile-first para preparação intensiva de TOEIC e inglês profissional, com foco em prontidão real para trabalhar internacionalmente.
+PWA mobile-first para preparação intensiva de TOEIC e inglês profissional.
 
 ## Novidades desta versão
-- Novo **Thinking Toolkit** com 108 atalhos mentais curados.
-- 12 funções cognitivas: introduzir pensamento, estruturar raciocínio, nuance, discordância inteligente, hipótese, causa e consequência, evidência, recomendação, síntese, ganhar tempo, raciocínio analítico e linguagem executiva.
-- Cada atalho inclui significado, gatilho mental, exemplo natural, nível e áudio.
-- Atalhos podem ser guardados no repertório rápido do usuário.
-- **Mental Shortcut of the Day** no Dashboard.
-- **Thinking Coach** dentro de Shanghai Work, com Response Blueprint e sugestões contextuais para cada cenário.
-- Áudio dos atalhos e dicas reutiliza o controle persistente de velocidade do Active Vocabulary.
-- Active Vocabulary permanece com 276 entradas curadas.
+- Corrige o filtro de famílias do **Thinking Toolkit** em celulares.
+- As funções mentais agora formam uma faixa horizontal deslízavel por toque.
+- Chips mantêm sua largura natural e não são comprimidos.
+- Adiciona inércia de scroll em navegadores móveis e scroll-snap suave.
+- Oculta a barra de rolagem no mobile sem remover o gesto horizontal.
+- Adiciona a indicação **“Deslize para ver mais →”** em telas menores.
+- A família selecionada é centralizada automaticamente após o toque.
+- Mantém Active Vocabulary com 276 entradas e Thinking Toolkit com 108 atalhos.
 - Estrutura flat: todos os arquivos permanecem na raiz para facilitar upload pelo celular ao GitHub.
-
-## Arquitetura de aprendizado
-O objetivo do Thinking Toolkit não é decorar frases sofisticadas. É associar uma intenção mental a uma estrutura verbal pronta:
-
-`INTENÇÃO → ATALHO → IDEIA`
-
-Exemplo:
-
-`discordar sem confronto → “I would challenge one assumption there.” → argumento`
-
-Isso reduz o custo cognitivo de formular respostas em tempo real e ajuda a diminuir response latency.
 
 ## Deploy
 Pronto para GitHub + Netlify sem etapa de build.
 
 ## Commit sugerido
-`feat: add thinking toolkit and contextual response coaching`
+`fix: enable horizontal scrolling for toolkit family filters`
