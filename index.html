@@ -131,10 +131,12 @@
       </section>
 
       <section id="vocabulary" class="view">
-        <div class="section-head"><div><span class="muted">Repertório para pensar e produzir</span><h2>Vocabulary & Thinking</h2><p class="section-description">Duas camadas complementares: palavras/expressões de alto valor e atalhos mentais para estruturar raciocínio, ganhar tempo e responder com mais clareza e sofisticação.</p></div><span class="pill" id="vocabMastery">0% ACTIVE</span></div>
-        <div class="module-tabs" role="tablist" aria-label="Módulos de vocabulário">
+        <div class="section-head"><div><span class="muted">Repertório para pensar, conectar e operar</span><h2>Vocabulary Lab</h2><p class="section-description">Quatro camadas complementares: repertório ativo, atalhos mentais, frameworks que encadeiam ideias e um mapa semântico das relações de negócio.</p></div><span class="pill" id="vocabMastery">0% ACTIVE</span></div>
+        <div class="module-tabs module-tabs-four" role="tablist" aria-label="Módulos de vocabulário">
           <button class="module-tab active" id="vocabLibraryTab" data-vocab-mode="library" role="tab" aria-selected="true">A+ Active Vocabulary <span>366</span></button>
           <button class="module-tab" id="thinkingToolkitTab" data-vocab-mode="thinking" role="tab" aria-selected="false">✦ Thinking Toolkit <span>108</span></button>
+          <button class="module-tab" id="frameworksTab" data-vocab-mode="frameworks" role="tab" aria-selected="false">⛓ Idea Frameworks <span>40</span></button>
+          <button class="module-tab" id="rolesTab" data-vocab-mode="roles" role="tab" aria-selected="false">◎ Business Roles <span>30</span></button>
         </div>
 
         <div id="vocabLibraryPanel">
@@ -173,6 +175,49 @@
             <div class="button-row vocab-navigation"><button class="secondary" id="prevThinking">← Anterior</button><button class="primary" id="markThinkingActive">Guardar como atalho</button><button class="secondary" id="nextThinking">Próximo →</button></div>
           </article>
           <div class="thinking-list" id="thinkingList"></div>
+        </div>
+
+        <div id="frameworksPanel" class="hidden">
+          <article class="card thinking-hero framework-hero"><div><span class="pill">IDEA CHAINS</span><h2>Não responda em frases soltas. Construa fluxo.</h2><p>Frameworks são sequências recuperáveis que conectam uma ideia à próxima. Você memoriza a arquitetura — e então preenche o conteúdo em tempo real.</p></div><div class="thinking-formula"><span>IDEIA</span><strong>→</strong><span>CONEXÃO</span><strong>→</strong><span>DESENVOLVIMENTO</span><strong>→</strong><span>FECHO</span></div></article>
+          <div class="thinking-stats" id="frameworkStats"></div>
+          <article class="card vocab-control-panel thinking-controls">
+            <div class="vocab-search-wrap"><label for="frameworkSearch">Buscar framework</label><input id="frameworkSearch" class="vocab-search" type="search" inputmode="search" autocomplete="off" placeholder="Ex.: disagreement, analysis, executive, STAR…" /></div>
+            <div class="vocab-audio-control"><div class="audio-control-title"><span>Velocidade do áudio</span><strong id="frameworkSpeedLabel">0.7×</strong></div><div class="speed-buttons" aria-label="Velocidade do áudio dos frameworks"><button class="speed-chip" data-vocab-rate="0.5">0.5× <small>Muito lenta</small></button><button class="speed-chip" data-vocab-rate="0.7">0.7× <small>Lenta</small></button><button class="speed-chip" data-vocab-rate="0.85">0.85× <small>Treino</small></button><button class="speed-chip" data-vocab-rate="1">1× <small>Natural</small></button></div></div>
+          </article>
+          <div class="thinking-filter-block"><div class="thinking-filter-label-row"><span class="vocab-filter-label">Nível de prioridade</span><span class="filter-scroll-hint">Deslize para ver mais →</span></div><div class="filter-row thinking-filter-row" id="frameworkLevelFilters"></div></div>
+          <div class="thinking-filter-block"><div class="thinking-filter-label-row"><span class="vocab-filter-label">Contexto</span><span class="filter-scroll-hint">Deslize para ver mais →</span></div><div class="filter-row thinking-filter-row" id="frameworkContextFilters"></div></div>
+          <div class="thinking-filter-block"><div class="thinking-filter-label-row"><span class="vocab-filter-label">Tipo de raciocínio</span><span class="filter-scroll-hint">Deslize para ver mais →</span></div><div class="filter-row thinking-filter-row" id="frameworkCategoryFilters"></div></div>
+          <div id="frameworkEmpty" class="card vocab-empty hidden"><strong>Nenhum framework encontrado.</strong><p>Tente outra busca ou remova algum filtro.</p></div>
+          <article class="card flashcard framework-card" id="frameworkCard">
+            <div class="flashcard-top"><div class="flash-tags"><span class="pill" id="frameworkContext">MEETINGS</span><span class="pill" id="frameworkCategory">STRUCTURED ANSWER</span><span class="pill level-pill" id="frameworkLevel">CORE</span></div><span class="muted" id="frameworkIndex">1/40</span></div>
+            <span class="muted">Framework de fluidez</span><h2 id="frameworkName">PREP</h2><p class="flash-definition" id="frameworkPurpose"></p>
+            <div class="framework-flow" id="frameworkFlow"></div>
+            <div class="vocab-audio-actions"><button class="secondary audio-action" id="speakFramework">🔊 Ouvir framework</button><button class="secondary audio-action" id="speakFrameworkExample">🎧 Ouvir exemplo completo</button><span class="audio-hint">Toque em cada etapa para ouvir apenas o conector. Depois tente reproduzir o fluxo sem olhar.</span></div>
+            <div class="example-box"><span>Full example</span><strong id="frameworkExample"></strong></div>
+            <div class="production-prompt"><span>Produza o fluxo</span><p id="frameworkPrompt"></p></div>
+            <div class="button-row vocab-navigation"><button class="secondary" id="prevFramework">← Anterior</button><button class="primary" id="markFrameworkActive">Marcar como dominado</button><button class="secondary" id="nextFramework">Próximo →</button></div>
+          </article>
+          <div class="thinking-list" id="frameworkList"></div>
+        </div>
+
+        <div id="rolesPanel" class="hidden">
+          <article class="card thinking-hero role-hero"><div><span class="pill">BUSINESS RELATIONSHIPS</span><h2>Aprenda o papel — depois o universo de palavras ao redor dele.</h2><p>Cada papel de negócio tem um campo semântico próprio: tipos de relação, status, ações, métricas, riscos e collocations que aparecem naturalmente quando você trabalha com aquele grupo.</p></div><div class="thinking-formula"><span>ROLE</span><strong>→</strong><span>SEMANTIC FIELD</span><strong>→</strong><span>COLLOCATIONS</span></div></article>
+          <div class="thinking-stats" id="roleStats"></div>
+          <article class="card vocab-control-panel thinking-controls">
+            <div class="vocab-search-wrap"><label for="roleSearch">Buscar papel, termo ou collocation</label><input id="roleSearch" class="vocab-search" type="search" inputmode="search" autocomplete="off" placeholder="Ex.: customers, supplier base, stakeholder, regulator…" /></div>
+            <div class="vocab-audio-control"><div class="audio-control-title"><span>Velocidade do áudio</span><strong id="roleSpeedLabel">0.7×</strong></div><div class="speed-buttons" aria-label="Velocidade do áudio do glossário de relações"><button class="speed-chip" data-vocab-rate="0.5">0.5× <small>Muito lenta</small></button><button class="speed-chip" data-vocab-rate="0.7">0.7× <small>Lenta</small></button><button class="speed-chip" data-vocab-rate="0.85">0.85× <small>Treino</small></button><button class="speed-chip" data-vocab-rate="1">1× <small>Natural</small></button></div></div>
+          </article>
+          <div class="thinking-filter-block"><div class="thinking-filter-label-row"><span class="vocab-filter-label">Ecossistema de negócio</span><span class="filter-scroll-hint">Deslize para ver mais →</span></div><div class="filter-row thinking-filter-row" id="roleEcosystemFilters"></div></div>
+          <div class="thinking-filter-block"><div class="thinking-filter-label-row"><span class="vocab-filter-label">Nível de prioridade</span><span class="filter-scroll-hint">Deslize para ver mais →</span></div><div class="filter-row thinking-filter-row" id="roleLevelFilters"></div></div>
+          <div id="roleEmpty" class="card vocab-empty hidden"><strong>Nenhum papel encontrado.</strong><p>Tente outra busca ou remova algum filtro.</p></div>
+          <article class="card role-card" id="roleCard">
+            <div class="flashcard-top"><div class="flash-tags"><span class="pill" id="roleEcosystem">MARKET</span><span class="pill level-pill" id="roleLevel">CORE</span></div><span class="muted" id="roleIndex">1/30</span></div>
+            <span class="muted">Business role</span><div class="role-title-row"><h2 id="roleName">Customers</h2><button class="secondary compact-audio" id="speakRoleName">🔊</button></div><p class="flash-definition" id="roleDefinition"></p>
+            <div class="semantic-section"><div class="semantic-heading"><span>Semantic field</span><small>Toque em qualquer termo para ouvir</small></div><div class="semantic-cloud" id="roleSemantic"></div></div>
+            <div class="collocation-section"><div class="semantic-heading"><span>High-value collocations</span><small>Expressão + significado + uso real</small></div><div class="role-collocations" id="roleCollocations"></div></div>
+            <div class="button-row vocab-navigation"><button class="secondary" id="prevRole">← Anterior</button><button class="primary" id="markRoleSaved">Guardar este papel</button><button class="secondary" id="nextRole">Próximo →</button></div>
+          </article>
+          <div class="role-list" id="roleList"></div>
         </div>
       </section>
 

@@ -14,6 +14,8 @@ const defaultState = {
   latencies: [],
   vocabActive: [],
   smartActive: [],
+  frameworkActive: [],
+  roleSaved: [],
   vocabRate: 0.7,
   routineDone: {},
   events: [],
@@ -32,6 +34,8 @@ function loadState() {
   merged.latencies = Array.isArray(saved.latencies) ? saved.latencies : [];
   merged.vocabActive = Array.isArray(saved.vocabActive) ? saved.vocabActive : [];
   merged.smartActive = Array.isArray(saved.smartActive) ? saved.smartActive : [];
+  merged.frameworkActive = Array.isArray(saved.frameworkActive) ? saved.frameworkActive : [];
+  merged.roleSaved = Array.isArray(saved.roleSaved) ? saved.roleSaved : [];
   merged.routineDone = saved.routineDone || {};
   merged.events = Array.isArray(saved.events) ? saved.events : [];
   return merged;
@@ -4436,6 +4440,2579 @@ const smartPhrases = [
   }
 ];
 
+const ideaFrameworks = [
+  {
+    "id": "fw-001",
+    "name": "PREP",
+    "category": "Structured Answer",
+    "level": "Core",
+    "context": "Meetings",
+    "purpose": "Give a clear opinion without rambling.",
+    "steps": [
+      [
+        "Point",
+        "From my perspective,..."
+      ],
+      [
+        "Reason",
+        "The main reason is..."
+      ],
+      [
+        "Example",
+        "For example,..."
+      ],
+      [
+        "Point",
+        "So, overall,..."
+      ]
+    ],
+    "example": "From my perspective, we should delay the launch. The main reason is that the quality risk is still too high. For example, two critical defects are still open. So, overall, one extra week is the safer decision.",
+    "prompt": "Give an opinion about a project decision using all four steps."
+  },
+  {
+    "id": "fw-002",
+    "name": "Rule of Three",
+    "category": "Structured Answer",
+    "level": "Core",
+    "context": "Presentations",
+    "purpose": "Make an answer feel organized and easy to follow.",
+    "steps": [
+      [
+        "Frame",
+        "There are three things to consider."
+      ],
+      [
+        "First",
+        "First,..."
+      ],
+      [
+        "Second",
+        "Second,..."
+      ],
+      [
+        "Third",
+        "And finally,..."
+      ]
+    ],
+    "example": "There are three things to consider. First, customer impact. Second, implementation cost. And finally, the time required to scale.",
+    "prompt": "Explain a business problem in exactly three points."
+  },
+  {
+    "id": "fw-003",
+    "name": "Point → Reason → Example",
+    "category": "Structured Answer",
+    "level": "Core",
+    "context": "Interviews",
+    "purpose": "Turn a short answer into a convincing answer.",
+    "steps": [
+      [
+        "Point",
+        "I believe..."
+      ],
+      [
+        "Reason",
+        "Because..."
+      ],
+      [
+        "Example",
+        "A good example is..."
+      ],
+      [
+        "Close",
+        "That is why..."
+      ]
+    ],
+    "example": "I believe strong teams need clear ownership. Because ambiguity slows decisions. A good example is a project where we assigned one owner per deliverable. That is why I always clarify responsibility early.",
+    "prompt": "Answer an interview question using one claim, one reason and one example."
+  },
+  {
+    "id": "fw-004",
+    "name": "Headline First",
+    "category": "Executive Communication",
+    "level": "Core",
+    "context": "Executive",
+    "purpose": "Lead with the answer before giving detail.",
+    "steps": [
+      [
+        "Headline",
+        "The short answer is..."
+      ],
+      [
+        "Why",
+        "The reason is..."
+      ],
+      [
+        "Support",
+        "The key evidence is..."
+      ],
+      [
+        "Ask",
+        "What I need from you is..."
+      ]
+    ],
+    "example": "The short answer is yes, we can hit the date. The reason is that the critical path is now stable. The key evidence is that all external dependencies are confirmed. What I need from you is approval for the overtime budget.",
+    "prompt": "Give an executive update with the conclusion in the first sentence."
+  },
+  {
+    "id": "fw-005",
+    "name": "What → So What → Now What",
+    "category": "Analysis",
+    "level": "Core",
+    "context": "Analysis & Data",
+    "purpose": "Move from information to meaning and action.",
+    "steps": [
+      [
+        "What",
+        "What we are seeing is..."
+      ],
+      [
+        "So what",
+        "What this means is..."
+      ],
+      [
+        "Now what",
+        "So the next step should be..."
+      ]
+    ],
+    "example": "What we are seeing is a 12% drop in repeat purchases. What this means is that retention, not acquisition, is becoming the bigger risk. So the next step should be to investigate the post-purchase experience.",
+    "prompt": "Take one metric and explain what it means and what should happen next."
+  },
+  {
+    "id": "fw-006",
+    "name": "Context → Point → Action",
+    "category": "Structured Answer",
+    "level": "Core",
+    "context": "Meetings",
+    "purpose": "Give enough context without losing the main point.",
+    "steps": [
+      [
+        "Context",
+        "Just to give some context,..."
+      ],
+      [
+        "Point",
+        "The key point is..."
+      ],
+      [
+        "Action",
+        "What I suggest is..."
+      ]
+    ],
+    "example": "Just to give some context, the supplier changed the production schedule yesterday. The key point is that our original delivery date is no longer realistic. What I suggest is that we replan the launch now.",
+    "prompt": "Explain a change in a project and propose one action."
+  },
+  {
+    "id": "fw-007",
+    "name": "Before → Now → Next",
+    "category": "Progress Update",
+    "level": "Core",
+    "context": "Meetings",
+    "purpose": "Explain progress as a simple timeline.",
+    "steps": [
+      [
+        "Before",
+        "Previously,..."
+      ],
+      [
+        "Now",
+        "At this point,..."
+      ],
+      [
+        "Next",
+        "The next step is..."
+      ]
+    ],
+    "example": "Previously, we were waiting for legal approval. At this point, the contract is signed and onboarding has started. The next step is to complete the technical integration.",
+    "prompt": "Give a 30-second project update."
+  },
+  {
+    "id": "fw-008",
+    "name": "Problem → Cause → Solution",
+    "category": "Problem Solving",
+    "level": "Core",
+    "context": "Problem Solving",
+    "purpose": "Explain an issue logically and avoid jumping straight to solutions.",
+    "steps": [
+      [
+        "Problem",
+        "The problem is..."
+      ],
+      [
+        "Cause",
+        "The main driver appears to be..."
+      ],
+      [
+        "Solution",
+        "The most practical solution is..."
+      ],
+      [
+        "Result",
+        "That should allow us to..."
+      ]
+    ],
+    "example": "The problem is late order confirmation. The main driver appears to be manual approval. The most practical solution is to automate low-risk orders. That should allow us to cut response time significantly.",
+    "prompt": "Describe a recurring operational problem and one practical solution."
+  },
+  {
+    "id": "fw-009",
+    "name": "Issue → Impact → Action",
+    "category": "Problem Solving",
+    "level": "Core",
+    "context": "Operations",
+    "purpose": "Escalate a problem without sounding dramatic.",
+    "steps": [
+      [
+        "Issue",
+        "We have an issue with..."
+      ],
+      [
+        "Impact",
+        "The immediate impact is..."
+      ],
+      [
+        "Action",
+        "To contain it, we are..."
+      ],
+      [
+        "Need",
+        "What we need now is..."
+      ]
+    ],
+    "example": "We have an issue with a delayed shipment. The immediate impact is a two-day production risk. To contain it, we are moving part of the volume by air. What we need now is confirmation from the logistics provider.",
+    "prompt": "Escalate one operational issue in four sentences."
+  },
+  {
+    "id": "fw-010",
+    "name": "Fact → Meaning → Response",
+    "category": "Analysis",
+    "level": "Core",
+    "context": "Analysis & Data",
+    "purpose": "Separate evidence from interpretation.",
+    "steps": [
+      [
+        "Fact",
+        "The data shows..."
+      ],
+      [
+        "Meaning",
+        "The way I interpret that is..."
+      ],
+      [
+        "Response",
+        "Based on that, I would..."
+      ]
+    ],
+    "example": "The data shows that conversion is stable but traffic is down. The way I interpret that is that the problem is reach, not product performance. Based on that, I would focus on acquisition first.",
+    "prompt": "Use one fact, one interpretation and one response."
+  },
+  {
+    "id": "fw-011",
+    "name": "Compare → Contrast → Recommend",
+    "category": "Decision",
+    "level": "Core",
+    "context": "Strategy",
+    "purpose": "Compare two options and end with a recommendation.",
+    "steps": [
+      [
+        "Option A",
+        "Option A gives us..."
+      ],
+      [
+        "Option B",
+        "By contrast, option B gives us..."
+      ],
+      [
+        "Criterion",
+        "The deciding factor for me is..."
+      ],
+      [
+        "Recommend",
+        "So I would recommend..."
+      ]
+    ],
+    "example": "Option A gives us speed. By contrast, option B gives us more control. The deciding factor for me is reversibility. So I would recommend option A for the pilot.",
+    "prompt": "Compare two choices and make a clear recommendation."
+  },
+  {
+    "id": "fw-012",
+    "name": "Goal → Obstacle → Option",
+    "category": "Decision",
+    "level": "Core",
+    "context": "Strategy",
+    "purpose": "Keep a discussion anchored on the objective.",
+    "steps": [
+      [
+        "Goal",
+        "Our goal is..."
+      ],
+      [
+        "Obstacle",
+        "The main obstacle is..."
+      ],
+      [
+        "Option",
+        "One way around that is..."
+      ],
+      [
+        "Decision",
+        "If we agree, we can..."
+      ]
+    ],
+    "example": "Our goal is to shorten lead time. The main obstacle is supplier capacity. One way around that is to split volume across two approved suppliers. If we agree, we can test that next month.",
+    "prompt": "Frame a business challenge around goal, obstacle and option."
+  },
+  {
+    "id": "fw-013",
+    "name": "STAR",
+    "category": "Storytelling",
+    "level": "Core",
+    "context": "Interviews",
+    "purpose": "Tell a concise evidence-based story in interviews.",
+    "steps": [
+      [
+        "Situation",
+        "The situation was..."
+      ],
+      [
+        "Task",
+        "My responsibility was..."
+      ],
+      [
+        "Action",
+        "What I did was..."
+      ],
+      [
+        "Result",
+        "As a result,..."
+      ]
+    ],
+    "example": "The situation was a late product launch. My responsibility was to coordinate the recovery plan. What I did was redesign the approval flow and clarify owners. As a result, we recovered five days and launched on the revised date.",
+    "prompt": "Tell one professional achievement using STAR."
+  },
+  {
+    "id": "fw-014",
+    "name": "CAR",
+    "category": "Storytelling",
+    "level": "Core",
+    "context": "Interviews",
+    "purpose": "Tell a shorter achievement story.",
+    "steps": [
+      [
+        "Challenge",
+        "The challenge was..."
+      ],
+      [
+        "Action",
+        "I decided to..."
+      ],
+      [
+        "Result",
+        "The result was..."
+      ]
+    ],
+    "example": "The challenge was inconsistent reporting across teams. I decided to standardize the definitions and automate the dashboard. The result was a much faster weekly review.",
+    "prompt": "Describe one challenge, your action and the measurable result."
+  },
+  {
+    "id": "fw-015",
+    "name": "SBI Feedback",
+    "category": "Leadership",
+    "level": "Core",
+    "context": "Leadership",
+    "purpose": "Give specific feedback without attacking the person.",
+    "steps": [
+      [
+        "Situation",
+        "In yesterday's meeting,..."
+      ],
+      [
+        "Behavior",
+        "When you..."
+      ],
+      [
+        "Impact",
+        "The impact was..."
+      ],
+      [
+        "Forward",
+        "Next time, I would like us to..."
+      ]
+    ],
+    "example": "In yesterday's meeting, when you changed the scope without checking dependencies, the impact was confusion across the team. Next time, I would like us to align the change before committing externally.",
+    "prompt": "Give constructive feedback using situation, behavior, impact and next step."
+  },
+  {
+    "id": "fw-016",
+    "name": "Acknowledge → Bridge → Position",
+    "category": "Disagreement",
+    "level": "Core",
+    "context": "Negotiation",
+    "purpose": "Disagree without creating unnecessary friction.",
+    "steps": [
+      [
+        "Acknowledge",
+        "I see your point."
+      ],
+      [
+        "Bridge",
+        "At the same time,..."
+      ],
+      [
+        "Position",
+        "My concern is..."
+      ],
+      [
+        "Proposal",
+        "What I would suggest instead is..."
+      ]
+    ],
+    "example": "I see your point. At the same time, we need to protect service quality. My concern is that the proposed cut is too aggressive. What I would suggest instead is a phased reduction.",
+    "prompt": "Disagree with a proposal while preserving the relationship."
+  },
+  {
+    "id": "fw-017",
+    "name": "Clarify → Confirm → Respond",
+    "category": "Conversation Control",
+    "level": "Core",
+    "context": "Cross-cultural",
+    "purpose": "Reduce misunderstandings before answering.",
+    "steps": [
+      [
+        "Clarify",
+        "When you say X, do you mean...?"
+      ],
+      [
+        "Confirm",
+        "So, if I understand correctly,..."
+      ],
+      [
+        "Respond",
+        "In that case, I would..."
+      ]
+    ],
+    "example": "When you say faster, do you mean launch sooner or shorten production time? So, if I understand correctly, the priority is the launch date. In that case, I would reduce scope rather than compress testing.",
+    "prompt": "Clarify an ambiguous request before giving your answer."
+  },
+  {
+    "id": "fw-018",
+    "name": "Claim → Evidence → Implication",
+    "category": "Analysis",
+    "level": "Pro",
+    "context": "Analysis & Data",
+    "purpose": "Make analytical statements more rigorous.",
+    "steps": [
+      [
+        "Claim",
+        "My current view is..."
+      ],
+      [
+        "Evidence",
+        "The strongest evidence is..."
+      ],
+      [
+        "Implication",
+        "The implication is..."
+      ],
+      [
+        "Action",
+        "Therefore, I would..."
+      ]
+    ],
+    "example": "My current view is that churn is driven by onboarding friction. The strongest evidence is the drop-off in the first two weeks. The implication is that acquisition spend alone will not solve the problem. Therefore, I would prioritize onboarding changes.",
+    "prompt": "Defend one analytical conclusion with evidence and implication."
+  },
+  {
+    "id": "fw-019",
+    "name": "Observation → Interpretation → Implication",
+    "category": "Analysis",
+    "level": "Pro",
+    "context": "Analysis & Data",
+    "purpose": "Show the difference between what happened and what you infer.",
+    "steps": [
+      [
+        "Observation",
+        "What I observe is..."
+      ],
+      [
+        "Interpretation",
+        "One interpretation is..."
+      ],
+      [
+        "Caution",
+        "I would not conclude yet that..."
+      ],
+      [
+        "Implication",
+        "But it does suggest..."
+      ]
+    ],
+    "example": "What I observe is that demand fell after the price increase. One interpretation is increased price sensitivity. I would not conclude yet that price is the only cause. But it does suggest we should test elasticity by segment.",
+    "prompt": "Interpret a pattern while explicitly keeping uncertainty."
+  },
+  {
+    "id": "fw-020",
+    "name": "Data → Insight → Action",
+    "category": "Analysis",
+    "level": "Pro",
+    "context": "Analysis & Data",
+    "purpose": "Translate metrics into a business response.",
+    "steps": [
+      [
+        "Data",
+        "The number that stands out is..."
+      ],
+      [
+        "Insight",
+        "What it tells us is..."
+      ],
+      [
+        "Action",
+        "The action I would take is..."
+      ],
+      [
+        "Measure",
+        "We would know it worked if..."
+      ]
+    ],
+    "example": "The number that stands out is the 18% increase in returns. What it tells us is that product expectation and reality may be diverging. The action I would take is to review product content and sizing. We would know it worked if returns fall without hurting conversion.",
+    "prompt": "Turn one KPI into an insight, action and success measure."
+  },
+  {
+    "id": "fw-021",
+    "name": "Trend → Driver → Impact",
+    "category": "Analysis",
+    "level": "Pro",
+    "context": "Strategy",
+    "purpose": "Explain a trend and why it matters.",
+    "steps": [
+      [
+        "Trend",
+        "The broader trend is..."
+      ],
+      [
+        "Driver",
+        "The main driver behind it is..."
+      ],
+      [
+        "Impact",
+        "For us, that means..."
+      ],
+      [
+        "Response",
+        "So we should..."
+      ]
+    ],
+    "example": "The broader trend is shorter product cycles. The main driver behind it is faster digital feedback. For us, that means planning must become more flexible. So we should reduce the size of each commitment.",
+    "prompt": "Explain one market trend and its implication for the company."
+  },
+  {
+    "id": "fw-022",
+    "name": "Assumption → Evidence → Conclusion",
+    "category": "Critical Thinking",
+    "level": "Pro",
+    "context": "Strategy",
+    "purpose": "Expose the assumption behind a decision.",
+    "steps": [
+      [
+        "Assumption",
+        "The assumption behind this is..."
+      ],
+      [
+        "Evidence",
+        "What supports that assumption is..."
+      ],
+      [
+        "Challenge",
+        "What could invalidate it is..."
+      ],
+      [
+        "Conclusion",
+        "So my conclusion is..."
+      ]
+    ],
+    "example": "The assumption behind this is that customers will pay for faster delivery. What supports that assumption is our premium-shipping usage. What could invalidate it is different behavior in lower-value orders. So my conclusion is to test before scaling.",
+    "prompt": "Take one business assumption and test it verbally."
+  },
+  {
+    "id": "fw-023",
+    "name": "Hypothesis → Test → Update",
+    "category": "Critical Thinking",
+    "level": "Pro",
+    "context": "Problem Solving",
+    "purpose": "Reason without pretending to know the answer too early.",
+    "steps": [
+      [
+        "Hypothesis",
+        "My current hypothesis is..."
+      ],
+      [
+        "Test",
+        "The fastest way to test it is..."
+      ],
+      [
+        "Signal",
+        "If we see X, that would support it."
+      ],
+      [
+        "Update",
+        "If not, I would revise the hypothesis toward..."
+      ]
+    ],
+    "example": "My current hypothesis is that the delay comes from approval queues. The fastest way to test it is to measure waiting time by stage. If we see most time concentrated before approval, that would support it. If not, I would revise the hypothesis toward execution capacity.",
+    "prompt": "State a hypothesis and explain how you would falsify it."
+  },
+  {
+    "id": "fw-024",
+    "name": "Options → Criteria → Decision",
+    "category": "Decision",
+    "level": "Pro",
+    "context": "Strategy",
+    "purpose": "Make a recommendation traceable to explicit criteria.",
+    "steps": [
+      [
+        "Options",
+        "We have three realistic options..."
+      ],
+      [
+        "Criteria",
+        "I would evaluate them on..."
+      ],
+      [
+        "Trade-off",
+        "The key trade-off is..."
+      ],
+      [
+        "Decision",
+        "On balance, I would choose..."
+      ]
+    ],
+    "example": "We have three realistic options: build, buy or partner. I would evaluate them on speed, control and cost. The key trade-off is speed versus ownership. On balance, I would choose a partner for phase one.",
+    "prompt": "Compare options using explicit decision criteria."
+  },
+  {
+    "id": "fw-025",
+    "name": "Risk → Probability → Impact → Mitigation",
+    "category": "Risk",
+    "level": "Pro",
+    "context": "Executive",
+    "purpose": "Discuss risk precisely instead of vaguely.",
+    "steps": [
+      [
+        "Risk",
+        "The main risk is..."
+      ],
+      [
+        "Probability",
+        "I would rate the likelihood as..."
+      ],
+      [
+        "Impact",
+        "If it happens, the impact would be..."
+      ],
+      [
+        "Mitigation",
+        "To reduce exposure, we can..."
+      ]
+    ],
+    "example": "The main risk is supplier failure during peak season. I would rate the likelihood as medium. If it happens, the impact would be severe. To reduce exposure, we can qualify a backup supplier now.",
+    "prompt": "Describe one business risk with probability, impact and mitigation."
+  },
+  {
+    "id": "fw-026",
+    "name": "Trade-off → Choice → Consequence",
+    "category": "Decision",
+    "level": "Pro",
+    "context": "Executive",
+    "purpose": "Make the cost of a decision explicit.",
+    "steps": [
+      [
+        "Trade-off",
+        "The trade-off is..."
+      ],
+      [
+        "Choice",
+        "If we prioritize X, we are choosing..."
+      ],
+      [
+        "Consequence",
+        "That means accepting..."
+      ],
+      [
+        "Recommend",
+        "Given our objective, I would..."
+      ]
+    ],
+    "example": "The trade-off is speed versus customization. If we prioritize speed, we are choosing a standardized solution. That means accepting less flexibility. Given our objective, I would make that trade.",
+    "prompt": "Explain the sacrifice behind one recommendation."
+  },
+  {
+    "id": "fw-027",
+    "name": "SCQA",
+    "category": "Executive Communication",
+    "level": "Pro",
+    "context": "Executive",
+    "purpose": "Create tension and lead naturally to a recommendation.",
+    "steps": [
+      [
+        "Situation",
+        "We currently have..."
+      ],
+      [
+        "Complication",
+        "However,..."
+      ],
+      [
+        "Question",
+        "So the question is..."
+      ],
+      [
+        "Answer",
+        "My recommendation is..."
+      ]
+    ],
+    "example": "We currently have strong demand in the region. However, our fulfillment capacity is already near its limit. So the question is how to grow without damaging service. My recommendation is to add capacity before increasing acquisition spend.",
+    "prompt": "Frame an executive problem using situation, complication, question and answer."
+  },
+  {
+    "id": "fw-028",
+    "name": "Pyramid Answer",
+    "category": "Executive Communication",
+    "level": "Pro",
+    "context": "Executive",
+    "purpose": "Start with the conclusion and support it with grouped reasons.",
+    "steps": [
+      [
+        "Answer",
+        "My recommendation is..."
+      ],
+      [
+        "Reason 1",
+        "There are three reasons."
+      ],
+      [
+        "Support",
+        "First... Second... Third..."
+      ],
+      [
+        "Close",
+        "Taken together,..."
+      ]
+    ],
+    "example": "My recommendation is to enter with a pilot. There are three reasons. First, uncertainty is still high. Second, the investment is reversible. Third, we can learn quickly. Taken together, a pilot gives us the best risk-adjusted path.",
+    "prompt": "Give the answer first and support it with three reasons."
+  },
+  {
+    "id": "fw-029",
+    "name": "Executive Update",
+    "category": "Progress Update",
+    "level": "Pro",
+    "context": "Executive",
+    "purpose": "Report status, risk and decision need in under a minute.",
+    "steps": [
+      [
+        "Status",
+        "We are currently..."
+      ],
+      [
+        "Change",
+        "Since the last update,..."
+      ],
+      [
+        "Risk",
+        "The main risk is..."
+      ],
+      [
+        "Ask",
+        "The decision we need is..."
+      ]
+    ],
+    "example": "We are currently on track for the revised launch. Since the last update, testing is complete. The main risk is final supplier certification. The decision we need is approval to release the contingency budget if certification slips.",
+    "prompt": "Give a 45-second executive project update."
+  },
+  {
+    "id": "fw-030",
+    "name": "Escalation Ladder",
+    "category": "Executive Communication",
+    "level": "Pro",
+    "context": "Executive",
+    "purpose": "Escalate with facts, ownership and a precise ask.",
+    "steps": [
+      [
+        "Fact",
+        "Here is what happened..."
+      ],
+      [
+        "Impact",
+        "Here is the impact..."
+      ],
+      [
+        "Containment",
+        "Here is what we have already done..."
+      ],
+      [
+        "Ask",
+        "What I need from you is..."
+      ]
+    ],
+    "example": "Here is what happened: the primary supplier missed the confirmed ship date. Here is the impact: production stops in four days. Here is what we have already done: secured partial backup volume. What I need from you is approval for expedited freight.",
+    "prompt": "Escalate a serious issue without sounding helpless."
+  },
+  {
+    "id": "fw-031",
+    "name": "Concern → Evidence → Alternative",
+    "category": "Disagreement",
+    "level": "Pro",
+    "context": "Negotiation",
+    "purpose": "Push back with substance, not emotion.",
+    "steps": [
+      [
+        "Concern",
+        "My concern with that approach is..."
+      ],
+      [
+        "Evidence",
+        "The reason I say that is..."
+      ],
+      [
+        "Alternative",
+        "An alternative would be..."
+      ],
+      [
+        "Question",
+        "Would that address your main objective?"
+      ]
+    ],
+    "example": "My concern with that approach is execution risk. The reason I say that is that two dependencies are still untested. An alternative would be a phased rollout. Would that address your main objective?",
+    "prompt": "Challenge a proposal and offer an alternative."
+  },
+  {
+    "id": "fw-032",
+    "name": "Give → Get",
+    "category": "Negotiation",
+    "level": "Pro",
+    "context": "Negotiation",
+    "purpose": "Avoid making concessions without receiving value.",
+    "steps": [
+      [
+        "Conditional give",
+        "If we can..."
+      ],
+      [
+        "Expected get",
+        "Then we would need..."
+      ],
+      [
+        "Value",
+        "That would allow both sides to..."
+      ],
+      [
+        "Confirm",
+        "Would that work for you?"
+      ]
+    ],
+    "example": "If we can extend the payment term to 60 days, then we would need a firm annual volume commitment. That would allow both sides to plan capacity more confidently. Would that work for you?",
+    "prompt": "Make one conditional concession in a negotiation."
+  },
+  {
+    "id": "fw-033",
+    "name": "Interest → Constraint → Option",
+    "category": "Negotiation",
+    "level": "Pro",
+    "context": "Negotiation",
+    "purpose": "Move from positions to underlying needs.",
+    "steps": [
+      [
+        "Interest",
+        "What matters most to us is..."
+      ],
+      [
+        "Constraint",
+        "The constraint we have is..."
+      ],
+      [
+        "Option",
+        "One option that could satisfy both is..."
+      ],
+      [
+        "Check",
+        "How does that fit with your priorities?"
+      ]
+    ],
+    "example": "What matters most to us is delivery reliability. The constraint we have is limited safety stock. One option that could satisfy both is a fixed weekly allocation. How does that fit with your priorities?",
+    "prompt": "Negotiate around interests rather than fixed positions."
+  },
+  {
+    "id": "fw-034",
+    "name": "Context → Intent → Check → Adapt",
+    "category": "Cross-cultural",
+    "level": "Pro",
+    "context": "Cross-cultural",
+    "purpose": "Make communication safer across different cultural and language contexts.",
+    "steps": [
+      [
+        "Context",
+        "Just to give some context,..."
+      ],
+      [
+        "Intent",
+        "What I am trying to achieve is..."
+      ],
+      [
+        "Check",
+        "How does that sound from your side?"
+      ],
+      [
+        "Adapt",
+        "If needed, we can adjust..."
+      ]
+    ],
+    "example": "Just to give some context, headquarters needs one global reporting standard. What I am trying to achieve is comparability, not extra bureaucracy. How does that sound from your side? If needed, we can adjust the process to fit the local workflow.",
+    "prompt": "Explain a global request while inviting local perspective."
+  },
+  {
+    "id": "fw-035",
+    "name": "Global Principle → Local Reality → Adaptation",
+    "category": "Cross-cultural",
+    "level": "Pro",
+    "context": "Cross-cultural",
+    "purpose": "Balance global consistency with local relevance.",
+    "steps": [
+      [
+        "Principle",
+        "The global principle is..."
+      ],
+      [
+        "Reality",
+        "Locally, the reality is..."
+      ],
+      [
+        "Adaptation",
+        "So the adaptation I would make is..."
+      ],
+      [
+        "Guardrail",
+        "As long as we preserve..."
+      ]
+    ],
+    "example": "The global principle is consistent customer experience. Locally, the reality is that payment behavior is different. So the adaptation I would make is to support local payment methods, as long as we preserve the same service standard.",
+    "prompt": "Adapt one global standard to a local context."
+  },
+  {
+    "id": "fw-036",
+    "name": "Observation → Question → Alignment → Confirm",
+    "category": "Cross-cultural",
+    "level": "Pro",
+    "context": "Cross-cultural",
+    "purpose": "Address a difference without making assumptions.",
+    "steps": [
+      [
+        "Observation",
+        "I noticed that..."
+      ],
+      [
+        "Question",
+        "Is there a local reason for that?"
+      ],
+      [
+        "Alignment",
+        "What would be the best way to align on...?"
+      ],
+      [
+        "Confirm",
+        "So we are agreed that..."
+      ]
+    ],
+    "example": "I noticed that final approval usually happens after the meeting. Is there a local reason for that? What would be the best way to align on decisions before we communicate externally? So we are agreed that we will pre-align with the key approvers.",
+    "prompt": "Explore a process difference with curiosity instead of judgment."
+  },
+  {
+    "id": "fw-037",
+    "name": "Signal → Noise → Meaning",
+    "category": "Critical Thinking",
+    "level": "Advanced",
+    "context": "Analysis & Data",
+    "purpose": "Separate a real pattern from short-term variation.",
+    "steps": [
+      [
+        "Signal",
+        "The signal I would focus on is..."
+      ],
+      [
+        "Noise",
+        "I would treat X as noise for now because..."
+      ],
+      [
+        "Meaning",
+        "The deeper implication is..."
+      ],
+      [
+        "Test",
+        "The next test should be..."
+      ]
+    ],
+    "example": "The signal I would focus on is the three-month retention decline. I would treat one week of traffic volatility as noise for now because it is not persistent. The deeper implication is weakening product stickiness. The next test should be cohort-level retention.",
+    "prompt": "Separate signal from noise in a set of business results."
+  },
+  {
+    "id": "fw-038",
+    "name": "Premise → Mechanism → Outcome",
+    "category": "Critical Thinking",
+    "level": "Advanced",
+    "context": "Strategy",
+    "purpose": "Explain why a strategy should work, not merely what it is.",
+    "steps": [
+      [
+        "Premise",
+        "The strategy assumes that..."
+      ],
+      [
+        "Mechanism",
+        "The mechanism is..."
+      ],
+      [
+        "Outcome",
+        "If that mechanism holds,..."
+      ],
+      [
+        "Failure mode",
+        "The strategy fails if..."
+      ]
+    ],
+    "example": "The strategy assumes that faster delivery increases conversion. The mechanism is reduced purchase hesitation. If that mechanism holds, conversion should rise most in time-sensitive categories. The strategy fails if customers are actually more price-sensitive than time-sensitive.",
+    "prompt": "Explain the causal logic of one strategy."
+  },
+  {
+    "id": "fw-039",
+    "name": "Second-order Effects",
+    "category": "Critical Thinking",
+    "level": "Advanced",
+    "context": "Strategy",
+    "purpose": "Go beyond the immediate consequence of a decision.",
+    "steps": [
+      [
+        "First order",
+        "The immediate effect would be..."
+      ],
+      [
+        "Second order",
+        "The second-order effect could be..."
+      ],
+      [
+        "Risk",
+        "That creates a risk that..."
+      ],
+      [
+        "Design",
+        "So I would design the policy to..."
+      ]
+    ],
+    "example": "The immediate effect would be faster approvals. The second-order effect could be weaker control if teams bypass review too often. That creates a risk that speed improves while quality declines. So I would design the policy to keep review for high-risk cases.",
+    "prompt": "Describe a decision's immediate and second-order effects."
+  },
+  {
+    "id": "fw-040",
+    "name": "Decision Under Uncertainty",
+    "category": "Decision",
+    "level": "Advanced",
+    "context": "Executive",
+    "purpose": "Make a decision even when information is incomplete.",
+    "steps": [
+      [
+        "Known",
+        "What we know is..."
+      ],
+      [
+        "Unknown",
+        "What remains uncertain is..."
+      ],
+      [
+        "Reversibility",
+        "The decision is reversible / hard to reverse because..."
+      ],
+      [
+        "Move",
+        "Given that, the best next move is..."
+      ]
+    ],
+    "example": "What we know is that demand is strong in two cities. What remains uncertain is national repeat behavior. The decision is reversible because a pilot limits commitment. Given that, the best next move is to test before a full rollout.",
+    "prompt": "Recommend a move while explicitly naming what is unknown."
+  }
+];
+
+const businessRoles = [
+  {
+    "id": "role-customers",
+    "role": "Customers",
+    "ecosystem": "Market",
+    "level": "Core",
+    "definition": "People or organizations that buy a company's products or services.",
+    "semantic": [
+      "new customers",
+      "existing customers",
+      "repeat customers",
+      "loyal customers",
+      "high-value customers",
+      "at-risk customers",
+      "dissatisfied customers",
+      "churned customers"
+    ],
+    "collocations": [
+      [
+        "acquire customers",
+        "bring new customers into the business",
+        "We need a lower-cost way to acquire customers in this segment."
+      ],
+      [
+        "retain customers",
+        "keep customers over time",
+        "The onboarding redesign is intended to retain customers for longer."
+      ],
+      [
+        "customer base",
+        "the total group of current customers",
+        "Our customer base has become more international."
+      ],
+      [
+        "customer needs",
+        "problems, expectations or outcomes customers care about",
+        "We should validate customer needs before changing the product."
+      ],
+      [
+        "customer satisfaction",
+        "how satisfied customers are with the experience",
+        "Customer satisfaction improved after support response times fell."
+      ],
+      [
+        "customer churn",
+        "the rate at which customers stop buying or leave",
+        "Customer churn is highest during the first 60 days."
+      ]
+    ]
+  },
+  {
+    "id": "role-clients",
+    "role": "Clients",
+    "ecosystem": "Market",
+    "level": "Core",
+    "definition": "Customers in a service, advisory or ongoing professional relationship.",
+    "semantic": [
+      "new clients",
+      "existing clients",
+      "long-term clients",
+      "enterprise clients",
+      "priority clients",
+      "international clients",
+      "retained clients",
+      "former clients"
+    ],
+    "collocations": [
+      [
+        "serve a client",
+        "provide professional value to a client",
+        "We need to understand the business before we can serve the client well."
+      ],
+      [
+        "client relationship",
+        "the ongoing professional relationship with a client",
+        "The client relationship depends on trust and consistent delivery."
+      ],
+      [
+        "client expectations",
+        "what the client believes should be delivered",
+        "Let's align client expectations before we commit to the timeline."
+      ],
+      [
+        "client brief",
+        "the requirements and context provided by the client",
+        "The team translated the client brief into a clear project scope."
+      ],
+      [
+        "client-facing",
+        "involving direct interaction with clients",
+        "She moved into a more client-facing role last year."
+      ],
+      [
+        "client retention",
+        "keeping clients over repeated engagements",
+        "Client retention is one of our strongest growth drivers."
+      ]
+    ]
+  },
+  {
+    "id": "role-prospects",
+    "role": "Prospects",
+    "ecosystem": "Market",
+    "level": "Core",
+    "definition": "Potential customers who fit the target profile and may buy in the future.",
+    "semantic": [
+      "qualified prospects",
+      "high-intent prospects",
+      "strategic prospects",
+      "inbound prospects",
+      "outbound prospects",
+      "warm prospects",
+      "cold prospects",
+      "enterprise prospects"
+    ],
+    "collocations": [
+      [
+        "qualify a prospect",
+        "assess whether a prospect is worth pursuing",
+        "Sales should qualify a prospect before investing in a long demo."
+      ],
+      [
+        "prospect pipeline",
+        "the set of potential opportunities being pursued",
+        "The prospect pipeline is strong for the next quarter."
+      ],
+      [
+        "engage a prospect",
+        "start a meaningful interaction with a prospect",
+        "The webinar helped us engage prospects earlier in the buying journey."
+      ],
+      [
+        "prospect needs",
+        "the problems or goals of a potential customer",
+        "Discovery should focus on prospect needs, not our feature list."
+      ],
+      [
+        "convert a prospect",
+        "turn a prospect into a customer",
+        "A tailored business case can help convert a prospect."
+      ],
+      [
+        "prospecting activity",
+        "work done to identify and contact potential buyers",
+        "Prospecting activity increased, but response quality stayed flat."
+      ]
+    ]
+  },
+  {
+    "id": "role-leads",
+    "role": "Leads",
+    "ecosystem": "Market",
+    "level": "Core",
+    "definition": "People or organizations that have shown some interest but may not yet be qualified.",
+    "semantic": [
+      "inbound leads",
+      "outbound leads",
+      "marketing-qualified leads",
+      "sales-qualified leads",
+      "hot leads",
+      "warm leads",
+      "cold leads",
+      "unqualified leads"
+    ],
+    "collocations": [
+      [
+        "generate leads",
+        "create potential sales contacts",
+        "The campaign generated leads at a lower cost than expected."
+      ],
+      [
+        "nurture leads",
+        "build interest over time until leads are ready",
+        "We use educational content to nurture leads before a sales call."
+      ],
+      [
+        "lead quality",
+        "how likely a lead is to become a valuable customer",
+        "Lead quality matters more than raw lead volume."
+      ],
+      [
+        "lead scoring",
+        "ranking leads according to likelihood or value",
+        "Lead scoring helps sales prioritize outreach."
+      ],
+      [
+        "follow up on a lead",
+        "contact a lead after an initial signal of interest",
+        "Someone should follow up on the lead within one business day."
+      ],
+      [
+        "convert leads",
+        "turn leads into qualified opportunities or customers",
+        "The new landing page converts leads more effectively."
+      ]
+    ]
+  },
+  {
+    "id": "role-keyaccounts",
+    "role": "Key Accounts",
+    "ecosystem": "Market",
+    "level": "Pro",
+    "definition": "Strategically important customers that receive focused commercial attention.",
+    "semantic": [
+      "strategic accounts",
+      "global accounts",
+      "national accounts",
+      "priority accounts",
+      "high-revenue accounts",
+      "high-growth accounts",
+      "at-risk accounts",
+      "named accounts"
+    ],
+    "collocations": [
+      [
+        "manage a key account",
+        "own the commercial relationship with a strategic customer",
+        "She manages a key account worth more than ten percent of regional revenue."
+      ],
+      [
+        "account plan",
+        "a structured plan for growing and protecting an account",
+        "The account plan identifies expansion opportunities and relationship risks."
+      ],
+      [
+        "account growth",
+        "revenue or scope expansion within an existing account",
+        "Cross-selling is driving most of our account growth."
+      ],
+      [
+        "account penetration",
+        "the extent of adoption within an organization",
+        "We still have low account penetration outside the finance team."
+      ],
+      [
+        "executive sponsor",
+        "a senior leader who supports the relationship",
+        "Each key account should have an executive sponsor."
+      ],
+      [
+        "renewal risk",
+        "risk that the account will not renew",
+        "Usage decline is an early signal of renewal risk."
+      ]
+    ]
+  },
+  {
+    "id": "role-endusers",
+    "role": "End Users",
+    "ecosystem": "Market",
+    "level": "Core",
+    "definition": "The people who actually use a product or service, whether or not they purchase it.",
+    "semantic": [
+      "active users",
+      "new users",
+      "power users",
+      "casual users",
+      "frequent users",
+      "inactive users",
+      "internal users",
+      "external users"
+    ],
+    "collocations": [
+      [
+        "user needs",
+        "outcomes and problems experienced by users",
+        "The design should start from user needs rather than internal assumptions."
+      ],
+      [
+        "user behavior",
+        "how users interact with a product or service",
+        "We are analyzing user behavior after the onboarding change."
+      ],
+      [
+        "user adoption",
+        "the extent to which users begin and continue using something",
+        "Training is critical for user adoption."
+      ],
+      [
+        "user feedback",
+        "information users provide about their experience",
+        "User feedback revealed a problem we had not seen in the metrics."
+      ],
+      [
+        "user journey",
+        "the sequence of interactions a user has",
+        "We mapped the user journey from sign-up to first value."
+      ],
+      [
+        "user experience",
+        "the overall quality of using a product or service",
+        "The new flow improves user experience without adding complexity."
+      ]
+    ]
+  },
+  {
+    "id": "role-suppliers",
+    "role": "Suppliers",
+    "ecosystem": "Supply",
+    "level": "Core",
+    "definition": "Organizations that provide materials, components, goods or services required by a business.",
+    "semantic": [
+      "approved suppliers",
+      "preferred suppliers",
+      "strategic suppliers",
+      "local suppliers",
+      "overseas suppliers",
+      "sole-source suppliers",
+      "backup suppliers",
+      "tier-one suppliers"
+    ],
+    "collocations": [
+      [
+        "supplier base",
+        "the total network of suppliers used by a company",
+        "We are reducing the supplier base to improve leverage and consistency."
+      ],
+      [
+        "supplier performance",
+        "how well a supplier meets cost, quality and delivery expectations",
+        "Supplier performance is reviewed every quarter."
+      ],
+      [
+        "qualify a supplier",
+        "approve a supplier after capability and risk checks",
+        "We need to qualify a supplier before placing production volume."
+      ],
+      [
+        "source from a supplier",
+        "buy or obtain goods from a supplier",
+        "We currently source this component from two suppliers."
+      ],
+      [
+        "supplier lead time",
+        "time between ordering and receiving from a supplier",
+        "Supplier lead time increased by nine days."
+      ],
+      [
+        "supplier dependency",
+        "risk created by relying heavily on a supplier",
+        "Dual sourcing reduces supplier dependency."
+      ]
+    ]
+  },
+  {
+    "id": "role-vendors",
+    "role": "Vendors",
+    "ecosystem": "Supply",
+    "level": "Core",
+    "definition": "Companies or individuals that sell products or services to another business, often in a commercial or procurement context.",
+    "semantic": [
+      "approved vendors",
+      "preferred vendors",
+      "software vendors",
+      "service vendors",
+      "local vendors",
+      "global vendors",
+      "incumbent vendors",
+      "alternative vendors"
+    ],
+    "collocations": [
+      [
+        "vendor selection",
+        "the process of choosing a vendor",
+        "Vendor selection should consider total cost, not just price."
+      ],
+      [
+        "vendor contract",
+        "the commercial agreement with a vendor",
+        "Legal is reviewing the vendor contract."
+      ],
+      [
+        "vendor management",
+        "the ongoing governance of vendor relationships",
+        "Strong vendor management reduces delivery and compliance risk."
+      ],
+      [
+        "vendor lock-in",
+        "difficulty switching away from a vendor",
+        "We should avoid unnecessary vendor lock-in."
+      ],
+      [
+        "vendor assessment",
+        "evaluation of a vendor's capability and risk",
+        "The security team completed the vendor assessment."
+      ],
+      [
+        "vendor relationship",
+        "the commercial working relationship with a vendor",
+        "The vendor relationship improved after we clarified governance."
+      ]
+    ]
+  },
+  {
+    "id": "role-manufacturers",
+    "role": "Manufacturers",
+    "ecosystem": "Supply",
+    "level": "Pro",
+    "definition": "Organizations that physically produce goods or components.",
+    "semantic": [
+      "contract manufacturers",
+      "original equipment manufacturers",
+      "local manufacturers",
+      "offshore manufacturers",
+      "high-volume manufacturers",
+      "specialist manufacturers",
+      "approved manufacturers",
+      "backup manufacturers"
+    ],
+    "collocations": [
+      [
+        "manufacturing capacity",
+        "the amount a manufacturer can produce",
+        "We need to secure manufacturing capacity before peak season."
+      ],
+      [
+        "production line",
+        "the organized process or equipment used to manufacture goods",
+        "The new production line will start trials next month."
+      ],
+      [
+        "production run",
+        "a batch or period of manufacturing",
+        "The first production run revealed a packaging issue."
+      ],
+      [
+        "manufacturing defect",
+        "a defect created during production",
+        "The return was traced to a manufacturing defect."
+      ],
+      [
+        "capacity allocation",
+        "the share of capacity reserved for a customer or product",
+        "We negotiated additional capacity allocation for Q4."
+      ],
+      [
+        "factory audit",
+        "a formal assessment of a manufacturing site",
+        "The factory audit identified two compliance gaps."
+      ]
+    ]
+  },
+  {
+    "id": "role-distributors",
+    "role": "Distributors",
+    "ecosystem": "Supply",
+    "level": "Pro",
+    "definition": "Intermediaries that buy, hold and resell products into markets or channels.",
+    "semantic": [
+      "authorized distributors",
+      "regional distributors",
+      "exclusive distributors",
+      "national distributors",
+      "local distributors",
+      "master distributors",
+      "channel distributors",
+      "specialist distributors"
+    ],
+    "collocations": [
+      [
+        "distribution agreement",
+        "a contract defining how a distributor sells products",
+        "The distribution agreement includes minimum annual volume."
+      ],
+      [
+        "distribution network",
+        "the system of distributors and routes to market",
+        "The brand is expanding its distribution network in Asia."
+      ],
+      [
+        "channel coverage",
+        "the extent of market access through channels",
+        "The distributor gives us stronger channel coverage outside major cities."
+      ],
+      [
+        "sell-through",
+        "sales from a distributor or retailer to end customers",
+        "Sell-through improved after the promotional campaign."
+      ],
+      [
+        "inventory holding",
+        "stock kept by a distributor",
+        "The agreement defines minimum inventory holding."
+      ],
+      [
+        "territory rights",
+        "rights to distribute within a geographic area",
+        "Territory rights are exclusive for the first two years."
+      ]
+    ]
+  },
+  {
+    "id": "role-logistics",
+    "role": "Logistics Providers",
+    "ecosystem": "Supply",
+    "level": "Core",
+    "definition": "Companies that transport, store, clear or fulfill goods.",
+    "semantic": [
+      "freight forwarders",
+      "carriers",
+      "couriers",
+      "3PL providers",
+      "warehouse operators",
+      "customs brokers",
+      "last-mile providers",
+      "express carriers"
+    ],
+    "collocations": [
+      [
+        "freight capacity",
+        "available transport space",
+        "Freight capacity becomes tight before major holidays."
+      ],
+      [
+        "shipment tracking",
+        "monitoring a shipment's location and status",
+        "Shipment tracking shows the container is still at the port."
+      ],
+      [
+        "customs clearance",
+        "formal process of clearing goods through customs",
+        "Customs clearance took longer than expected."
+      ],
+      [
+        "delivery window",
+        "the planned period for delivery",
+        "The logistics provider confirmed a two-hour delivery window."
+      ],
+      [
+        "last-mile delivery",
+        "the final movement of goods to the customer",
+        "Last-mile delivery is the largest cost in this model."
+      ],
+      [
+        "expedited freight",
+        "faster transportation at higher cost",
+        "We approved expedited freight to protect the launch date."
+      ]
+    ]
+  },
+  {
+    "id": "role-partners",
+    "role": "Strategic Partners",
+    "ecosystem": "Ecosystem",
+    "level": "Pro",
+    "definition": "Organizations that collaborate to create mutual strategic value beyond a simple buyer-seller relationship.",
+    "semantic": [
+      "technology partners",
+      "channel partners",
+      "implementation partners",
+      "local partners",
+      "joint-venture partners",
+      "ecosystem partners",
+      "innovation partners",
+      "commercial partners"
+    ],
+    "collocations": [
+      [
+        "strategic partnership",
+        "a long-term collaboration built around shared strategic value",
+        "The strategic partnership gives both companies access to new capabilities."
+      ],
+      [
+        "partner ecosystem",
+        "the network of organizations that complement a business",
+        "Our partner ecosystem is especially important in new markets."
+      ],
+      [
+        "joint go-to-market",
+        "a coordinated commercial approach between partners",
+        "The teams are preparing a joint go-to-market plan."
+      ],
+      [
+        "shared incentives",
+        "rewards aligned across partners",
+        "The agreement works because the shared incentives are clear."
+      ],
+      [
+        "partner enablement",
+        "support that helps partners perform effectively",
+        "Partner enablement includes training, tools and sales materials."
+      ],
+      [
+        "co-create value",
+        "create value collaboratively",
+        "We want to co-create value rather than simply resell each other's services."
+      ]
+    ]
+  },
+  {
+    "id": "role-stakeholders",
+    "role": "Stakeholders",
+    "ecosystem": "Governance",
+    "level": "Core",
+    "definition": "People or groups affected by, interested in or able to influence a decision or initiative.",
+    "semantic": [
+      "internal stakeholders",
+      "external stakeholders",
+      "key stakeholders",
+      "senior stakeholders",
+      "local stakeholders",
+      "global stakeholders",
+      "supportive stakeholders",
+      "critical stakeholders"
+    ],
+    "collocations": [
+      [
+        "stakeholder alignment",
+        "shared understanding and support among stakeholders",
+        "Stakeholder alignment is essential before the rollout."
+      ],
+      [
+        "stakeholder mapping",
+        "identifying stakeholders and their influence or interest",
+        "We completed stakeholder mapping at the start of the program."
+      ],
+      [
+        "stakeholder expectations",
+        "what stakeholders expect from an initiative",
+        "The project is technically on track but stakeholder expectations have shifted."
+      ],
+      [
+        "engage stakeholders",
+        "involve stakeholders in communication or decisions",
+        "We should engage stakeholders before changing the operating model."
+      ],
+      [
+        "manage stakeholders",
+        "coordinate relationships, expectations and influence",
+        "She is strong at managing stakeholders across functions."
+      ],
+      [
+        "stakeholder buy-in",
+        "active support from stakeholders",
+        "We need stakeholder buy-in before moving to implementation."
+      ]
+    ]
+  },
+  {
+    "id": "role-sponsors",
+    "role": "Sponsors",
+    "ecosystem": "Governance",
+    "level": "Pro",
+    "definition": "Senior people who provide authority, resources and organizational backing to an initiative.",
+    "semantic": [
+      "executive sponsors",
+      "project sponsors",
+      "business sponsors",
+      "regional sponsors",
+      "program sponsors",
+      "active sponsors",
+      "senior sponsors",
+      "co-sponsors"
+    ],
+    "collocations": [
+      [
+        "secure sponsorship",
+        "obtain senior backing for an initiative",
+        "We need to secure sponsorship before asking teams to change priorities."
+      ],
+      [
+        "sponsor support",
+        "active backing from the sponsor",
+        "Sponsor support helped resolve the resource conflict."
+      ],
+      [
+        "sponsor alignment",
+        "agreement among sponsors on goals and decisions",
+        "Sponsor alignment is still missing on the target operating model."
+      ],
+      [
+        "escalate to the sponsor",
+        "raise an issue to the sponsor for resolution",
+        "We may need to escalate to the sponsor if the teams cannot agree."
+      ],
+      [
+        "sponsor mandate",
+        "authority or direction provided by the sponsor",
+        "The sponsor mandate is clear: simplify the process without increasing risk."
+      ],
+      [
+        "visible sponsorship",
+        "public and active senior support",
+        "Visible sponsorship matters during organizational change."
+      ]
+    ]
+  },
+  {
+    "id": "role-decisionmakers",
+    "role": "Decision-makers",
+    "ecosystem": "Governance",
+    "level": "Core",
+    "definition": "People who have the authority to make or approve a decision.",
+    "semantic": [
+      "final decision-makers",
+      "economic decision-makers",
+      "technical decision-makers",
+      "local decision-makers",
+      "senior decision-makers",
+      "joint decision-makers",
+      "informed decision-makers",
+      "authorized decision-makers"
+    ],
+    "collocations": [
+      [
+        "decision authority",
+        "formal authority to make a decision",
+        "We need to clarify who has decision authority for pricing."
+      ],
+      [
+        "decision criteria",
+        "standards used to choose among options",
+        "The decision criteria are cost, speed and implementation risk."
+      ],
+      [
+        "decision process",
+        "the sequence through which a decision is made",
+        "The local decision process includes an offline approval step."
+      ],
+      [
+        "influence a decision",
+        "affect the outcome without necessarily owning it",
+        "The data should inform the discussion, not manipulate the decision."
+      ],
+      [
+        "make the final call",
+        "make the final decision",
+        "The regional director will make the final call."
+      ],
+      [
+        "decision rights",
+        "defined authority over specific decisions",
+        "The new governance model clarifies decision rights."
+      ]
+    ]
+  },
+  {
+    "id": "role-gatekeepers",
+    "role": "Gatekeepers",
+    "ecosystem": "Governance",
+    "level": "Pro",
+    "definition": "People or functions that control access, approval or progression through a process.",
+    "semantic": [
+      "procurement gatekeepers",
+      "technical gatekeepers",
+      "legal gatekeepers",
+      "security gatekeepers",
+      "administrative gatekeepers",
+      "local gatekeepers",
+      "process gatekeepers",
+      "informal gatekeepers"
+    ],
+    "collocations": [
+      [
+        "approval gate",
+        "a required checkpoint before moving forward",
+        "Security review is the final approval gate before launch."
+      ],
+      [
+        "control access",
+        "decide who or what can proceed",
+        "Procurement controls access to the approved vendor list."
+      ],
+      [
+        "clear a gate",
+        "satisfy the requirements of a checkpoint",
+        "We need to clear the legal gate this week."
+      ],
+      [
+        "gatekeeping role",
+        "a role that filters or controls progression",
+        "Finance has a gatekeeping role for capital expenditure."
+      ],
+      [
+        "approval bottleneck",
+        "a slow approval point that limits flow",
+        "The committee has become an approval bottleneck."
+      ],
+      [
+        "navigate the process",
+        "move effectively through required steps",
+        "A local colleague helped us navigate the process."
+      ]
+    ]
+  },
+  {
+    "id": "role-regulators",
+    "role": "Regulators",
+    "ecosystem": "Governance",
+    "level": "Pro",
+    "definition": "Public authorities that create, interpret or enforce rules governing an industry or activity.",
+    "semantic": [
+      "national regulators",
+      "local regulators",
+      "industry regulators",
+      "financial regulators",
+      "data regulators",
+      "market regulators",
+      "licensing authorities",
+      "supervisory authorities"
+    ],
+    "collocations": [
+      [
+        "regulatory approval",
+        "formal authorization from a regulator",
+        "The launch is conditional on regulatory approval."
+      ],
+      [
+        "regulatory requirement",
+        "a rule that must be met",
+        "Data localization is a regulatory requirement in this case."
+      ],
+      [
+        "regulatory compliance",
+        "conformity with applicable regulations",
+        "The process was redesigned to strengthen regulatory compliance."
+      ],
+      [
+        "regulatory risk",
+        "risk arising from regulation or non-compliance",
+        "Regulatory risk is higher when entering a new market."
+      ],
+      [
+        "regulatory filing",
+        "a document formally submitted to an authority",
+        "The team completed the regulatory filing last week."
+      ],
+      [
+        "engage with regulators",
+        "communicate or coordinate with regulatory authorities",
+        "Legal will engage with regulators before the final submission."
+      ]
+    ]
+  },
+  {
+    "id": "role-managers",
+    "role": "Managers",
+    "ecosystem": "Internal",
+    "level": "Core",
+    "definition": "People responsible for directing work, allocating resources and supporting team performance.",
+    "semantic": [
+      "line managers",
+      "people managers",
+      "functional managers",
+      "project managers",
+      "regional managers",
+      "senior managers",
+      "hiring managers",
+      "matrix managers"
+    ],
+    "collocations": [
+      [
+        "manage performance",
+        "guide and evaluate employee performance",
+        "Managers need clear data to manage performance fairly."
+      ],
+      [
+        "set expectations",
+        "make desired outcomes and standards explicit",
+        "A good manager sets expectations early."
+      ],
+      [
+        "allocate resources",
+        "assign people, budget or capacity",
+        "Managers are reallocating resources toward the priority project."
+      ],
+      [
+        "remove blockers",
+        "eliminate obstacles that prevent progress",
+        "My role as a manager is to remove blockers, not create more approval steps."
+      ],
+      [
+        "coach the team",
+        "help team members improve through guidance",
+        "She spends time coaching the team instead of only reviewing output."
+      ],
+      [
+        "managerial support",
+        "support provided by a manager",
+        "The change will fail without visible managerial support."
+      ]
+    ]
+  },
+  {
+    "id": "role-directreports",
+    "role": "Direct Reports",
+    "ecosystem": "Internal",
+    "level": "Core",
+    "definition": "Employees who report directly to a specific manager.",
+    "semantic": [
+      "new direct reports",
+      "senior direct reports",
+      "junior direct reports",
+      "high performers",
+      "new hires",
+      "developing employees",
+      "team leads",
+      "individual contributors"
+    ],
+    "collocations": [
+      [
+        "delegate to a direct report",
+        "assign responsibility to someone who reports to you",
+        "I delegated the analysis to a direct report with the right expertise."
+      ],
+      [
+        "develop a direct report",
+        "help a team member build capability and readiness",
+        "Managers should develop direct reports for future roles."
+      ],
+      [
+        "one-on-one meeting",
+        "a recurring private meeting between manager and employee",
+        "We discuss priorities and development in our weekly one-on-one meeting."
+      ],
+      [
+        "performance expectations",
+        "clear standards for expected performance",
+        "Performance expectations should be specific and measurable."
+      ],
+      [
+        "career development",
+        "growth of skills, experience and career direction",
+        "Career development is a regular topic in our one-on-ones."
+      ],
+      [
+        "give ownership",
+        "entrust meaningful responsibility",
+        "I try to give ownership rather than prescribe every step."
+      ]
+    ]
+  },
+  {
+    "id": "role-peers",
+    "role": "Peers & Colleagues",
+    "ecosystem": "Internal",
+    "level": "Core",
+    "definition": "People at a similar organizational level or coworkers you collaborate with.",
+    "semantic": [
+      "close colleagues",
+      "cross-functional peers",
+      "regional peers",
+      "global peers",
+      "technical peers",
+      "business peers",
+      "trusted colleagues",
+      "counterparts"
+    ],
+    "collocations": [
+      [
+        "work cross-functionally",
+        "collaborate across organizational functions",
+        "We need to work cross-functionally to solve this issue."
+      ],
+      [
+        "peer alignment",
+        "agreement among colleagues at a similar level",
+        "Peer alignment will make the leadership review much easier."
+      ],
+      [
+        "ask a colleague for input",
+        "request perspective or expertise from a coworker",
+        "I asked a colleague for input before finalizing the recommendation."
+      ],
+      [
+        "coordinate with a counterpart",
+        "align with the person holding a parallel role",
+        "I coordinate with my Shanghai counterpart every morning."
+      ],
+      [
+        "build trust with colleagues",
+        "develop reliable professional relationships",
+        "Small commitments are one way to build trust with colleagues."
+      ],
+      [
+        "peer feedback",
+        "feedback exchanged among colleagues",
+        "Peer feedback helped us improve the process quickly."
+      ]
+    ]
+  },
+  {
+    "id": "role-executives",
+    "role": "Executives",
+    "ecosystem": "Internal",
+    "level": "Pro",
+    "definition": "Senior leaders responsible for enterprise or major business-unit direction and decisions.",
+    "semantic": [
+      "senior executives",
+      "C-suite executives",
+      "regional executives",
+      "business-unit leaders",
+      "functional executives",
+      "executive committee members",
+      "country leaders",
+      "general managers"
+    ],
+    "collocations": [
+      [
+        "executive alignment",
+        "agreement among senior leaders",
+        "Executive alignment is required before we announce the change."
+      ],
+      [
+        "executive summary",
+        "a concise high-level summary for senior leaders",
+        "Put the recommendation in the first paragraph of the executive summary."
+      ],
+      [
+        "executive decision",
+        "a decision made at senior leadership level",
+        "The investment requires an executive decision."
+      ],
+      [
+        "executive attention",
+        "focus from senior leadership",
+        "The issue now has executive attention."
+      ],
+      [
+        "brief an executive",
+        "give a concise update to a senior leader",
+        "I need to brief the executive before the steering committee."
+      ],
+      [
+        "executive-level communication",
+        "communication designed for senior leadership",
+        "Executive-level communication should be concise and decision-oriented."
+      ]
+    ]
+  },
+  {
+    "id": "role-investors",
+    "role": "Investors",
+    "ecosystem": "Capital",
+    "level": "Pro",
+    "definition": "People or institutions that provide capital with the expectation of financial return.",
+    "semantic": [
+      "institutional investors",
+      "retail investors",
+      "strategic investors",
+      "long-term investors",
+      "active investors",
+      "potential investors",
+      "foreign investors",
+      "anchor investors"
+    ],
+    "collocations": [
+      [
+        "investor confidence",
+        "the degree of trust investors have in a company or market",
+        "Clear guidance helped restore investor confidence."
+      ],
+      [
+        "investor expectations",
+        "what investors expect regarding performance and strategy",
+        "The results were strong but below investor expectations."
+      ],
+      [
+        "investor relations",
+        "the function managing communication with investors",
+        "Investor relations prepared the earnings materials."
+      ],
+      [
+        "attract investors",
+        "make an investment opportunity appealing",
+        "The new structure could attract long-term investors."
+      ],
+      [
+        "investor appetite",
+        "willingness of investors to invest",
+        "Investor appetite for the sector has weakened."
+      ],
+      [
+        "investment thesis",
+        "the reasoning that supports an investment",
+        "The investment thesis depends on sustained margin expansion."
+      ]
+    ]
+  },
+  {
+    "id": "role-shareholders",
+    "role": "Shareholders",
+    "ecosystem": "Capital",
+    "level": "Pro",
+    "definition": "Individuals or entities that legally own shares in a company.",
+    "semantic": [
+      "major shareholders",
+      "minority shareholders",
+      "controlling shareholders",
+      "institutional shareholders",
+      "founding shareholders",
+      "long-term shareholders",
+      "activist shareholders",
+      "public shareholders"
+    ],
+    "collocations": [
+      [
+        "shareholder value",
+        "value created for company owners",
+        "The strategy aims to create long-term shareholder value."
+      ],
+      [
+        "shareholder return",
+        "financial return received by shareholders",
+        "Revenue growth alone does not guarantee shareholder return."
+      ],
+      [
+        "shareholder approval",
+        "formal approval required from shareholders",
+        "The transaction is subject to shareholder approval."
+      ],
+      [
+        "shareholder interests",
+        "economic and governance interests of shareholders",
+        "The board must consider shareholder interests alongside other obligations."
+      ],
+      [
+        "shareholder meeting",
+        "formal meeting of company shareholders",
+        "The proposal will be discussed at the annual shareholder meeting."
+      ],
+      [
+        "controlling stake",
+        "an ownership position that provides control",
+        "The parent company retains a controlling stake."
+      ]
+    ]
+  },
+  {
+    "id": "role-consultants",
+    "role": "Consultants",
+    "ecosystem": "Advisory",
+    "level": "Core",
+    "definition": "External specialists who provide analysis, advice, expertise or implementation support.",
+    "semantic": [
+      "management consultants",
+      "strategy consultants",
+      "technical consultants",
+      "implementation consultants",
+      "independent consultants",
+      "external advisors",
+      "specialist advisors",
+      "consulting teams"
+    ],
+    "collocations": [
+      [
+        "engage a consultant",
+        "hire a consultant for a defined need",
+        "We engaged a consultant to benchmark the operating model."
+      ],
+      [
+        "consulting engagement",
+        "a defined piece of consulting work",
+        "The consulting engagement will last twelve weeks."
+      ],
+      [
+        "scope of work",
+        "the formally defined work to be delivered",
+        "The scope of work excludes implementation support."
+      ],
+      [
+        "external perspective",
+        "a viewpoint from outside the organization",
+        "A consultant can provide an external perspective on the problem."
+      ],
+      [
+        "subject-matter expertise",
+        "deep specialist knowledge in a domain",
+        "We need subject-matter expertise in customs regulation."
+      ],
+      [
+        "advisory support",
+        "professional guidance without direct ownership",
+        "The partner will provide advisory support during the transition."
+      ]
+    ]
+  },
+  {
+    "id": "role-competitors",
+    "role": "Competitors",
+    "ecosystem": "Market",
+    "level": "Pro",
+    "definition": "Organizations competing for the same customers, resources, attention or strategic position.",
+    "semantic": [
+      "direct competitors",
+      "indirect competitors",
+      "market leaders",
+      "new entrants",
+      "low-cost competitors",
+      "premium competitors",
+      "local competitors",
+      "global competitors"
+    ],
+    "collocations": [
+      [
+        "competitive landscape",
+        "the structure and intensity of competition in a market",
+        "The competitive landscape has changed quickly over the last two years."
+      ],
+      [
+        "competitive advantage",
+        "a capability or position that allows stronger performance than rivals",
+        "Speed is only a competitive advantage if customers value it."
+      ],
+      [
+        "competitor analysis",
+        "structured assessment of competitors",
+        "The strategy team completed a competitor analysis before market entry."
+      ],
+      [
+        "benchmark against competitors",
+        "compare performance or capabilities with rivals",
+        "We benchmarked delivery speed against competitors."
+      ],
+      [
+        "competitive response",
+        "an action taken in reaction to a rival",
+        "We should anticipate the likely competitive response before changing price."
+      ],
+      [
+        "differentiate from competitors",
+        "create meaningful distinction from rivals",
+        "The product needs to differentiate from competitors on more than design."
+      ]
+    ]
+  },
+  {
+    "id": "role-resellers",
+    "role": "Resellers",
+    "ecosystem": "Ecosystem",
+    "level": "Core",
+    "definition": "Organizations that buy products or services and resell them to other customers without substantially transforming them.",
+    "semantic": [
+      "authorized resellers",
+      "value-added resellers",
+      "regional resellers",
+      "online resellers",
+      "specialist resellers",
+      "exclusive resellers",
+      "local resellers",
+      "channel resellers"
+    ],
+    "collocations": [
+      [
+        "reseller network",
+        "the group of resellers representing a company",
+        "We are expanding the reseller network in second-tier cities."
+      ],
+      [
+        "reseller margin",
+        "the margin available to a reseller",
+        "The new price structure protects reseller margin."
+      ],
+      [
+        "reseller agreement",
+        "the commercial agreement governing resale",
+        "The reseller agreement defines territory and support obligations."
+      ],
+      [
+        "enable resellers",
+        "provide tools, training and support to resellers",
+        "We need to enable resellers before the product launch."
+      ],
+      [
+        "reseller performance",
+        "commercial performance of a reseller",
+        "Reseller performance varies significantly by region."
+      ],
+      [
+        "channel conflict",
+        "competition or tension between sales channels",
+        "Direct sales created channel conflict with some resellers."
+      ]
+    ]
+  },
+  {
+    "id": "role-contractors",
+    "role": "Contractors",
+    "ecosystem": "Advisory",
+    "level": "Core",
+    "definition": "External individuals or firms engaged to deliver defined work without being permanent employees.",
+    "semantic": [
+      "independent contractors",
+      "specialist contractors",
+      "temporary contractors",
+      "external contractors",
+      "project contractors",
+      "local contractors",
+      "approved contractors",
+      "subcontractors"
+    ],
+    "collocations": [
+      [
+        "engage a contractor",
+        "hire a contractor for defined work",
+        "We engaged a contractor to support the migration."
+      ],
+      [
+        "contractor agreement",
+        "the formal agreement governing contractor work",
+        "The contractor agreement includes confidentiality obligations."
+      ],
+      [
+        "contractor capacity",
+        "available contractor time or resources",
+        "Contractor capacity is limited during the holiday period."
+      ],
+      [
+        "manage contractors",
+        "coordinate and supervise contractor delivery",
+        "The project manager is responsible for managing contractors."
+      ],
+      [
+        "contractor onboarding",
+        "process of preparing a contractor to work effectively",
+        "Security checks are part of contractor onboarding."
+      ],
+      [
+        "subcontract work",
+        "assign part of contracted work to another provider",
+        "The vendor may subcontract work with prior approval."
+      ]
+    ]
+  },
+  {
+    "id": "role-board",
+    "role": "Board Members",
+    "ecosystem": "Governance",
+    "level": "Advanced",
+    "definition": "Directors responsible for oversight, governance and major strategic decisions on behalf of the company.",
+    "semantic": [
+      "executive directors",
+      "non-executive directors",
+      "independent directors",
+      "board chair",
+      "committee chairs",
+      "audit committee members",
+      "nominee directors",
+      "outside directors"
+    ],
+    "collocations": [
+      [
+        "board oversight",
+        "formal oversight exercised by the board",
+        "Board oversight is especially important for major risk decisions."
+      ],
+      [
+        "board approval",
+        "formal authorization from the board",
+        "The acquisition requires board approval."
+      ],
+      [
+        "board meeting",
+        "a formal meeting of directors",
+        "The proposal will go to the next board meeting."
+      ],
+      [
+        "board mandate",
+        "authority or direction established by the board",
+        "Management is operating under a clear board mandate."
+      ],
+      [
+        "board governance",
+        "the systems and practices governing board responsibility",
+        "The review identified several board governance improvements."
+      ],
+      [
+        "brief the board",
+        "present concise information to directors",
+        "The CFO will brief the board on the financing options."
+      ]
+    ]
+  },
+  {
+    "id": "role-employees",
+    "role": "Employees",
+    "ecosystem": "Internal",
+    "level": "Core",
+    "definition": "People employed by an organization and contributing to its operations, capabilities and culture.",
+    "semantic": [
+      "full-time employees",
+      "part-time employees",
+      "new employees",
+      "long-tenured employees",
+      "frontline employees",
+      "knowledge workers",
+      "high performers",
+      "remote employees"
+    ],
+    "collocations": [
+      [
+        "employee engagement",
+        "the degree of commitment and involvement employees feel",
+        "Employee engagement improved after managers increased communication."
+      ],
+      [
+        "employee experience",
+        "the overall experience of working in an organization",
+        "The redesign focuses on employee experience from onboarding to development."
+      ],
+      [
+        "employee retention",
+        "the ability to keep employees over time",
+        "Career mobility is important for employee retention."
+      ],
+      [
+        "employee turnover",
+        "the rate at which employees leave",
+        "Employee turnover is highest in the first year."
+      ],
+      [
+        "employee development",
+        "activities that build employee capability",
+        "The company increased investment in employee development."
+      ],
+      [
+        "employee feedback",
+        "input employees provide about work and the organization",
+        "Employee feedback highlighted a lack of role clarity."
+      ]
+    ]
+  },
+  {
+    "id": "role-recruiters",
+    "role": "Recruiters",
+    "ecosystem": "Advisory",
+    "level": "Core",
+    "definition": "Professionals who identify, assess and connect candidates with employment opportunities.",
+    "semantic": [
+      "internal recruiters",
+      "agency recruiters",
+      "executive recruiters",
+      "technical recruiters",
+      "campus recruiters",
+      "regional recruiters",
+      "talent partners",
+      "headhunter firms"
+    ],
+    "collocations": [
+      [
+        "recruiting process",
+        "the end-to-end process of attracting and hiring candidates",
+        "The recruiting process includes three interview stages."
+      ],
+      [
+        "candidate pipeline",
+        "the pool of candidates under consideration",
+        "The recruiter is building a stronger candidate pipeline."
+      ],
+      [
+        "screen candidates",
+        "conduct an initial assessment of applicants",
+        "Recruiters screen candidates before hiring-manager interviews."
+      ],
+      [
+        "source talent",
+        "actively identify potential candidates",
+        "The team is sourcing talent in several markets."
+      ],
+      [
+        "recruitment agency",
+        "an external company that supports hiring",
+        "We use a recruitment agency for specialized roles."
+      ],
+      [
+        "candidate experience",
+        "the experience candidates have during hiring",
+        "Fast communication improves candidate experience."
+      ]
+    ]
+  }
+];
+
+
 const THINKING_CONTEXT_ORDER = [
   "Reuniões",
   "Apresentações",
@@ -4619,7 +7196,7 @@ function renderVocabPreview() {
   document.getElementById("vocabPreview").innerHTML = vocabulary.slice(0, 4).map(v => `<span class="vocab-chip ${state.vocabActive.includes(v.id) ? "active" : ""}">${escapeHtml(v.term)}</span>`).join("");
 }
 
-const viewLabels = { dashboard: "Dashboard", diagnostic: "Diagnóstico", toeic: "TOEIC Engine", vocabulary: "Active Vocabulary", errors: "Error Engine", work: "Shanghai Work" };
+const viewLabels = { dashboard: "Dashboard", diagnostic: "Diagnóstico", toeic: "TOEIC Engine", vocabulary: "Vocabulary Lab", errors: "Error Engine", work: "Shanghai Work" };
 function showView(viewId) {
   document.querySelectorAll(".view").forEach(v => v.classList.remove("active-view"));
   document.getElementById(viewId)?.classList.add("active-view");
@@ -4819,7 +7396,7 @@ function renderVocabSpeed() {
   document.querySelectorAll("[data-vocab-rate]").forEach(btn => {
     btn.classList.toggle("active", Math.abs(Number(btn.dataset.vocabRate) - rate) < 0.001);
   });
-  ["vocabSpeedLabel", "thinkingSpeedLabel"].forEach(id => {
+  ["vocabSpeedLabel", "thinkingSpeedLabel", "frameworkSpeedLabel", "roleSpeedLabel"].forEach(id => {
     const label = document.getElementById(id);
     if (label) label.textContent = `${rate.toFixed(2).replace(/0$/, "")}×`;
   });
@@ -4910,15 +7487,20 @@ let thinkingContext = "All";
 let thinkingSearch = "";
 
 function setVocabMode(mode) {
-  vocabMode = mode === "thinking" ? "thinking" : "library";
+  const allowed = ["library", "thinking", "frameworks", "roles"];
+  vocabMode = allowed.includes(mode) ? mode : "library";
   document.getElementById("vocabLibraryPanel")?.classList.toggle("hidden", vocabMode !== "library");
   document.getElementById("thinkingToolkitPanel")?.classList.toggle("hidden", vocabMode !== "thinking");
+  document.getElementById("frameworksPanel")?.classList.toggle("hidden", vocabMode !== "frameworks");
+  document.getElementById("rolesPanel")?.classList.toggle("hidden", vocabMode !== "roles");
   document.querySelectorAll("[data-vocab-mode]").forEach(btn => {
     const active = btn.dataset.vocabMode === vocabMode;
     btn.classList.toggle("active", active);
     btn.setAttribute("aria-selected", String(active));
   });
   if (vocabMode === "thinking") renderThinkingToolkit();
+  if (vocabMode === "frameworks") renderFrameworks();
+  if (vocabMode === "roles") renderBusinessRoles();
 }
 
 document.querySelectorAll("[data-vocab-mode]").forEach(btn => btn.addEventListener("click", () => setVocabMode(btn.dataset.vocabMode)));
@@ -5038,6 +7620,126 @@ function renderDailyThinkingTip() {
 
 document.getElementById("dailyThinkingAudio")?.addEventListener("click", () => speakEnglish(dailySmartPhrase().example, state.vocabRate || 0.7));
 document.getElementById("openThinkingFromDashboard")?.addEventListener("click", () => { showView("vocabulary"); setVocabMode("thinking"); document.getElementById("thinkingToolkitPanel")?.scrollIntoView({ behavior: "smooth", block: "start" }); });
+
+
+// Idea Frameworks — connected structures for fluent speaking
+let frameworkIndex = 0;
+let frameworkLevel = "All";
+let frameworkContext = "All";
+let frameworkCategory = "All";
+let frameworkSearch = "";
+
+function filteredFrameworks() {
+  const needle = frameworkSearch.trim().toLowerCase();
+  return ideaFrameworks.filter(item => {
+    const matchesLevel = frameworkLevel === "All" || item.level === frameworkLevel;
+    const matchesContext = frameworkContext === "All" || item.context === frameworkContext;
+    const matchesCategory = frameworkCategory === "All" || item.category === frameworkCategory;
+    const searchable = `${item.name} ${item.category} ${item.context} ${item.level} ${item.purpose} ${item.example} ${item.prompt} ${item.steps.flat().join(" ")}`.toLowerCase();
+    return matchesLevel && matchesContext && matchesCategory && (!needle || searchable.includes(needle));
+  });
+}
+function renderFrameworks() {
+  const list = filteredFrameworks();
+  const levels = ["All", "Core", "Pro", "Advanced"];
+  const contexts = ["All", ...new Set(ideaFrameworks.map(x => x.context))];
+  const categories = ["All", ...new Set(ideaFrameworks.map(x => x.category))];
+  const activeCount = state.frameworkActive.filter(id => ideaFrameworks.some(x => x.id === id)).length;
+  const connectorCount = ideaFrameworks.reduce((sum, x) => sum + x.steps.length, 0);
+  document.getElementById("frameworkStats").innerHTML = `<article class="card mini-stat"><span>Frameworks</span><strong>${ideaFrameworks.length}</strong><small>arquiteturas curadas</small></article><article class="card mini-stat"><span>Conectores</span><strong>${connectorCount}</strong><small>passos encadeados</small></article><article class="card mini-stat"><span>Dominados</span><strong>${activeCount}</strong><small>fluxos recuperáveis</small></article><article class="card mini-stat"><span>Visíveis</span><strong>${list.length}</strong><small>filtro atual</small></article>`;
+  document.getElementById("frameworkLevelFilters").innerHTML = levels.map(v => `<button class="filter-chip ${frameworkLevel === v ? "active" : ""}" data-framework-level="${v}">${v === "All" ? "Todos os níveis" : v}</button>`).join("");
+  document.getElementById("frameworkContextFilters").innerHTML = contexts.map(v => `<button class="filter-chip ${frameworkContext === v ? "active" : ""}" data-framework-context="${escapeHtml(v)}">${escapeHtml(v === "All" ? "Todos os contextos" : v)}</button>`).join("");
+  document.getElementById("frameworkCategoryFilters").innerHTML = categories.map(v => `<button class="filter-chip ${frameworkCategory === v ? "active" : ""}" data-framework-category="${escapeHtml(v)}">${escapeHtml(v === "All" ? "Todos os tipos" : v)}</button>`).join("");
+  document.querySelectorAll("[data-framework-level]").forEach(btn => btn.addEventListener("click", () => { frameworkLevel = btn.dataset.frameworkLevel; frameworkIndex = 0; renderFrameworks(); centerThinkingFilter("frameworkLevelFilters"); }));
+  document.querySelectorAll("[data-framework-context]").forEach(btn => btn.addEventListener("click", () => { frameworkContext = btn.dataset.frameworkContext; frameworkIndex = 0; renderFrameworks(); centerThinkingFilter("frameworkContextFilters"); }));
+  document.querySelectorAll("[data-framework-category]").forEach(btn => btn.addEventListener("click", () => { frameworkCategory = btn.dataset.frameworkCategory; frameworkIndex = 0; renderFrameworks(); centerThinkingFilter("frameworkCategoryFilters"); }));
+  const empty = document.getElementById("frameworkEmpty");
+  if (!list.length) { empty.classList.remove("hidden"); document.getElementById("frameworkCard").classList.add("hidden"); document.getElementById("frameworkList").innerHTML = ""; renderVocabSpeed(); return; }
+  empty.classList.add("hidden"); document.getElementById("frameworkCard").classList.remove("hidden"); renderFrameworkCard();
+  document.getElementById("frameworkList").innerHTML = list.map((item, i) => `<button class="thinking-row ${state.frameworkActive.includes(item.id) ? "active" : ""}" data-framework-row="${i}"><span><strong>${escapeHtml(item.name)}</strong><small>${escapeHtml(item.context)} · ${escapeHtml(item.category)} · ${escapeHtml(item.level)}</small></span><span>${state.frameworkActive.includes(item.id) ? "READY ✓" : "TRAIN"}</span></button>`).join("");
+  document.querySelectorAll("[data-framework-row]").forEach(btn => btn.addEventListener("click", () => { frameworkIndex = Number(btn.dataset.frameworkRow); renderFrameworkCard(); document.getElementById("frameworkCard").scrollIntoView({ behavior: "smooth", block: "center" }); }));
+  renderVocabSpeed();
+}
+function frameworkSpokenText(item) { return item.steps.map(([label, phrase]) => `${label}. ${phrase.replace(/X|Y/g, "the option")}`).join(" "); }
+function renderFrameworkCard() {
+  const list = filteredFrameworks(); if (!list.length) return;
+  frameworkIndex = (frameworkIndex + list.length) % list.length; const item = list[frameworkIndex];
+  document.getElementById("frameworkContext").textContent = item.context.toUpperCase();
+  document.getElementById("frameworkCategory").textContent = item.category.toUpperCase();
+  document.getElementById("frameworkLevel").textContent = item.level.toUpperCase();
+  document.getElementById("frameworkIndex").textContent = `${frameworkIndex + 1}/${list.length}`;
+  document.getElementById("frameworkName").textContent = item.name;
+  document.getElementById("frameworkPurpose").textContent = item.purpose;
+  document.getElementById("frameworkExample").textContent = item.example;
+  document.getElementById("frameworkPrompt").textContent = item.prompt;
+  document.getElementById("frameworkFlow").innerHTML = item.steps.map(([label, phrase], i) => `<button class="framework-step" data-framework-step="${i}"><span>${i + 1}</span><small>${escapeHtml(label)}</small><strong>${escapeHtml(phrase)}</strong></button>${i < item.steps.length - 1 ? '<b class="flow-arrow">→</b>' : ''}`).join("");
+  document.querySelectorAll("[data-framework-step]").forEach(btn => btn.addEventListener("click", () => { const step = item.steps[Number(btn.dataset.frameworkStep)]; if (step) speakEnglish(step[1].replace(/X|Y/g, "the option"), state.vocabRate || 0.7); }));
+  const active = state.frameworkActive.includes(item.id); const mark = document.getElementById("markFrameworkActive");
+  mark.textContent = active ? "Framework dominado ✓" : "Marcar como dominado"; mark.classList.toggle("success-button", active);
+}
+document.getElementById("frameworkSearch")?.addEventListener("input", e => { frameworkSearch = e.target.value; frameworkIndex = 0; renderFrameworks(); });
+document.getElementById("prevFramework")?.addEventListener("click", () => { frameworkIndex--; renderFrameworkCard(); });
+document.getElementById("nextFramework")?.addEventListener("click", () => { frameworkIndex++; renderFrameworkCard(); });
+document.getElementById("speakFramework")?.addEventListener("click", () => { const item = filteredFrameworks()[frameworkIndex]; if (item) speakEnglish(frameworkSpokenText(item), state.vocabRate || 0.7); });
+document.getElementById("speakFrameworkExample")?.addEventListener("click", () => { const item = filteredFrameworks()[frameworkIndex]; if (item) speakEnglish(item.example, state.vocabRate || 0.7); });
+document.getElementById("markFrameworkActive")?.addEventListener("click", () => {
+  const item = filteredFrameworks()[frameworkIndex]; if (!item) return;
+  if (state.frameworkActive.includes(item.id)) state.frameworkActive = state.frameworkActive.filter(id => id !== item.id);
+  else { state.frameworkActive.push(item.id); state.xp += 12; logEvent("framework_active", { id: item.id, name: item.name }); showToast("Framework dominado · +12 XP"); }
+  save(); renderFrameworks(); renderDashboard();
+});
+
+// Business Roles Glossary — semantic fields and collocations by relationship role
+let roleIndex = 0;
+let roleEcosystem = "All";
+let roleLevel = "All";
+let roleSearch = "";
+function roleSearchText(item) { return `${item.role} ${item.ecosystem} ${item.level} ${item.definition} ${item.semantic.join(" ")} ${item.collocations.flat().join(" ")}`.toLowerCase(); }
+function filteredRoles() {
+  const needle = roleSearch.trim().toLowerCase();
+  return businessRoles.filter(item => (roleEcosystem === "All" || item.ecosystem === roleEcosystem) && (roleLevel === "All" || item.level === roleLevel) && (!needle || roleSearchText(item).includes(needle)));
+}
+function renderBusinessRoles() {
+  const list = filteredRoles(); const ecosystems = ["All", ...new Set(businessRoles.map(x => x.ecosystem))]; const levels = ["All", "Core", "Pro", "Advanced"];
+  const collocationCount = businessRoles.reduce((sum, x) => sum + x.collocations.length, 0); const semanticCount = businessRoles.reduce((sum, x) => sum + x.semantic.length, 0);
+  const savedCount = state.roleSaved.filter(id => businessRoles.some(x => x.id === id)).length;
+  document.getElementById("roleStats").innerHTML = `<article class="card mini-stat"><span>Business roles</span><strong>${businessRoles.length}</strong><small>relações mapeadas</small></article><article class="card mini-stat"><span>Semantic terms</span><strong>${semanticCount}</strong><small>vocabulário por papel</small></article><article class="card mini-stat"><span>Collocations</span><strong>${collocationCount}</strong><small>combinações de alto valor</small></article><article class="card mini-stat"><span>Guardados</span><strong>${savedCount}</strong><small>papéis em foco</small></article>`;
+  document.getElementById("roleEcosystemFilters").innerHTML = ecosystems.map(v => `<button class="filter-chip ${roleEcosystem === v ? "active" : ""}" data-role-ecosystem="${escapeHtml(v)}">${escapeHtml(v === "All" ? "Todos os ecossistemas" : v)}</button>`).join("");
+  document.getElementById("roleLevelFilters").innerHTML = levels.map(v => `<button class="filter-chip ${roleLevel === v ? "active" : ""}" data-role-level="${v}">${v === "All" ? "Todos os níveis" : v}</button>`).join("");
+  document.querySelectorAll("[data-role-ecosystem]").forEach(btn => btn.addEventListener("click", () => { roleEcosystem = btn.dataset.roleEcosystem; roleIndex = 0; renderBusinessRoles(); centerThinkingFilter("roleEcosystemFilters"); }));
+  document.querySelectorAll("[data-role-level]").forEach(btn => btn.addEventListener("click", () => { roleLevel = btn.dataset.roleLevel; roleIndex = 0; renderBusinessRoles(); centerThinkingFilter("roleLevelFilters"); }));
+  const empty = document.getElementById("roleEmpty");
+  if (!list.length) { empty.classList.remove("hidden"); document.getElementById("roleCard").classList.add("hidden"); document.getElementById("roleList").innerHTML = ""; renderVocabSpeed(); return; }
+  empty.classList.add("hidden"); document.getElementById("roleCard").classList.remove("hidden"); renderRoleCard();
+  document.getElementById("roleList").innerHTML = list.map((item, i) => `<button class="role-list-item ${state.roleSaved.includes(item.id) ? "active" : ""}" data-role-row="${i}"><span><strong>${escapeHtml(item.role)}</strong><small>${escapeHtml(item.ecosystem)} · ${item.semantic.length} terms · ${item.collocations.length} collocations</small></span><span>${state.roleSaved.includes(item.id) ? "SAVED ✓" : item.level.toUpperCase()}</span></button>`).join("");
+  document.querySelectorAll("[data-role-row]").forEach(btn => btn.addEventListener("click", () => { roleIndex = Number(btn.dataset.roleRow); renderRoleCard(); document.getElementById("roleCard").scrollIntoView({ behavior: "smooth", block: "center" }); }));
+  renderVocabSpeed();
+}
+function renderRoleCard() {
+  const list = filteredRoles(); if (!list.length) return;
+  roleIndex = (roleIndex + list.length) % list.length; const item = list[roleIndex];
+  document.getElementById("roleEcosystem").textContent = item.ecosystem.toUpperCase();
+  document.getElementById("roleLevel").textContent = item.level.toUpperCase();
+  document.getElementById("roleIndex").textContent = `${roleIndex + 1}/${list.length}`;
+  document.getElementById("roleName").textContent = item.role; document.getElementById("roleDefinition").textContent = item.definition;
+  document.getElementById("roleSemantic").innerHTML = item.semantic.map((term, i) => `<button class="semantic-chip" data-role-semantic="${i}">🔊 ${escapeHtml(term)}</button>`).join("");
+  document.getElementById("roleCollocations").innerHTML = item.collocations.map(([term, meaning, example], i) => `<article class="collocation-row"><button class="collocation-audio" data-role-collocation="${i}" aria-label="Ouvir ${escapeHtml(term)}">🔊</button><div><strong>${escapeHtml(term)}</strong><p>${escapeHtml(meaning)}</p><small>${escapeHtml(example)}</small></div><button class="collocation-example-audio" data-role-example="${i}" aria-label="Ouvir exemplo">🎧</button></article>`).join("");
+  document.querySelectorAll("[data-role-semantic]").forEach(btn => btn.addEventListener("click", () => speakEnglish(item.semantic[Number(btn.dataset.roleSemantic)], state.vocabRate || 0.7)));
+  document.querySelectorAll("[data-role-collocation]").forEach(btn => btn.addEventListener("click", () => speakEnglish(item.collocations[Number(btn.dataset.roleCollocation)][0], state.vocabRate || 0.7)));
+  document.querySelectorAll("[data-role-example]").forEach(btn => btn.addEventListener("click", () => speakEnglish(item.collocations[Number(btn.dataset.roleExample)][2], state.vocabRate || 0.7)));
+  const saved = state.roleSaved.includes(item.id); const mark = document.getElementById("markRoleSaved");
+  mark.textContent = saved ? "Papel guardado ✓" : "Guardar este papel"; mark.classList.toggle("success-button", saved);
+}
+document.getElementById("roleSearch")?.addEventListener("input", e => { roleSearch = e.target.value; roleIndex = 0; renderBusinessRoles(); });
+document.getElementById("prevRole")?.addEventListener("click", () => { roleIndex--; renderRoleCard(); });
+document.getElementById("nextRole")?.addEventListener("click", () => { roleIndex++; renderRoleCard(); });
+document.getElementById("speakRoleName")?.addEventListener("click", () => { const item = filteredRoles()[roleIndex]; if (item) speakEnglish(`${item.role}. ${item.definition}`, state.vocabRate || 0.7); });
+document.getElementById("markRoleSaved")?.addEventListener("click", () => {
+  const item = filteredRoles()[roleIndex]; if (!item) return;
+  if (state.roleSaved.includes(item.id)) state.roleSaved = state.roleSaved.filter(id => id !== item.id);
+  else { state.roleSaved.push(item.id); state.xp += 10; logEvent("business_role_saved", { id: item.id, role: item.role }); showToast("Business role guardado · +10 XP"); }
+  save(); renderBusinessRoles(); renderDashboard();
+});
 
 // Error Engine
 function getDominantError() {
@@ -5196,5 +7898,7 @@ renderToeic();
 setListeningPhrase(false);
 renderVocabulary();
 renderThinkingToolkit();
+renderFrameworks();
+renderBusinessRoles();
 renderErrors();
 renderWork();

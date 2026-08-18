@@ -42,3 +42,7 @@ Visible `:focus-visible`; `prefers-reduced-motion`; `aria-current` navigation; l
 - `scenario-tip`: atalho contextual clicável com áudio.
 
 Princípio visual: dicas devem reduzir carga cognitiva, não competir com o prompt principal. O coaching usa `accent-soft` e bordas semânticas para funcionar como camada auxiliar.
+
+
+## Vocabulary Lab — four-layer pattern
+As quatro camadas usam a mesma gramática visual: filtros horizontais, conteúdo focal, áudio, produção/uso e navegação. Tabs com quatro ou mais módulos viram faixa horizontal rolável em mobile.

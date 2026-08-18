@@ -20,14 +20,19 @@ Pronto para GitHub + Netlify sem etapa de build.
 `fix: enable horizontal scrolling for toolkit family filters`
 
 
-## v0.2.6 — China & Global Work Expansion
+## v0.3.0 — China & Global Work Expansion
 - Expande China & Global Work de 12 para 102 entradas curadas.
 - Biblioteca total passa de 276 para 366 entradas.
 - Inclui comunicação intercultural, alinhamento global-local, operação na China, logística, etiqueta, contexto regulatório, confiança e linguagem de relacionamento.
 - Mantém classificação Core / Pro / Advanced e os controles de áudio existentes.
 
 
-## v0.2.6
+## v0.3.0
 - Fix Toolkit regression introduced in v0.2.5.
 - Restore priority/context/function filters and unified learning-card layout.
 - Harden Toolkit rendering against missing DOM filter elements.
+
+
+## v0.3.0 — Four-layer Vocabulary Lab
+
+Vocabulary Lab agora possui quatro camadas: Active Vocabulary (366), Thinking Toolkit (108), Idea Frameworks (40) e Business Roles Glossary (30 papéis, 240 termos semânticos e 180 collocations). Todos os novos conteúdos usam o mesmo controle persistente de velocidade de áudio.
