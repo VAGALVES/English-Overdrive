@@ -50,7 +50,7 @@ html[data-theme="light"]{color-scheme:light;--bg:#f3f6f8;--bg-elevated:#fff;--si
 @media(max-width:900px){.filter-scroll-hint{display:inline}.thinking-filter-row{margin-right:calc(clamp(18px,2.5vw,26px)*-1);padding-right:clamp(28px,8vw,56px)}}
 @media(max-width:680px){.thinking-controls{overflow:visible}.thinking-filter-block{overflow:visible}.thinking-filter-row{width:calc(100% + 18px);max-width:none;margin-right:-18px;padding-right:34px;scrollbar-width:none}.thinking-filter-row::-webkit-scrollbar{display:none}.thinking-filter-row .filter-chip{min-height:44px;padding:9px 13px;font-size:10px}.filter-scroll-hint{font-size:8px}}
 
-/* Toolkit learning-card coherence v0.2.5 */
+/* Toolkit learning-card coherence v0.2.6 */
 #thinkingToolkitPanel .thinking-filter-block{margin:10px 0 2px}
 #thinkingToolkitPanel .thinking-filter-label-row{padding:0 2px}
 #thinkingToolkitPanel .thinking-card{min-height:430px}

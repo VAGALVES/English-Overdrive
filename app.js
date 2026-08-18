@@ -4948,9 +4948,12 @@ function renderThinkingToolkit() {
 
   document.getElementById("thinkingStats").innerHTML = `<article class="card mini-stat"><span>Biblioteca</span><strong>${smartPhrases.length}</strong><small>atalhos curados</small></article><article class="card mini-stat"><span>Guardados</span><strong>${activeCount}</strong><small>repertório rápido</small></article><article class="card mini-stat"><span>Visíveis</span><strong>${list.length}</strong><small>filtro atual</small></article><article class="card mini-stat"><span>Contextos</span><strong>${usedContexts.length}</strong><small>situações de uso</small></article>`;
 
-  document.getElementById("thinkingLevelFilters").innerHTML = levels.map(level => `<button class="filter-chip ${thinkingLevel === level ? "active" : ""}" data-thinking-level="${level}">${level === "All" ? "Todos os níveis" : level}</button>`).join("");
-  document.getElementById("thinkingContextFilters").innerHTML = ["All", ...usedContexts].map(ctx => `<button class="filter-chip ${thinkingContext === ctx ? "active" : ""}" data-thinking-context="${escapeHtml(ctx)}">${escapeHtml(ctx === "All" ? "Todos os contextos" : ctx)}</button>`).join("");
-  document.getElementById("thinkingFilters").innerHTML = categories.map(cat => `<button class="filter-chip ${thinkingFilter === cat ? "active" : ""}" data-thinking-filter="${escapeHtml(cat)}">${escapeHtml(cat === "All" ? "Todas as funções" : cat)}</button>`).join("");
+  const thinkingLevelFiltersEl = document.getElementById("thinkingLevelFilters");
+  if (thinkingLevelFiltersEl) thinkingLevelFiltersEl.innerHTML = levels.map(level => `<button class="filter-chip ${thinkingLevel === level ? "active" : ""}" data-thinking-level="${level}">${level === "All" ? "Todos os níveis" : level}</button>`).join("");
+  const thinkingContextFiltersEl = document.getElementById("thinkingContextFilters");
+  if (thinkingContextFiltersEl) thinkingContextFiltersEl.innerHTML = ["All", ...usedContexts].map(ctx => `<button class="filter-chip ${thinkingContext === ctx ? "active" : ""}" data-thinking-context="${escapeHtml(ctx)}">${escapeHtml(ctx === "All" ? "Todos os contextos" : ctx)}</button>`).join("");
+  const thinkingFiltersEl = document.getElementById("thinkingFilters");
+  if (thinkingFiltersEl) thinkingFiltersEl.innerHTML = categories.map(cat => `<button class="filter-chip ${thinkingFilter === cat ? "active" : ""}" data-thinking-filter="${escapeHtml(cat)}">${escapeHtml(cat === "All" ? "Todas as funções" : cat)}</button>`).join("");
 
   document.querySelectorAll("[data-thinking-level]").forEach(btn => btn.addEventListener("click", () => { thinkingLevel = btn.dataset.thinkingLevel; thinkingIndex = 0; renderThinkingToolkit(); centerThinkingFilter("thinkingLevelFilters"); }));
   document.querySelectorAll("[data-thinking-context]").forEach(btn => btn.addEventListener("click", () => { thinkingContext = btn.dataset.thinkingContext; thinkingIndex = 0; renderThinkingToolkit(); centerThinkingFilter("thinkingContextFilters"); }));
@@ -4981,15 +4984,15 @@ function renderThinkingCard() {
   if (!list.length) return;
   thinkingIndex = (thinkingIndex + list.length) % list.length;
   const item = list[thinkingIndex];
-  document.getElementById("thinkingContext").textContent = thinkingPrimaryContext(item).toUpperCase();
-  document.getElementById("thinkingCategory").textContent = item.category.toUpperCase();
-  document.getElementById("thinkingLevel").textContent = item.level.toUpperCase();
-  document.getElementById("thinkingIndex").textContent = `${thinkingIndex + 1}/${list.length}`;
-  document.getElementById("thinkingPhrase").textContent = item.phrase;
-  document.getElementById("thinkingMeaning").textContent = item.meaning;
-  document.getElementById("thinkingCue").textContent = item.cue;
-  document.getElementById("thinkingExample").textContent = item.example;
-  document.getElementById("thinkingPrompt").textContent = `Use “${item.phrase}” agora em uma frase sua. Situação: ${item.cue}`;
+  document.getElementById("thinkingContext")?.replaceChildren(document.createTextNode(thinkingPrimaryContext(item).toUpperCase()));
+  document.getElementById("thinkingCategory")?.replaceChildren(document.createTextNode(item.category.toUpperCase()));
+  document.getElementById("thinkingLevel")?.replaceChildren(document.createTextNode(item.level.toUpperCase()));
+  document.getElementById("thinkingIndex")?.replaceChildren(document.createTextNode(`${thinkingIndex + 1}/${list.length}`));
+  document.getElementById("thinkingPhrase")?.replaceChildren(document.createTextNode(item.phrase));
+  document.getElementById("thinkingMeaning")?.replaceChildren(document.createTextNode(item.meaning));
+  document.getElementById("thinkingCue")?.replaceChildren(document.createTextNode(item.cue));
+  document.getElementById("thinkingExample")?.replaceChildren(document.createTextNode(item.example));
+  document.getElementById("thinkingPrompt")?.replaceChildren(document.createTextNode(`Use “${item.phrase}” agora em uma frase sua. Situação: ${item.cue}`));
   const active = state.smartActive.includes(item.id);
   const mark = document.getElementById("markThinkingActive");
   mark.textContent = active ? "Atalho guardado ✓" : "Guardar como atalho";

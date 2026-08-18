@@ -1,4 +1,4 @@
-const CACHE_VERSION = "english-overdrive-v0.2.5";
+const CACHE_VERSION = "english-overdrive-v0.2.6";
 const APP_SHELL = [
   "/",
   "/index.html",
