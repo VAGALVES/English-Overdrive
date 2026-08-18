@@ -129,7 +129,7 @@ Fluxo:
 O Shanghai Work usa o mesmo banco para gerar coaching contextual por cenário, combinando um Response Blueprint com atalhos relevantes. No futuro, o Adaptive Engine deverá priorizar atalhos que o usuário ainda não consegue recuperar espontaneamente sob pressão.
 
 
-## Vocabulary Lab v0.3.0
+## Vocabulary Lab v0.3.1
 - Active Vocabulary: lexical items and collocations.
 - Thinking Toolkit: mental shortcuts.
 - Idea Frameworks: reusable chains of discourse and reasoning.
