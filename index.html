@@ -126,16 +126,39 @@
       </section>
 
       <section id="vocabulary" class="view">
-        <div class="section-head"><div><span class="muted">Produção, não reconhecimento</span><h2>Active Vocabulary</h2></div><span class="pill" id="vocabMastery">0% ACTIVE</span></div>
+        <div class="section-head"><div><span class="muted">Produção, não reconhecimento</span><h2>Active Vocabulary</h2><p class="section-description">Biblioteca curada para TOEIC, reuniões, carreira internacional e trabalho real. Prioridade para palavras, collocations e expressões que você realmente precisa produzir.</p></div><span class="pill" id="vocabMastery">0% ACTIVE</span></div>
         <div class="vocab-stats" id="vocabStats"></div>
+
+        <article class="card vocab-control-panel">
+          <div class="vocab-search-wrap">
+            <label for="vocabSearch">Buscar na biblioteca</label>
+            <input id="vocabSearch" class="vocab-search" type="search" inputmode="search" autocomplete="off" placeholder="Ex.: deadline, reunião, forecast, negotiate…" />
+          </div>
+          <div class="vocab-audio-control">
+            <div class="audio-control-title"><span>Velocidade do áudio</span><strong id="vocabSpeedLabel">0.7×</strong></div>
+            <div class="speed-buttons" aria-label="Velocidade do áudio do vocabulário">
+              <button class="speed-chip" data-vocab-rate="0.5">0.5× <small>Muito lenta</small></button>
+              <button class="speed-chip" data-vocab-rate="0.7">0.7× <small>Lenta</small></button>
+              <button class="speed-chip" data-vocab-rate="0.85">0.85× <small>Treino</small></button>
+              <button class="speed-chip" data-vocab-rate="1">1× <small>Natural</small></button>
+            </div>
+          </div>
+        </article>
+
+        <div class="vocab-filter-label">Nível de prioridade</div>
+        <div class="filter-row" id="vocabLevelFilters"></div>
+        <div class="vocab-filter-label">Contexto</div>
         <div class="filter-row" id="vocabFilters"></div>
+
+        <div id="vocabEmpty" class="card vocab-empty hidden"><strong>Nenhuma entrada encontrada.</strong><p>Tente outra busca ou remova algum filtro.</p></div>
         <article class="card flashcard" id="flashcard">
-          <div class="flashcard-top"><span class="pill" id="flashCategory">Meetings</span><span class="muted" id="flashIndex">1/30</span></div>
-          <span class="muted">Expressão</span><h2 id="flashTerm">follow up</h2>
+          <div class="flashcard-top"><div class="flash-tags"><span class="pill" id="flashCategory">Meetings</span><span class="pill level-pill" id="flashLevel">CORE</span></div><span class="muted" id="flashIndex">1/276</span></div>
+          <span class="muted">Palavra ou expressão</span><h2 id="flashTerm">follow up</h2>
           <p class="flash-definition" id="flashDefinition">acompanhar / dar continuidade</p>
+          <div class="vocab-audio-actions"><button class="secondary audio-action" id="speakVocabTerm">🔊 Ouvir expressão</button><button class="secondary audio-action" id="speakVocabExample">🎧 Ouvir exemplo</button><span class="audio-hint">Use 0.5×–0.7× para percepção e shadowing; depois volte a 1×.</span></div>
           <div class="example-box"><span>Example</span><strong id="flashExample">I'll follow up with the supplier this afternoon.</strong></div>
           <div class="production-prompt"><span>Produza sem traduzir</span><p id="flashPrompt">Diga em inglês: “Vou acompanhar isso amanhã.”</p></div>
-          <div class="button-row"><button class="secondary" id="speakVocab">🔊 Ouvir</button><button class="secondary" id="prevVocab">← Anterior</button><button class="primary" id="markActive">Marcar como ativa</button><button class="secondary" id="nextVocab">Próxima →</button></div>
+          <div class="button-row vocab-navigation"><button class="secondary" id="prevVocab">← Anterior</button><button class="primary" id="markActive">Marcar como ativa</button><button class="secondary" id="nextVocab">Próxima →</button></div>
         </article>
         <div class="vocab-list" id="vocabList"></div>
       </section>

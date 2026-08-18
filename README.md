@@ -1,4 +1,4 @@
-# English Overdrive v0.2.0
+# English Overdrive v0.2.1
 
 PWA mobile-first para preparação intensiva de TOEIC e inglês profissional com foco em prontidão para trabalhar internacionalmente.
 
@@ -20,3 +20,12 @@ A estrutura está pronta para GitHub + Netlify. Publique a raiz do repositório,
 
 ## Commit sugerido
 `feat: expand training content and adaptive learning modules`
+
+
+## v0.2.1 — Vocabulary Library
+- 276 curated vocabulary entries across 23 contexts.
+- Core / Pro / Advanced priority levels.
+- Search and contextual filters.
+- Separate playback for term and example sentence.
+- Vocabulary audio speed control: 0.5x, 0.7x, 0.85x, and 1x.
+- Audio speed preference persists locally.
