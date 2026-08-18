@@ -42,17 +42,3 @@ Visible `:focus-visible`; `prefers-reduced-motion`; `aria-current` navigation; l
 - `scenario-tip`: atalho contextual clicável com áudio.
 
 Princípio visual: dicas devem reduzir carga cognitiva, não competir com o prompt principal. O coaching usa `accent-soft` e bordas semânticas para funcionar como camada auxiliar.
-
-## Unified Learning Card — v0.2.4
-Active Vocabulary e Thinking Toolkit passam a compartilhar a mesma gramática visual e pedagógica:
-1. contexto / função / prioridade;
-2. item principal em alta hierarquia;
-3. significado;
-4. áudio do item e do exemplo;
-5. exemplo contextual;
-6. produção ativa sem tradução;
-7. ação de mastery;
-8. navegação anterior/próxima.
-
-### Filtros mobile
-Filtros extensos devem usar chips horizontais com `overflow-x:auto`, largura natural, gesto por toque e auto-centralização do item selecionado. Filtros podem ser combinados sem alterar a estrutura do learning card.

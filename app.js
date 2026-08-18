@@ -2647,7 +2647,818 @@ const vocabulary = [
     "definition": "adaptação regional de uma estratégia global",
     "example": "Regionalization lets us keep global standards while adapting execution.",
     "prompt": "A regionalização permite manter padrões globais enquanto adaptamos a execução."
+  },
+  {
+    "id": "work-across-time-zones",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "work across time zones",
+    "definition": "trabalhar entre diferentes fusos horários",
+    "example": "Our team works across time zones, so we document decisions clearly.",
+    "prompt": "Nossa equipe trabalha entre fusos diferentes, então documentamos as decisões com clareza."
+  },
+  {
+    "id": "local-point-of-contact",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "local point of contact",
+    "definition": "ponto de contato local",
+    "example": "Mei will be our local point of contact in Shanghai.",
+    "prompt": "Mei será nosso ponto de contato local em Xangai."
+  },
+  {
+    "id": "on-the-ground",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "on the ground",
+    "definition": "presente localmente / atuando no local",
+    "example": "We need someone on the ground to coordinate with the factory.",
+    "prompt": "Precisamos de alguém no local para coordenar com a fábrica."
+  },
+  {
+    "id": "local-counterpart",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "local counterpart",
+    "definition": "contraparte / colega equivalente no mercado local",
+    "example": "I'll review the plan with my local counterpart before the meeting.",
+    "prompt": "Vou revisar o plano com minha contraparte local antes da reunião."
+  },
+  {
+    "id": "regional-counterpart",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "regional counterpart",
+    "definition": "contraparte regional",
+    "example": "Please copy your regional counterpart on the update.",
+    "prompt": "Por favor, copie sua contraparte regional na atualização."
+  },
+  {
+    "id": "local-stakeholders-global",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "local stakeholders",
+    "definition": "partes interessadas locais",
+    "example": "We should involve the local stakeholders early.",
+    "prompt": "Devemos envolver as partes interessadas locais desde o início."
+  },
+  {
+    "id": "local-requirement-global",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "local requirement",
+    "definition": "exigência local",
+    "example": "The global process must still meet every local requirement.",
+    "prompt": "O processo global ainda precisa atender a todas as exigências locais."
+  },
+  {
+    "id": "local-regulations-global",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "local regulations",
+    "definition": "regulamentações locais",
+    "example": "We need to check the local regulations before launch.",
+    "prompt": "Precisamos verificar as regulamentações locais antes do lançamento."
+  },
+  {
+    "id": "local-practice",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "local practice",
+    "definition": "prática local / forma comum de trabalhar no local",
+    "example": "That is standard locally, even if it differs from our usual practice.",
+    "prompt": "Isso é padrão localmente, mesmo que seja diferente da nossa prática habitual."
+  },
+  {
+    "id": "local-context-global",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "local context",
+    "definition": "contexto local",
+    "example": "The recommendation makes more sense once you understand the local context.",
+    "prompt": "A recomendação faz mais sentido quando você entende o contexto local."
+  },
+  {
+    "id": "local-expectations",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "local expectations",
+    "definition": "expectativas locais",
+    "example": "Let's clarify the local expectations before we commit to a deadline.",
+    "prompt": "Vamos esclarecer as expectativas locais antes de nos comprometermos com um prazo."
+  },
+  {
+    "id": "working-style-global",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "working style",
+    "definition": "estilo / forma de trabalhar",
+    "example": "It took me a few weeks to adapt to the team's working style.",
+    "prompt": "Levei algumas semanas para me adaptar ao estilo de trabalho da equipe."
+  },
+  {
+    "id": "business-hours-global",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "business hours",
+    "definition": "horário comercial",
+    "example": "I'll send it during Shanghai business hours.",
+    "prompt": "Vou enviar durante o horário comercial de Xangai."
+  },
+  {
+    "id": "local-calendar",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "local calendar",
+    "definition": "calendário local de trabalho e feriados",
+    "example": "Please check the local calendar before scheduling the workshop.",
+    "prompt": "Por favor, verifique o calendário local antes de marcar o workshop."
+  },
+  {
+    "id": "distributed-team-global",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "distributed team",
+    "definition": "equipe distribuída em diferentes locais",
+    "example": "A distributed team needs clear ownership and documentation.",
+    "prompt": "Uma equipe distribuída precisa de responsabilidades e documentação claras."
+  },
+  {
+    "id": "remote-collaboration-global",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "remote collaboration",
+    "definition": "colaboração remota",
+    "example": "Good remote collaboration depends on clear handoffs.",
+    "prompt": "Uma boa colaboração remota depende de passagens de responsabilidade claras."
+  },
+  {
+    "id": "handover-global",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "handover",
+    "definition": "passagem de responsabilidade / transferência de trabalho",
+    "example": "I'll prepare a handover before the Europe team comes online.",
+    "prompt": "Vou preparar uma passagem de responsabilidade antes de a equipe da Europa entrar online."
+  },
+  {
+    "id": "language-barrier",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "language barrier",
+    "definition": "barreira linguística",
+    "example": "A language barrier can be reduced with simpler wording and visual examples.",
+    "prompt": "Uma barreira linguística pode ser reduzida com linguagem mais simples e exemplos visuais."
+  },
+  {
+    "id": "communication-gap-global",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "communication gap",
+    "definition": "falha / lacuna de comunicação",
+    "example": "The delay came from a communication gap between the regional teams.",
+    "prompt": "O atraso veio de uma falha de comunicação entre as equipes regionais."
+  },
+  {
+    "id": "cultural-difference-global",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "cultural difference",
+    "definition": "diferença cultural",
+    "example": "A cultural difference does not necessarily mean someone disagrees with you.",
+    "prompt": "Uma diferença cultural não significa necessariamente que alguém discorda de você."
+  },
+  {
+    "id": "decision-making-process-global",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "decision-making process",
+    "definition": "processo de tomada de decisão",
+    "example": "I want to understand the local decision-making process before escalating.",
+    "prompt": "Quero entender o processo local de tomada de decisão antes de escalar o assunto."
+  },
+  {
+    "id": "approval-process-global",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "approval process",
+    "definition": "processo de aprovação",
+    "example": "How does the approval process work in the China office?",
+    "prompt": "Como funciona o processo de aprovação no escritório da China?"
+  },
+  {
+    "id": "reporting-line-global",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "reporting line",
+    "definition": "linha de reporte / relação hierárquica",
+    "example": "My reporting line is global, but I work closely with the local leadership team.",
+    "prompt": "Minha linha de reporte é global, mas trabalho de perto com a liderança local."
+  },
+  {
+    "id": "local-ownership-global",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "local ownership",
+    "definition": "responsabilidade e autonomia local",
+    "example": "The rollout will be faster if there is clear local ownership.",
+    "prompt": "A implantação será mais rápida se houver responsabilidade local clara."
+  },
+  {
+    "id": "global-alignment-global",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "global alignment",
+    "definition": "alinhamento global",
+    "example": "We need global alignment before changing the regional process.",
+    "prompt": "Precisamos de alinhamento global antes de mudar o processo regional."
+  },
+  {
+    "id": "regional-alignment-global",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "regional alignment",
+    "definition": "alinhamento regional",
+    "example": "Let's get regional alignment before presenting this to headquarters.",
+    "prompt": "Vamos obter alinhamento regional antes de apresentar isso à sede."
+  },
+  {
+    "id": "escalation-path-global",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "escalation path",
+    "definition": "caminho definido para escalar problemas",
+    "example": "Do we have a clear escalation path if the issue cannot be solved locally?",
+    "prompt": "Temos um caminho claro de escalonamento caso o problema não possa ser resolvido localmente?"
+  },
+  {
+    "id": "business-etiquette-global",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "business etiquette",
+    "definition": "etiqueta profissional / costumes de negócios",
+    "example": "I like to learn the local business etiquette before meeting a new partner.",
+    "prompt": "Gosto de aprender a etiqueta profissional local antes de encontrar um novo parceiro."
+  },
+  {
+    "id": "face-to-face-meeting-global",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "face-to-face meeting",
+    "definition": "reunião presencial",
+    "example": "A face-to-face meeting may help us build trust faster.",
+    "prompt": "Uma reunião presencial pode nos ajudar a construir confiança mais rapidamente."
+  },
+  {
+    "id": "relationship-building-global",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "relationship building",
+    "definition": "construção de relacionamento",
+    "example": "Relationship building is part of effective global collaboration.",
+    "prompt": "Construir relacionamentos faz parte de uma colaboração global eficaz."
+  },
+  {
+    "id": "local-partner-global",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "local partner",
+    "definition": "parceiro local",
+    "example": "Our local partner will help us understand the market better.",
+    "prompt": "Nosso parceiro local nos ajudará a entender melhor o mercado."
+  },
+  {
+    "id": "local-supplier-global",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "local supplier",
+    "definition": "fornecedor local",
+    "example": "We are comparing two local suppliers in Suzhou.",
+    "prompt": "Estamos comparando dois fornecedores locais em Suzhou."
+  },
+  {
+    "id": "customs-clearance-global",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "customs clearance",
+    "definition": "desembaraço aduaneiro",
+    "example": "The samples are waiting for customs clearance.",
+    "prompt": "As amostras estão aguardando o desembaraço aduaneiro."
+  },
+  {
+    "id": "import-duty-global",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "import duty",
+    "definition": "imposto / tarifa de importação",
+    "example": "We need to include the import duty in the landed cost.",
+    "prompt": "Precisamos incluir a tarifa de importação no custo total de chegada."
+  },
+  {
+    "id": "wechat-group",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "WeChat group",
+    "definition": "grupo no WeChat para comunicação de trabalho",
+    "example": "I'll add you to the WeChat group so you can follow the local updates.",
+    "prompt": "Vou adicionar você ao grupo do WeChat para acompanhar as atualizações locais."
+  },
+  {
+    "id": "renminbi-rmb",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "renminbi (RMB)",
+    "definition": "renminbi, moeda chinesa; RMB é a abreviação usada em negócios",
+    "example": "The supplier quoted the price in renminbi, or RMB.",
+    "prompt": "O fornecedor cotou o preço em renminbi, ou RMB."
+  },
+  {
+    "id": "spring-festival",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "Spring Festival",
+    "definition": "Festival da Primavera / Ano-Novo Chinês",
+    "example": "Lead times may change around the Spring Festival holiday.",
+    "prompt": "Os prazos podem mudar durante o feriado do Festival da Primavera."
+  },
+  {
+    "id": "golden-week",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "Golden Week",
+    "definition": "período de feriado prolongado na China, especialmente em outubro",
+    "example": "Let's confirm the production schedule before Golden Week.",
+    "prompt": "Vamos confirmar o cronograma de produção antes da Golden Week."
+  },
+  {
+    "id": "local-currency-global",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "local currency",
+    "definition": "moeda local",
+    "example": "Can we pay the vendor in local currency?",
+    "prompt": "Podemos pagar o fornecedor na moeda local?"
+  },
+  {
+    "id": "local-distributor-global",
+    "category": "China & Global Work",
+    "level": "Core",
+    "term": "local distributor",
+    "definition": "distribuidor local",
+    "example": "The local distributor has better access to second-tier cities.",
+    "prompt": "O distribuidor local tem melhor acesso às cidades de segundo nível."
+  },
+  {
+    "id": "cross-border-collaboration",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "cross-border collaboration",
+    "definition": "colaboração entre equipes ou empresas de países diferentes",
+    "example": "Cross-border collaboration works best when responsibilities are explicit.",
+    "prompt": "A colaboração entre países funciona melhor quando as responsabilidades são explícitas."
+  },
+  {
+    "id": "global-local-balance",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "global-local balance",
+    "definition": "equilíbrio entre padronização global e necessidades locais",
+    "example": "The challenge is finding the right global-local balance.",
+    "prompt": "O desafio é encontrar o equilíbrio certo entre global e local."
+  },
+  {
+    "id": "local-autonomy-global",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "local autonomy",
+    "definition": "autonomia da equipe ou mercado local",
+    "example": "The China team needs enough local autonomy to respond quickly.",
+    "prompt": "A equipe da China precisa de autonomia local suficiente para responder rapidamente."
+  },
+  {
+    "id": "decision-rights-global",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "decision rights",
+    "definition": "definição de quem tem autoridade para tomar determinadas decisões",
+    "example": "We should clarify decision rights between headquarters and the local team.",
+    "prompt": "Devemos esclarecer os direitos de decisão entre a sede e a equipe local."
+  },
+  {
+    "id": "stakeholder-alignment-global",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "stakeholder alignment",
+    "definition": "alinhamento entre as principais partes interessadas",
+    "example": "We need stakeholder alignment before announcing the change.",
+    "prompt": "Precisamos alinhar as partes interessadas antes de anunciar a mudança."
+  },
+  {
+    "id": "executive-sponsorship-global",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "executive sponsorship",
+    "definition": "patrocínio e apoio ativo de uma liderança executiva",
+    "example": "The project has strong executive sponsorship in both China and Europe.",
+    "prompt": "O projeto tem forte patrocínio executivo tanto na China quanto na Europa."
+  },
+  {
+    "id": "local-adaptation-global",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "local adaptation",
+    "definition": "adaptação de produto, processo ou comunicação ao contexto local",
+    "example": "The global concept is strong, but it needs some local adaptation.",
+    "prompt": "O conceito global é forte, mas precisa de alguma adaptação local."
+  },
+  {
+    "id": "market-specific-global",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "market-specific",
+    "definition": "específico de determinado mercado",
+    "example": "Some customer expectations are market-specific.",
+    "prompt": "Algumas expectativas dos clientes são específicas de cada mercado."
+  },
+  {
+    "id": "country-specific-global",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "country-specific",
+    "definition": "específico de determinado país",
+    "example": "The policy has a few country-specific exceptions.",
+    "prompt": "A política possui algumas exceções específicas de cada país."
+  },
+  {
+    "id": "globally-consistent",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "globally consistent",
+    "definition": "consistente em todos os mercados globais",
+    "example": "The brand should be globally consistent without ignoring local needs.",
+    "prompt": "A marca deve ser globalmente consistente sem ignorar as necessidades locais."
+  },
+  {
+    "id": "locally-relevant",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "locally relevant",
+    "definition": "relevante para o contexto e público local",
+    "example": "The message is globally aligned but still locally relevant.",
+    "prompt": "A mensagem está alinhada globalmente, mas continua relevante localmente."
+  },
+  {
+    "id": "cultural-sensitivity-global",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "cultural sensitivity",
+    "definition": "sensibilidade para perceber e respeitar diferenças culturais",
+    "example": "Cultural sensitivity matters when giving feedback across cultures.",
+    "prompt": "A sensibilidade cultural é importante ao dar feedback entre culturas."
+  },
+  {
+    "id": "cultural-awareness-global",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "cultural awareness",
+    "definition": "consciência das diferenças culturais e de seu impacto",
+    "example": "Cultural awareness helps prevent unnecessary misunderstandings.",
+    "prompt": "A consciência cultural ajuda a evitar mal-entendidos desnecessários."
+  },
+  {
+    "id": "cultural-fluency-global",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "cultural fluency",
+    "definition": "capacidade de adaptar comportamento e comunicação a diferentes contextos culturais",
+    "example": "Cultural fluency is as important as language fluency in a global role.",
+    "prompt": "A fluência cultural é tão importante quanto a fluência linguística em uma função global."
+  },
+  {
+    "id": "communication-style-global",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "communication style",
+    "definition": "estilo de comunicação",
+    "example": "Their communication style is more indirect than what I'm used to.",
+    "prompt": "O estilo de comunicação deles é mais indireto do que estou acostumado."
+  },
+  {
+    "id": "direct-communication-global",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "direct communication",
+    "definition": "comunicação explícita e direta",
+    "example": "Direct communication can be efficient, but tone still matters.",
+    "prompt": "A comunicação direta pode ser eficiente, mas o tom ainda importa."
+  },
+  {
+    "id": "indirect-communication-global",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "indirect communication",
+    "definition": "comunicação em que parte da mensagem é transmitida de forma implícita",
+    "example": "With indirect communication, context can be as important as the words themselves.",
+    "prompt": "Na comunicação indireta, o contexto pode ser tão importante quanto as próprias palavras."
+  },
+  {
+    "id": "high-context-communication",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "high-context communication",
+    "definition": "comunicação que depende bastante de contexto, relação e sinais implícitos",
+    "example": "In high-context communication, what is not said may also carry meaning.",
+    "prompt": "Na comunicação de alto contexto, aquilo que não é dito também pode carregar significado."
+  },
+  {
+    "id": "read-the-room-global",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "read the room",
+    "definition": "perceber o clima, reações e dinâmica social de uma situação",
+    "example": "Before pushing the proposal, take a moment to read the room.",
+    "prompt": "Antes de insistir na proposta, pare um momento para perceber o clima da sala."
+  },
+  {
+    "id": "put-someone-on-the-spot",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "put someone on the spot",
+    "definition": "colocar alguém sob pressão para responder ou decidir imediatamente",
+    "example": "I don't want to put anyone on the spot, so we can discuss this offline first.",
+    "prompt": "Não quero colocar ninguém sob pressão, então podemos discutir isso em particular primeiro."
+  },
+  {
+    "id": "face-saving",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "face-saving",
+    "definition": "preservação de dignidade, reputação ou posição social em uma interação",
+    "example": "A face-saving approach can make difficult feedback easier to receive.",
+    "prompt": "Uma abordagem que preserve a dignidade pode facilitar o recebimento de um feedback difícil."
+  },
+  {
+    "id": "build-trust-global",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "build trust",
+    "definition": "construir confiança ao longo do relacionamento",
+    "example": "We should invest time to build trust before asking for a major commitment.",
+    "prompt": "Devemos investir tempo para construir confiança antes de pedir um compromisso importante."
+  },
+  {
+    "id": "relationship-driven-global",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "relationship-driven",
+    "definition": "orientado por relações e confiança, além de processos formais",
+    "example": "This market can be more relationship-driven than transaction-driven.",
+    "prompt": "Este mercado pode ser mais orientado por relacionamentos do que por transações."
+  },
+  {
+    "id": "consensus-building-global",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "consensus building",
+    "definition": "construção gradual de consenso entre envolvidos",
+    "example": "Consensus building before the meeting can make the final decision easier.",
+    "prompt": "Construir consenso antes da reunião pode facilitar a decisão final."
+  },
+  {
+    "id": "pre-align-global",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "pre-align",
+    "definition": "alinhar previamente antes de uma reunião ou decisão formal",
+    "example": "Let's pre-align with the Shanghai team before the regional review.",
+    "prompt": "Vamos alinhar previamente com a equipe de Xangai antes da revisão regional."
+  },
+  {
+    "id": "socialize-an-idea-global",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "socialize an idea",
+    "definition": "apresentar informalmente uma ideia a diferentes pessoas para obter reação e apoio antes da decisão formal",
+    "example": "I want to socialize the idea with the local leaders before presenting it formally.",
+    "prompt": "Quero circular a ideia entre os líderes locais antes de apresentá-la formalmente."
+  },
+  {
+    "id": "manage-expectations-global",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "manage expectations",
+    "definition": "alinhar expectativas para evitar surpresas ou interpretações erradas",
+    "example": "We need to manage expectations about what can be delivered before the holiday.",
+    "prompt": "Precisamos alinhar as expectativas sobre o que pode ser entregue antes do feriado."
+  },
+  {
+    "id": "clarify-expectations-global",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "clarify expectations",
+    "definition": "tornar expectativas explícitas e claras",
+    "example": "Let's clarify expectations around response times and ownership.",
+    "prompt": "Vamos esclarecer as expectativas sobre tempo de resposta e responsabilidades."
+  },
+  {
+    "id": "local-buy-in-global",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "local buy-in",
+    "definition": "aceitação e apoio da equipe ou mercado local",
+    "example": "The initiative will fail without strong local buy-in.",
+    "prompt": "A iniciativa fracassará sem forte apoio local."
+  },
+  {
+    "id": "regional-buy-in-global",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "regional buy-in",
+    "definition": "aceitação e apoio da liderança ou equipes regionais",
+    "example": "We already have regional buy-in, but the local details are still open.",
+    "prompt": "Já temos apoio regional, mas os detalhes locais ainda estão em aberto."
+  },
+  {
+    "id": "local-decision-maker",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "local decision maker",
+    "definition": "pessoa com autoridade para decidir no contexto local",
+    "example": "Who is the local decision maker for this contract?",
+    "prompt": "Quem é o tomador de decisão local para este contrato?"
+  },
+  {
+    "id": "internal-champion-global",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "internal champion",
+    "definition": "pessoa dentro da organização que apoia e impulsiona uma iniciativa",
+    "example": "Having an internal champion in the local office will help the rollout.",
+    "prompt": "Ter um apoiador interno no escritório local ajudará na implantação."
+  },
+  {
+    "id": "regulatory-landscape-global",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "regulatory landscape",
+    "definition": "conjunto e dinâmica das regras e exigências regulatórias de um mercado",
+    "example": "We need a clearer view of the regulatory landscape before entering the market.",
+    "prompt": "Precisamos de uma visão mais clara do ambiente regulatório antes de entrar no mercado."
+  },
+  {
+    "id": "data-localization-global",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "data localization",
+    "definition": "exigência ou prática de armazenar/processar dados em determinado país ou região",
+    "example": "Data localization requirements can affect the system architecture.",
+    "prompt": "Exigências de localização de dados podem afetar a arquitetura do sistema."
+  },
+  {
+    "id": "market-access-global",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "market access",
+    "definition": "capacidade de entrar, operar e vender em determinado mercado",
+    "example": "The partnership could improve our market access in China.",
+    "prompt": "A parceria pode melhorar nosso acesso ao mercado na China."
+  },
+  {
+    "id": "local-entity-global",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "local entity",
+    "definition": "entidade jurídica local da empresa",
+    "example": "The contract must be signed by the local entity.",
+    "prompt": "O contrato precisa ser assinado pela entidade jurídica local."
+  },
+  {
+    "id": "fapiao",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "fapiao",
+    "definition": "fatura fiscal oficial usada na China para fins contábeis, fiscais e de reembolso",
+    "example": "Please ask the hotel for a fapiao for the business expense.",
+    "prompt": "Por favor, peça ao hotel um fapiao para a despesa corporativa."
+  },
+  {
+    "id": "company-chop",
+    "category": "China & Global Work",
+    "level": "Pro",
+    "term": "company chop",
+    "definition": "carimbo oficial corporativo usado na China para autenticar determinados documentos",
+    "example": "The document may require the company chop before it is valid.",
+    "prompt": "O documento pode precisar do carimbo oficial da empresa antes de ser válido."
+  },
+  {
+    "id": "glocalization",
+    "category": "China & Global Work",
+    "level": "Advanced",
+    "term": "glocalization",
+    "definition": "combinação de estratégia global com adaptação local significativa",
+    "example": "Glocalization lets us protect the global brand while adapting to local behavior.",
+    "prompt": "A glocalização permite proteger a marca global enquanto adaptamos a execução ao comportamento local."
+  },
+  {
+    "id": "cultural-intelligence-cq",
+    "category": "China & Global Work",
+    "level": "Advanced",
+    "term": "cultural intelligence (CQ)",
+    "definition": "capacidade de compreender, adaptar-se e agir eficazmente em contextos culturais diferentes",
+    "example": "Cultural intelligence matters when the same behavior can be interpreted differently across markets.",
+    "prompt": "A inteligência cultural é importante quando o mesmo comportamento pode ser interpretado de maneiras diferentes entre mercados."
+  },
+  {
+    "id": "contextual-intelligence-global",
+    "category": "China & Global Work",
+    "level": "Advanced",
+    "term": "contextual intelligence",
+    "definition": "capacidade de compreender o ambiente, as relações e as condições que dão significado a uma situação",
+    "example": "Contextual intelligence helps us avoid applying a global solution mechanically.",
+    "prompt": "A inteligência contextual nos ajuda a evitar aplicar mecanicamente uma solução global."
+  },
+  {
+    "id": "cross-border-governance",
+    "category": "China & Global Work",
+    "level": "Advanced",
+    "term": "cross-border governance",
+    "definition": "estrutura de decisão, responsabilidade e controle entre países ou regiões",
+    "example": "The program needs stronger cross-border governance to avoid duplicated decisions.",
+    "prompt": "O programa precisa de uma governança transfronteiriça mais forte para evitar decisões duplicadas."
+  },
+  {
+    "id": "cultural-due-diligence",
+    "category": "China & Global Work",
+    "level": "Advanced",
+    "term": "cultural due diligence",
+    "definition": "avaliação estruturada de fatores culturais que podem afetar uma parceria, aquisição ou iniciativa",
+    "example": "We should include cultural due diligence before integrating the two organizations.",
+    "prompt": "Devemos incluir uma análise cultural estruturada antes de integrar as duas organizações."
+  },
+  {
+    "id": "hierarchy-sensitive-communication",
+    "category": "China & Global Work",
+    "level": "Advanced",
+    "term": "hierarchy-sensitive communication",
+    "definition": "comunicação ajustada às relações de hierarquia, senioridade e autoridade",
+    "example": "Hierarchy-sensitive communication can help you choose the right forum for disagreement.",
+    "prompt": "Uma comunicação sensível à hierarquia pode ajudar a escolher o fórum adequado para discordar."
+  },
+  {
+    "id": "status-dynamics-global",
+    "category": "China & Global Work",
+    "level": "Advanced",
+    "term": "status dynamics",
+    "definition": "dinâmica de poder, senioridade, posição e influência entre participantes",
+    "example": "Understanding the status dynamics helps explain why nobody challenged the proposal publicly.",
+    "prompt": "Entender a dinâmica de status ajuda a explicar por que ninguém questionou a proposta publicamente."
+  },
+  {
+    "id": "pre-wire-the-meeting",
+    "category": "China & Global Work",
+    "level": "Advanced",
+    "term": "pre-wire the meeting",
+    "definition": "conversar previamente com participantes-chave para testar ideias, reduzir resistência e preparar uma decisão",
+    "example": "Let's pre-wire the meeting with the key stakeholders before asking for approval.",
+    "prompt": "Vamos preparar a reunião conversando antes com os principais envolvidos antes de pedir aprovação."
+  },
+  {
+    "id": "offline-alignment-global",
+    "category": "China & Global Work",
+    "level": "Advanced",
+    "term": "offline alignment",
+    "definition": "alinhamento fora da reunião formal, geralmente em conversas individuais ou menores",
+    "example": "We may need some offline alignment before bringing this back to the full group.",
+    "prompt": "Talvez precisemos de algum alinhamento fora da reunião antes de levar o assunto novamente ao grupo completo."
+  },
+  {
+    "id": "relationship-first-approach",
+    "category": "China & Global Work",
+    "level": "Advanced",
+    "term": "relationship-first approach",
+    "definition": "abordagem que prioriza confiança e relacionamento antes de pressionar por uma transação ou decisão",
+    "example": "A relationship-first approach can be more effective when the partnership is still new.",
+    "prompt": "Uma abordagem que priorize o relacionamento pode ser mais eficaz quando a parceria ainda é nova."
+  },
+  {
+    "id": "local-for-local-strategy",
+    "category": "China & Global Work",
+    "level": "Advanced",
+    "term": "local-for-local strategy",
+    "definition": "estratégia de desenvolver, produzir ou operar localmente para atender principalmente ao próprio mercado local",
+    "example": "A local-for-local strategy can reduce lead times and improve market responsiveness.",
+    "prompt": "Uma estratégia local para o mercado local pode reduzir prazos e melhorar a capacidade de resposta ao mercado."
+  },
+  {
+    "id": "guanxi",
+    "category": "China & Global Work",
+    "level": "Advanced",
+    "term": "guanxi",
+    "definition": "rede de relacionamentos, confiança e obrigações recíprocas; termo chinês usado também em discussões de negócios em inglês",
+    "example": "Guanxi is often discussed as relationship capital, but it should not be reduced to simple favoritism.",
+    "prompt": "Guanxi costuma ser discutido como capital de relacionamento, mas não deve ser reduzido a simples favoritismo."
   }
+
 ];
 
 const smartPhrases = [
